@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <Cart />
+    <Catalog />
   </div>
 </template>
+
+<script>
+import Cart from './components/Cart.vue';
+import Catalog from './components/Catalog.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Cart,
+    Catalog,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
