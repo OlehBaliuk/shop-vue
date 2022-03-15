@@ -1,41 +1,46 @@
 <template>
   <div id="app">
-    <Cart />
-    <Catalog />
+    <Header />
+    <main class="main-content">
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
-import Cart from './components/Cart.vue';
-import Catalog from './components/Catalog.vue';
+import Header from './components/Header.vue';
 
 export default {
   name: 'App',
   components: {
-    Cart,
-    Catalog,
+    Header,
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+html {
+  font-size: 10px;
 
-nav {
-  padding: 30px;
+  body {
+    margin: 0;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    #app {
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

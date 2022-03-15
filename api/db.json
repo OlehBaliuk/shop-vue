@@ -1,0 +1,58 @@
+{
+  "products": [
+    {
+      "image": "1.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "1000",
+      "id": 1
+    },
+    {
+      "image": "2.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "170",
+      "id": 2
+    },
+    {
+      "image": "3.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "130",
+      "id": 3
+    },
+    {
+      "image": "4.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "180",
+      "id": 4
+    },
+    {
+      "image": "5.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "108",
+      "id": 56
+    },
+    {
+      "image": "6.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "1000",
+      "id": 57
+    }
+  ],
+  "users": [
+    {
+      "email": "123@123",
+      "password": "$2a$10$ZrGFpFDpIFTEvf3OgPT4K.N4bmbYGP7GFd33TBzqdfh.0srmoiXpe",
+      "id": 1
+    },
+    {
+      "email": "123@1231",
+      "password": "$2a$10$g0k.zWPeKk6dtcbvP/8AMu.GnRhVenekrs.luaGH1XNZGHemAY3GG",
+      "id": 2
+    }
+  ]
+}

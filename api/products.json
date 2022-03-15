@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "image": "1.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "100",
+      "id": 1
+    },
+    {
+      "image": "2.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "170",
+      "id": 2
+    },
+    {
+      "image": "3.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "130",
+      "id": 3
+    },
+    {
+      "image": "4.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "180",
+      "id": 4
+    },
+    {
+      "image": "5.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "108",
+      "id": 56
+    }
+  ]
+}
