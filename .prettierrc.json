@@ -7,5 +7,5 @@
   "useTabs": false,
   "jsxBracketSameLine": false,
   "arrowParens": "avoid",
-  "prettier.printWidth": 95
+  "prettier.printWidth": 120
 }

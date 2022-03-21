@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductService from '../services/productService';
+import HttpService from '../services/HttpService';
 import Product from './Product.vue';
 
 export default {
@@ -23,7 +23,7 @@ export default {
     Product,
   },
   async created() {
-    const data = await ProductService.get();
+    const data = await HttpService.get('/products');
     this.productsList = data;
   },
 };

@@ -1,54 +1,54 @@
 <template>
-  <div class="login-wrapper">
-    <h1 class="login-wrapper__title">Login</h1>
+  <div class="wrapper-form">
+    <h1 class="wrapper-form__title">Registration</h1>
+
     <form @submit.prevent="submit" class="input-wrapper">
-      <label for="login-login-form">
+      <label for="login-reg-rorm">
         <input
-          id="login-login-form"
+          id="login-reg-rorm"
           class="input-wrapper__field"
           type="text"
           placeholder="login.."
-          v-model="dataLogin.email"
+          v-model="dataRegistration.email"
         />
       </label>
-      <label for="password-login-form">
-        <input
-          id="password-login-form"
+      <label for="password-reg-form"
+        ><input
+          id="password-reg-form"
           class="input-wrapper__field"
           type="password"
+          v-model="dataRegistration.password"
           placeholder="password.."
-          v-model="dataLogin.password"
-        />
-      </label>
+      /></label>
 
-      <Button :handleClick="() => login(dataLogin)" class="input-wrapper_button" title="Login" />
+      <Button :handleClick="() => registration(dataRegistration)" class="input-wrapper_button" title="Registration" />
     </form>
   </div>
 </template>
 
 <script>
-import HttpService from '../services/HttpService';
+import HttpServis from '@/services/HttpService';
 import Button from './Button.vue';
 
 export default {
-  name: 'LoginForm',
+  name: 'RegistrationForm',
   components: {
     Button,
   },
   data: () => ({
-    dataLogin: {
+    dataRegistration: {
       email: '',
       password: '',
     },
   }),
   methods: {
-    async login(credentials) {
-      const response = await HttpService.post('/login', credentials);
+    async registration(credentials) {
+      const response = await HttpServis.post('/users', credentials);
       if (response) {
-        this.resetLoginForm();
+        this.resetRegistrationForm();
       }
     },
-    resetLoginForm() {
+    resetRegistrationForm() {
       this.dataLogin = {
         email: '',
         password: '',
@@ -69,7 +69,6 @@ export default {
 
   .input-wrapper_button {
     margin: 0 auto;
-    width: 5rem;
   }
 }
 </style>
