@@ -8,8 +8,6 @@ import vuetify from './plugins/vuetify';
 
 Vue.use(VueAxios, axios);
 
-Vue.use(VueAxios, axios);
-
 Vue.config.productionTip = false;
 Vue.axios.defaults.baseURL = 'http://localhost:3000';
 

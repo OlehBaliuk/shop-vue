@@ -1,19 +1,22 @@
 <template>
-  <div id="app">
+  <v-app>
     <Header />
-    <main class="main-content">
+    <v-main class="d-flex justify-center">
       <router-view />
-    </main>
-  </div>
+    </v-main>
+    <Footer />
+  </v-app>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+    Footer,
   },
 };
 </script>
@@ -35,10 +38,21 @@ html {
       a {
         text-decoration: none;
       }
-      .main-content {
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .v-main__wrap {
         display: flex;
         justify-content: center;
-        align-items: center;
+      }
+
+      input[type='number']::-webkit-outer-spin-button,
+      input[type='number']::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
     }
   }

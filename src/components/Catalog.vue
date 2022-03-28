@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HttpService from '../services/HttpService';
+import HttpService from '@/services/HttpService';
 import Product from './Product.vue';
 
 export default {

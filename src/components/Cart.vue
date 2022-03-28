@@ -1,18 +1,88 @@
 <template>
-  <div class="cart">
-    <h1 class="cart__title">Cart</h1>
+  <div class="cart-wrapper">
+    <h1>Cart</h1>
+    <div v-if="isEmpty">Cart is empty</div>
+    <div v-else v-for="product in getCart" :key="product.id" class="product-wrapper">
+      <div class="product-wrapper__info">
+        <img class="product-wrapper__img" :src="require('@/assets/images/' + product.image)" alt="img" />
+        <div class="product-wrapper__text">
+          <p>name: {{ product.name }}</p>
+          <p>price: {{ product.price }}</p>
+        </div>
+        <div class="product-wrapper__quantity d-flex">
+          <span class="d-flex align-center">quantity:</span>
+          <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green"> mdi-minus </v-icon>
+          <p class="product-wrapper__count">{{ product.count }}</p>
+          <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red"> mdi-plus </v-icon>
+        </div>
+        <v-btn @click="deleteProductFromCart(product.id)" color="teal lighten-1" text> delete </v-btn>
+      </div>
+    </div>
+    <div v-if="!isEmpty" class="cart-wrapper__total-field">
+      <h2>Total:{{ countTotalCost }}</h2>
+      <v-btn @click="cleareCart" color="teal lighten-1" text> cleare cart </v-btn>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Cart',
+
+  data() {
+    return {
+      product: null,
+      isLoader: false,
+    };
+  },
+
+  computed: {
+    ...mapGetters(['getCart']),
+    isEmpty() {
+      return !Object.keys(this.getCart).length;
+    },
+    countTotalCost() {
+      const total = Object.values(this.getCart).reduce((acc, item) => acc + item.price * item.count, 0);
+
+      return total;
+    },
+  },
+
+  methods: {
+    ...mapActions(['deleteProductFromCart', 'cleareCart', 'incrementProductInCart', 'decrementProductInCart']),
+  },
 };
 </script>
 
 <style scoped lang="scss">
-.cart {
-  display: flex;
-  justify-content: start;
+.cart-wrapper {
+  width: 60%;
+
+  .product-wrapper__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(179, 170, 170);
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+    .product-wrapper__img {
+      height: 4rem;
+      widows: 4rem;
+      object-fit: cover;
+    }
+
+    .product-wrapper__input {
+      width: 3rem;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+
+    .product-wrapper__count {
+      font-size: 1.2rem;
+    }
+  }
 }
 </style>

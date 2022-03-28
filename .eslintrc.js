@@ -12,7 +12,9 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': 0,
     'arrow-parens': 0,
-    'max-len': ['error', { code: 120, tabWidth: 4 }],
+    'max-len': ['off', { code: 120, tabWidth: 4 }],
     'linebreak-style': 0,
+    camelcase: 0,
+    'no-trailing-spaces': 0,
   },
 };
