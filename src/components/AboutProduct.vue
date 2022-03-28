@@ -1,28 +1,38 @@
 <template>
   <div>
-    <div v-if="isLoader">loading..</div>
-    <div v-else>
-      <v-card class="mx-4 my-4" width="400">
-        <v-img
-          class="white--text align-end"
-          object-fit="cover"
-          height="400"
-          :src="require('../assets/images/' + product.image)"
-        >
-          <v-card-title class="black--text"></v-card-title>
-        </v-img>
-        <v-card-subtitle class="pb-0"> price:{{ product.price }} </v-card-subtitle>
-        <v-card-subtitle class="pb-0"> description: {{ product.description }} </v-card-subtitle>
-        <v-card-actions class="d-flex justify-center">
-          <v-btn color="teal lighten-1" text> Add to cart </v-btn>
-        </v-card-actions>
-      </v-card>
+    <h2 class="my-5">About product</h2>
+    <v-progress-linear v-if="isLoader" indeterminate color="cyan"> </v-progress-linear>
+    <div class="wrapper d-flex flex-wrap" v-else>
+      <div>
+        <div class="d-flex flex-column justify-space-between align-center mx-5 my-5">
+          <v-slider v-model="widthSlider" class="align-self-stretch" min="200" max="400" step="1"></v-slider>
+          <v-img :width="widthSlider" :src="require('../assets/images/' + getProductImage())"></v-img>
+          <v-btn @click="changeRating" width="100%">
+            <v-rating v-model="product.rating" icon-label="custom icon label text {0} of {1}"></v-rating>
+          </v-btn>
+        </div>
+      </div>
+      <div>
+        <v-card class="mx-5 my-5" width="300" elevation="2" outlined
+          ><v-card-text>
+            <p class="text-h5 text--primary mb-3">{{ product.name }}</p>
+            <div class="text-subtitle-2">Price: {{ product.price }}</div>
+            <div class="text--primary">
+              {{ product.description }}
+            </div>
+          </v-card-text>
+          <v-btn :disabled="isDisable" @click="addProductToState(product)" color="teal lighten-1" text
+            >{{ changeTitleButton }}
+          </v-btn>
+        </v-card>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import HttpService from '@/services/HttpService';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'AboutProduct',
@@ -31,7 +41,34 @@ export default {
     return {
       product: null,
       isLoader: true,
+      widthSlider: 250,
     };
+  },
+
+  methods: {
+    getProductImage() {
+      return this.product.image === '' ? '1.jpg' : this.product.image;
+    },
+
+    changeRating() {
+      HttpService.put(`/products/${this.$route.params.id}`, this.product);
+    },
+
+    ...mapActions(['addProductToState']),
+  },
+
+  computed: {
+    ...mapGetters(['getCart']),
+
+    isDisable() {
+      return Object.keys(this.getCart).includes(String(this.product.id));
+    },
+    changeTitleButton() {
+      if (Object.keys(this.getCart).includes(String(this.product.id))) {
+        return 'In a cart';
+      }
+      return 'Add to cart';
+    },
   },
 
   async mounted() {
@@ -43,4 +80,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+</style>

@@ -2,7 +2,7 @@
   <div class="catalog">
     <h1>Catalog</h1>
     <div class="product-wrapper">
-      <Product v-for="product in productsList" :key="product.id" :product="product" />
+      <Product @onDelete="deleteProduct" v-for="product in productsList" :key="product.id" :product="product" />
     </div>
   </div>
 </template>
@@ -22,9 +22,21 @@ export default {
   components: {
     Product,
   },
-  async created() {
-    const data = await HttpService.get('/products');
-    this.productsList = data;
+
+  methods: {
+    async getProductFromDB() {
+      const data = await HttpService.get('/products');
+
+      this.productsList = data;
+    },
+
+    deleteProduct(productId) {
+      this.productsList = this.productsList.filter(product => product.id !== productId);
+    },
+  },
+
+  created() {
+    this.getProductFromDB();
   },
 };
 </script>

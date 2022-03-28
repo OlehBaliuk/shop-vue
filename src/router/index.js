@@ -2,8 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Cart from '../components/Cart.vue';
 import Catalog from '../components/Catalog.vue';
-import Authorization from '../components/Authorization.vue';
+import RegistrationForm from '../components/RegistrationForm.vue';
 import AboutProduct from '../components/AboutProduct.vue';
+import AddNewProduct from '../components/AddNewProduct.vue';
+import EditProduct from '../components/EditProduct.vue';
+import LoginForm from '../components/LoginForm.vue';
 
 Vue.use(VueRouter);
 
@@ -24,14 +27,29 @@ const routes = [
     component: Catalog,
   },
   {
-    path: '/authorization',
-    name: 'authorization',
-    component: Authorization,
+    path: '/registration',
+    name: 'registration',
+    component: RegistrationForm,
   },
   {
     path: '/catalog/:id',
     name: 'about-product',
     component: AboutProduct,
+  },
+  {
+    path: '/add-new-product',
+    name: 'add-new-product',
+    component: AddNewProduct,
+  },
+  {
+    path: '/edit-product/:id',
+    name: 'edit-product',
+    component: EditProduct,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginForm,
   },
 ];
 
