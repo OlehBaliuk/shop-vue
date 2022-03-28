@@ -16,5 +16,8 @@ module.exports = {
     'linebreak-style': 0,
     camelcase: 0,
     'no-trailing-spaces': 0,
+    'object-curly-newline': 0,
+    'vuejs-accessibility/label-has-for': 'off',
+    'vue/no-mutating-props': 0,
   },
 };

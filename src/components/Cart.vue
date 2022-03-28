@@ -4,7 +4,11 @@
     <div v-if="isEmpty">Cart is empty</div>
     <div v-else v-for="product in getCart" :key="product.id" class="product-wrapper">
       <div class="product-wrapper__info">
-        <img class="product-wrapper__img" :src="require('@/assets/images/' + product.image)" alt="img" />
+        <img
+          class="product-wrapper__img"
+          :src="require('@/assets/images/' + (product.image === '' ? '1.jpg' : product.image))"
+          alt="img"
+        />
         <div class="product-wrapper__text">
           <p>name: {{ product.name }}</p>
           <p>price: {{ product.price }}</p>
@@ -40,9 +44,11 @@ export default {
 
   computed: {
     ...mapGetters(['getCart']),
+
     isEmpty() {
       return !Object.keys(this.getCart).length;
     },
+
     countTotalCost() {
       const total = Object.values(this.getCart).reduce((acc, item) => acc + item.price * item.count, 0);
 

@@ -54,6 +54,22 @@ html {
         -webkit-appearance: none;
         margin: 0;
       }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .v-main__wrap {
+        display: flex;
+        justify-content: center;
+      }
+
+      input[type='number']::-webkit-outer-spin-button,
+      input[type='number']::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
   }
 }

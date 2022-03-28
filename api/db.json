@@ -1,39 +1,43 @@
 {
   "products": [
     {
+      "name": "футболка",
+      "description": "опять футболка",
+      "price": "123",
       "image": "1.jpg",
-      "name": "T-shirt",
-      "description": "bla-bla-bla",
-      "price": "100",
-      "id": 1
+      "id": 1,
+      "rating": 5
     },
     {
+      "name": "майка",
+      "description": "тоже майка",
+      "price": "123",
       "image": "2.jpg",
-      "name": "T-shirt",
-      "description": "bla-bla-bla",
-      "price": "170",
       "id": 2
     },
     {
       "image": "3.jpg",
       "name": "T-shirt",
       "description": "bla-bla-bla",
-      "price": "130",
-      "id": 3
+      "price": "1300",
+      "id": 3,
+      "rating": 5
     },
     {
       "image": "4.jpg",
       "name": "T-shirt",
       "description": "bla-bla-bla",
       "price": "180",
-      "id": 4
+      "id": 4,
+      "rating": 5
     },
     {
       "image": "5.jpg",
       "name": "T-shirt",
       "description": "bla-bla-bla",
       "price": "108",
-      "id": 56
+      "id": 56,
+      "rating": 5
     },
     {
       "image": "6.jpg",
@@ -41,6 +45,14 @@
       "description": "bla-bla-bla",
       "price": "148",
       "id": 57
+    },
+    {
+      "name": "uioo",
+      "description": "uoui",
+      "price": "7777",
+      "image": "",
+      "id": 59,
+      "rating": 5
     }
   ],
   "users": [
@@ -53,6 +65,22 @@
       "email": "123@1231",
       "password": "$2a$10$g0k.zWPeKk6dtcbvP/8AMu.GnRhVenekrs.luaGH1XNZGHemAY3GG",
       "id": 2
+    },
+    {
+      "email": "abc@ab.ab",
+      "password": "$2a$10$POpNbIGqETp3UHQLMHa7Xe3yOIuw3DRYjdmYWSE3KpEPiWxXuNFx2",
+      "first": "Oleh",
+      "last": "Baliuk",
+      "age": 29,
+      "id": 3
+    },
+    {
+      "email": "abcd@ab.ab",
+      "password": "$2a$10$2Oi.WiFMIialdj8SVs4.peAM5G93hHXnAcsZNBAZEmXDy/nuXTOha",
+      "first": "aa",
+      "last": "aa",
+      "age": 18,
+      "id": 4
     }
   ]
 }

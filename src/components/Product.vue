@@ -1,16 +1,23 @@
 <template>
-  <v-card class="mx-4 my-4" width="300">
+  <v-card class="mx-4 my-4 xs-" width="300">
     <v-img
-      class="white--text align-end"
+      class="main-image white--text align-end"
       object-fit="cover"
       height="200"
-      :src="require('../assets/images/' + product.image)"
+      :src="require('../assets/images/' + getProductImage())"
     >
+      <v-btn router-link :to="'/edit-product/' + product.id" class="icon-edit"
+        ><v-icon color="black">mdi-pencil-outline</v-icon>
+      </v-btn>
+      <v-btn @click="deleteProductFromDB(product.id)" class="icon-delete">
+        <v-icon color="black">mdi-delete-forever</v-icon>
+      </v-btn>
+
       <v-card-title class="black--text">{{ product.name }}</v-card-title>
     </v-img>
     <v-card-subtitle class="pb-0"> price:{{ product.price }} </v-card-subtitle>
     <v-card-actions class="d-flex justify-center">
-      <v-btn :disabled="isDisable" @click="addProduct(product)" color="teal lighten-1" text
+      <v-btn :disabled="isDisable" @click="addProductToState(product)" color="teal lighten-1" text
         >{{ changeTitleButton }}
       </v-btn>
       <v-btn color="teal lighten-1" text router-link :to="'/catalog/' + product.id"> About product </v-btn>
@@ -20,6 +27,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import HttpService from '../services/HttpService';
 
 export default {
   name: 'Product',
@@ -32,8 +40,15 @@ export default {
   methods: {
     ...mapActions(['addProductToState']),
 
-    addProduct(product) {
-      this.addProductToState(product);
+    getProductImage() {
+      return this.product.image === '' ? '1.jpg' : this.product.image;
+    },
+
+    async deleteProductFromDB(productId) {
+      const response = await HttpService.delete(`/products/${productId}`);
+      if (response) {
+        this.$emit('onDelete', this.product.id);
+      }
     },
   },
 
@@ -54,15 +69,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.product-item {
-  font-size: 1.5rem;
-  border: 1px solid black;
-  margin: 2rem;
+.icon-edit,
+.icon-delete {
+  display: none;
+  position: absolute;
+  top: 0;
+}
 
-  .product-item__image {
-    height: 20rem;
-    width: 15rem;
-    object-fit: cover;
+.main-image:hover {
+  .icon-edit {
+    display: flex;
+    background-color: rgba(192, 188, 188, 0.5);
+  }
+  .icon-delete {
+    display: flex;
+    background-color: rgba(192, 188, 188, 0.5);
+    right: 0;
   }
 }
 </style>
