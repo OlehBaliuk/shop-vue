@@ -2,11 +2,16 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Cart from '../components/Cart.vue';
 import Catalog from '../components/Catalog.vue';
-import LoginForm from '../components/LoginForm.vue';
+import Authorization from '../components/Authorization.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: '/',
+    name: 'main',
+    component: Catalog,
+  },
   {
     path: '/cart',
     name: 'cart',
@@ -18,9 +23,9 @@ const routes = [
     component: Catalog,
   },
   {
-    path: '/login',
-    name: 'login',
-    component: LoginForm,
+    path: '/authorization',
+    name: 'authorization',
+    component: Authorization,
   },
 ];
 

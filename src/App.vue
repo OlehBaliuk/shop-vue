@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss">
 html {
-  font-size: 10px;
+  font-size: 15px;
 
   body {
     margin: 0;
@@ -34,7 +34,6 @@ html {
 
       a {
         text-decoration: none;
-        color: black;
       }
       .main-content {
         display: flex;

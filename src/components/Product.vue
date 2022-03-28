@@ -1,25 +1,31 @@
 <template>
-  <div class="product-item">
-    <img class="product-item__image" :src="require('../assets/images/' + product.image)" alt="" />
-    <p class="product-item__name">{{ product.name }}</p>
-    <p class="product-item__price">price:{{ product.price }}</p>
-    <p class="product-item__description">description:{{ product.description }}</p>
-    <Button title="add to cart" class="product-item__button" />
-  </div>
+  <v-card class="mx-4 my-4" max-width="400">
+    <v-img
+      class="white--text align-end"
+      object-fit="cover"
+      height="200"
+      :src="require('../assets/images/' + product.image)"
+    >
+      <v-card-title class="black--text">{{ product.name }}</v-card-title>
+    </v-img>
+
+    <v-card-subtitle class="pb-0"> price:{{ product.price }} </v-card-subtitle>
+
+    <v-card-actions>
+      <v-btn color="teal lighten-1" text> Add to cart </v-btn>
+
+      <v-btn color="teal lighten-1" text> About product </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
-import Button from './Button.vue';
-
 export default {
   name: 'Product',
   props: {
     product: {
       type: Object,
     },
-  },
-  components: {
-    Button,
   },
 };
 </script>

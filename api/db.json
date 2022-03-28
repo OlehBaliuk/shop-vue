@@ -34,13 +34,25 @@
       "description": "bla-bla-bla",
       "price": "108",
       "id": 56
+    },
+    {
+      "image": "6.jpg",
+      "name": "T-shirt",
+      "description": "bla-bla-bla",
+      "price": "148",
+      "id": 57
     }
   ],
   "users": [
     {
       "email": "123@123",
-      "password": "$2a$10$UGg/IngDW.E8JAJSXXNC9OCvfLL1OMA7JuWXhBSFHLq7A8C0ZN3jG",
+      "password": "$2a$10$ZrGFpFDpIFTEvf3OgPT4K.N4bmbYGP7GFd33TBzqdfh.0srmoiXpe",
       "id": 1
+    },
+    {
+      "email": "123@1231",
+      "password": "$2a$10$g0k.zWPeKk6dtcbvP/8AMu.GnRhVenekrs.luaGH1XNZGHemAY3GG",
+      "id": 2
     }
   ]
 }

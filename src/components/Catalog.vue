@@ -32,6 +32,7 @@ export default {
 <style scoped lang="scss">
 .product-wrapper {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 </style>
