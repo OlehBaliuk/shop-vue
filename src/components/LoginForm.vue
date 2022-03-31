@@ -10,17 +10,15 @@
         <v-container fluid>
           <v-row>
             <v-col cols="12" sm="6">
-              <v-text-field v-model="form.email" :rules="rules.email" label="E-mail" required></v-text-field>
+              <v-text-field v-model="form.email" label="E-mail" required></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6">
               <v-text-field
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="rules.min"
                 :type="showPassword ? 'text' : 'password'"
                 name="input-10-2"
                 label="Password"
-                hint="At least 8 characters"
                 v-model="form.password"
                 class="input-group--focused"
                 required
@@ -42,7 +40,8 @@
 <script>
 import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
-import HttpService from '../services/HttpService';
+import HttpService from '@/services/HttpService';
+import routes from '@/constants/routes';
 
 export default {
   name: 'RegistrationForm',
@@ -55,18 +54,6 @@ export default {
 
     return {
       form: { ...defaultForm },
-      rules: {
-        min: [val => (val || '').length >= 8 || 'Min 8 characters'],
-        email: [
-          value => {
-            // eslint-disable-next-line
-            const pattern =
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return pattern.test(value) || 'Invalid e-mail.';
-          },
-        ],
-      },
-
       snackbar: false,
       showPassword: false,
       defaultForm,
@@ -86,15 +73,13 @@ export default {
     },
 
     async submit(credentials) {
-      const token = await HttpService.post('/login', credentials);
+      const token = await HttpService.post(`${routes.login}`, credentials);
       const decoded = jwt_decode(token.accessToken);
 
-      if (decoded) {
-        this.addUserToState(decoded);
-        this.snackbar = true;
-        this.resetForm();
-        this.$router.push({ path: '/catalog' });
-      }
+      this.addUserToState(decoded);
+      this.snackbar = true;
+      this.resetForm();
+      this.$router.push({ path: routes.catalog });
     },
 
     ...mapActions(['addUserToState']),

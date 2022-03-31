@@ -112,6 +112,7 @@
 <script>
 import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
+import routes from '@/constants/routes';
 import HttpService from '../services/HttpService';
 
 export default {
@@ -165,15 +166,13 @@ export default {
     },
 
     async submit(credentials) {
-      const token = await HttpService.post('/users', credentials);
+      const token = await HttpService.post(`${routes.users}`, credentials);
       const decoded = jwt_decode(token.accessToken);
 
-      if (decoded) {
-        this.addUserToState(decoded);
-        this.snackbar = true;
-        this.resetForm();
-        this.$router.push({ path: '/catalog' });
-      }
+      this.addUserToState(decoded);
+      this.snackbar = true;
+      this.resetForm();
+      this.$router.push({ path: routes.catalog });
     },
 
     ...mapActions(['addUserToState']),

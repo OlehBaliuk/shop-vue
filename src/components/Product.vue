@@ -4,7 +4,7 @@
       class="main-image white--text align-end"
       object-fit="cover"
       height="200"
-      :src="require('../assets/images/' + getProductImage())"
+      :src="require('/public/images/' + getProductImage())"
     >
       <v-btn router-link :to="'/edit-product/' + product.id" class="icon-edit"
         ><v-icon color="black">mdi-pencil-outline</v-icon>
@@ -27,6 +27,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import routes from '@/constants/routes';
 import HttpService from '../services/HttpService';
 
 export default {
@@ -45,7 +46,7 @@ export default {
     },
 
     async deleteProductFromDB(productId) {
-      const response = await HttpService.delete(`/products/${productId}`);
+      const response = await HttpService.delete(`${routes.products}/${productId}`);
       if (response) {
         this.$emit('onDelete', this.product.id);
       }

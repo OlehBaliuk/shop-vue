@@ -11,9 +11,10 @@
     {
       "name": "майка",
       "description": "тоже майка",
-      "price": "123",
+      "price": "1231",
       "image": "2.jpg",
-      "id": 2
+      "id": 2,
+      "rating": 5
     },
     {
       "image": "3.jpg",
@@ -37,14 +38,15 @@
       "description": "bla-bla-bla",
       "price": "108",
       "id": 56,
-      "rating": 5
+      "rating": 4
     },
     {
       "image": "6.jpg",
       "name": "T-shirt",
       "description": "bla-bla-bla",
       "price": "148",
-      "id": 57
+      "id": 57,
+      "rating": 5
     },
     {
       "name": "uioo",
@@ -53,6 +55,63 @@
       "image": "",
       "id": 59,
       "rating": 5
+    },
+    {
+      "name": "111iliuliuliu",
+      "description": "111",
+      "price": "111",
+      "image": "",
+      "id": 60,
+      "rating": 5
+    },
+    {
+      "name": "aaaa",
+      "description": "aaa",
+      "price": "111",
+      "image": "",
+      "id": 61
+    },
+    {
+      "name": "33tr6trt",
+      "description": "33hggyfyf",
+      "price": "1000",
+      "image": "",
+      "id": 62
+    },
+    {
+      "name": "рррроллл",
+      "description": "рпшагнвнеен",
+      "price": "12200",
+      "image": "",
+      "id": 63
+    },
+    {
+      "name": "цццц",
+      "description": "ццц",
+      "price": "1111",
+      "image": "",
+      "id": 64
+    },
+    {
+      "name": "ss",
+      "description": "sss",
+      "price": "1111",
+      "image": "",
+      "id": 65
+    },
+    {
+      "name": "s",
+      "description": "s",
+      "price": "1111",
+      "image": "",
+      "id": 66
+    },
+    {
+      "name": "aa",
+      "description": "aa",
+      "price": "111",
+      "image": "",
+      "id": 67
     }
   ],
   "users": [
@@ -81,6 +140,22 @@
       "last": "aa",
       "age": 18,
       "id": 4
+    },
+    {
+      "email": "abca@ab.ab",
+      "password": "$2a$10$HvZpCYPVJ36ZmmFxqvO8ROPMf13aGvUnjykqNA9zPApaJZcg9rtmW",
+      "first": "qqq",
+      "last": "qqq",
+      "age": 50,
+      "id": 5
+    },
+    {
+      "email": "abce@ab.ab",
+      "password": "$2a$10$loNXqd2g0J8m38GhRUBOuubqLVamyrcgq6Q1rWTLAKTeClpOXtW86",
+      "first": "s",
+      "last": "s",
+      "age": 18,
+      "id": 6
     }
   ]
 }

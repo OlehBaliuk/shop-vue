@@ -6,8 +6,9 @@
 </template>
 
 <script>
+import routes from '@/constants/routes';
+import HttpService from '@/services/HttpService';
 import FormProduct from './sharedComponents/FormProduct.vue';
-import HttpService from '../services/HttpService';
 
 export default {
   name: 'AddNewProduct',
@@ -28,8 +29,11 @@ export default {
   },
 
   methods: {
-    submit(newProduct) {
-      HttpService.post('/products', newProduct);
+    async submit(newProduct) {
+      const response = await HttpService.post(`${routes.products}`, newProduct);
+      if (response) {
+        this.$router.push({ path: routes.catalog });
+      }
     },
   },
 };

@@ -6,6 +6,5 @@
   "semi": true,
   "useTabs": false,
   "jsxBracketSameLine": false,
-  "arrowParens": "avoid",
-  "prettier.printWidth": 120
+  "arrowParens": "avoid"
 }

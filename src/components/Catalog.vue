@@ -9,6 +9,7 @@
 
 <script>
 import HttpService from '@/services/HttpService';
+import routes from '@/constants/routes';
 import Product from './Product.vue';
 
 export default {
@@ -25,7 +26,7 @@ export default {
 
   methods: {
     async getProductFromDB() {
-      const data = await HttpService.get('/products');
+      const data = await HttpService.get(`${routes.products}`);
 
       this.productsList = data;
     },
