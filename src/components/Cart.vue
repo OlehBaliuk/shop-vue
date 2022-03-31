@@ -6,7 +6,7 @@
       <div class="product-wrapper__info">
         <img
           class="product-wrapper__img"
-          :src="require('@/assets/images/' + (product.image === '' ? '1.jpg' : product.image))"
+          :src="require('/public/images/' + (product.image === '' ? '1.jpg' : product.image))"
           alt="img"
         />
         <div class="product-wrapper__text">
@@ -15,16 +15,16 @@
         </div>
         <div class="product-wrapper__quantity d-flex">
           <span class="d-flex align-center">quantity:</span>
-          <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green"> mdi-minus </v-icon>
+          <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green">mdi-minus</v-icon>
           <p class="product-wrapper__count">{{ product.count }}</p>
-          <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red"> mdi-plus </v-icon>
+          <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red">mdi-plus</v-icon>
         </div>
-        <v-btn @click="deleteProductFromCart(product.id)" color="teal lighten-1" text> delete </v-btn>
+        <v-btn @click="deleteProductFromCart(product.id)" color="teal lighten-1" text>delete</v-btn>
       </div>
     </div>
     <div v-if="!isEmpty" class="cart-wrapper__total-field">
-      <h2>Total:{{ countTotalCost }}</h2>
-      <v-btn @click="cleareCart" color="teal lighten-1" text> cleare cart </v-btn>
+      <h2>Total: {{ countTotalCost }}</h2>
+      <v-btn @click="cleareCart" color="teal lighten-1" text>clear cart</v-btn>
     </div>
   </div>
 </template>
@@ -68,6 +68,7 @@ export default {
 
   .product-wrapper__info {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     border: 1px solid rgb(179, 170, 170);

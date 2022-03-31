@@ -3,6 +3,7 @@
     <form @submit.prevent="submit" class="form">
       <validation-provider v-slot="{ errors }" name="Name" rules="required|max:25">
         <v-text-field
+          data-test="nameText"
           v-model="dataProduct.name"
           :counter="25"
           :error-messages="errors"
@@ -14,6 +15,7 @@
       <validation-provider v-slot="{ errors }" name="Description" rules="required|max:25">
         <v-text-field
           v-model="dataProduct.description"
+          data-test="descriptionText"
           :counter="25"
           :error-messages="errors"
           label="Description"
@@ -31,26 +33,27 @@
       >
         <v-text-field
           v-model="dataProduct.price"
+          data-test="price"
           :counter="25"
           :error-messages="errors"
           label="Price"
           required
         ></v-text-field>
       </validation-provider>
-
       <validation-provider v-slot="{ errors }" rules="required" name="checkbox">
         <v-checkbox
           v-model="checkbox"
+          data-test="checkbox"
           :error-messages="errors"
-          value="1"
+          value="true"
           label="right"
           type="checkbox"
           required
         ></v-checkbox>
       </validation-provider>
 
-      <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
-      <v-btn @click="clear"> clear </v-btn>
+      <v-btn class="mr-4" type="submit" :disabled="invalid">submit</v-btn>
+      <v-btn @click="clear">clear</v-btn>
     </form>
   </validation-observer>
 </template>
@@ -108,7 +111,7 @@ export default {
     },
   },
   created() {
-    this.dataProduct = JSON.parse(JSON.stringify(this.product));
+    this.dataProduct = { ...this.product };
   },
 };
 </script>

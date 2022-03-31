@@ -1,12 +1,12 @@
 <template>
   <div>
     <h2 class="my-5">About product</h2>
-    <v-progress-linear v-if="isLoader" indeterminate color="cyan"> </v-progress-linear>
+    <v-progress-linear v-if="isLoader" indeterminate color="cyan"></v-progress-linear>
     <div class="wrapper d-flex flex-wrap" v-else>
       <div>
         <div class="d-flex flex-column justify-space-between align-center mx-5 my-5">
           <v-slider v-model="widthSlider" class="align-self-stretch" min="200" max="400" step="1"></v-slider>
-          <v-img :width="widthSlider" :src="require('../assets/images/' + getProductImage())"></v-img>
+          <v-img :width="widthSlider" :src="require('/public/images/' + getProductImage)"></v-img>
           <v-btn @click="changeRating" width="100%">
             <v-rating v-model="product.rating" icon-label="custom icon label text {0} of {1}"></v-rating>
           </v-btn>
@@ -33,6 +33,7 @@
 <script>
 import HttpService from '@/services/HttpService';
 import { mapActions, mapGetters } from 'vuex';
+import routes from '@/constants/routes';
 
 export default {
   name: 'AboutProduct',
@@ -46,12 +47,15 @@ export default {
   },
 
   methods: {
-    getProductImage() {
-      return this.product.image === '' ? '1.jpg' : this.product.image;
+    changeRating() {
+      HttpService.put(`${routes.products}/${this.$route.params.id}`, this.product);
     },
 
-    changeRating() {
-      HttpService.put(`/products/${this.$route.params.id}`, this.product);
+    async getProduct() {
+      const data = await HttpService.get(`${routes.products}/${this.$route.params.id}`, this.product);
+
+      this.product = data;
+      this.isLoader = !this.isLoader;
     },
 
     ...mapActions(['addProductToState']),
@@ -59,6 +63,10 @@ export default {
 
   computed: {
     ...mapGetters(['getCart']),
+
+    getProductImage() {
+      return this.product.image === '' ? '1.jpg' : this.product.image;
+    },
 
     isDisable() {
       return Object.keys(this.getCart).includes(String(this.product.id));
@@ -72,10 +80,7 @@ export default {
   },
 
   async mounted() {
-    const data = await HttpService.get(`/products/${this.$route.params.id}`);
-
-    this.product = data;
-    this.isLoader = !this.isLoader;
+    this.getProduct();
   },
 };
 </script>

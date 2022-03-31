@@ -6,8 +6,9 @@
 </template>
 
 <script>
+import HttpService from '@/services/HttpService';
+import routes from '@/constants/routes';
 import FormProduct from './sharedComponents/FormProduct.vue';
-import HttpService from '../services/HttpService';
 
 export default {
   name: 'EditProduct',
@@ -24,12 +25,15 @@ export default {
   },
 
   methods: {
-    submit(newProduct) {
-      HttpService.put(`/products/${this.$route.params.id}`, newProduct);
+    async submit(newProduct) {
+      const response = await HttpService.put(`${routes.products}/${this.$route.params.id}`, newProduct);
+      if (response) {
+        this.$router.push({ path: routes.catalog });
+      }
     },
 
     async getProductFromDB() {
-      const result = await HttpService.get(`/products/${this.$route.params.id}`);
+      const result = await HttpService.get(`${routes.products}/${this.$route.params.id}`);
       return result;
     },
   },
