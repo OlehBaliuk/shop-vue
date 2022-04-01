@@ -2,25 +2,42 @@
   <div class="cart-wrapper">
     <h1>Cart</h1>
     <div v-if="isEmpty">Cart is empty</div>
+
     <div v-else v-for="product in getCart" :key="product.id" class="product-wrapper">
-      <div class="product-wrapper__info">
-        <img
-          class="product-wrapper__img"
-          :src="require('/public/images/' + (product.image === '' ? '1.jpg' : product.image))"
-          alt="img"
-        />
-        <div class="product-wrapper__text">
-          <p>name: {{ product.name }}</p>
-          <p>price: {{ product.price }}</p>
+      <v-col class="py-0" cols="12">
+        <div class="product-wrapper__info">
+          <div class="d-flex align-center">
+            <img
+              class="product-wrapper__img"
+              :src="require('/public/images/' + (product.image === '' ? '1.jpg' : product.image))"
+              alt="img"
+            />
+            <div class="product-wrapper__text">
+              <p>name: {{ product.name }}</p>
+            </div>
+          </div>
+          <div></div>
+          <div class="product-wrapper__quantity">
+            <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green">mdi-minus</v-icon>
+            <label for="countProduct">
+              <input
+                min="1"
+                type="number"
+                id="countProduct"
+                :value="product.count"
+                @change="onChangeCountProduct(product.id, $event)"
+                @input="onInput"
+                @blur="onBlur(product.id, $event)"
+              />
+            </label>
+            <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red">mdi-plus</v-icon>
+          </div>
+          <div class="price-wrapper">
+            <p>{{ product.price }} UAH</p>
+            <v-btn @click="deleteProductFromCart(product.id)" x-small color="teal lighten-1" text>delete</v-btn>
+          </div>
         </div>
-        <div class="product-wrapper__quantity d-flex">
-          <span class="d-flex align-center">quantity:</span>
-          <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green">mdi-minus</v-icon>
-          <p class="product-wrapper__count">{{ product.count }}</p>
-          <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red">mdi-plus</v-icon>
-        </div>
-        <v-btn @click="deleteProductFromCart(product.id)" color="teal lighten-1" text>delete</v-btn>
-      </div>
+      </v-col>
     </div>
     <div v-if="!isEmpty" class="cart-wrapper__total-field">
       <h2>Total: {{ countTotalCost }}</h2>
@@ -57,7 +74,26 @@ export default {
   },
 
   methods: {
-    ...mapActions(['deleteProductFromCart', 'cleareCart', 'incrementProductInCart', 'decrementProductInCart']),
+    ...mapActions([
+      'deleteProductFromCart',
+      'cleareCart',
+      'incrementProductInCart',
+      'decrementProductInCart',
+      'changeCountProduct',
+    ]),
+
+    onChangeCountProduct(productId, e) {
+      this.changeCountProduct({ productId, count: Number(e.target.value) });
+    },
+    onInput(e) {
+      if (e.target.value === '0') e.target.value = 1;
+    },
+
+    onBlur(productId, e) {
+      if (e.target.value === '' || e.target.value === '0') {
+        this.changeCountProduct({ productId, count: 1 });
+      }
+    },
   },
 };
 </script>
@@ -77,7 +113,7 @@ export default {
 
     .product-wrapper__img {
       height: 4rem;
-      widows: 4rem;
+      width: 4rem;
       object-fit: cover;
     }
 
@@ -90,6 +126,23 @@ export default {
     .product-wrapper__count {
       font-size: 1.2rem;
     }
+
+    .product-wrapper__text {
+      width: 20rem;
+      text-align: start;
+      margin-left: 1rem;
+    }
+
+    .price-wrapper {
+      width: 7rem;
+    }
   }
+}
+
+#countProduct {
+  border: 1px solid black;
+  border-radius: 3px;
+  width: 4rem;
+  text-align: center;
 }
 </style>

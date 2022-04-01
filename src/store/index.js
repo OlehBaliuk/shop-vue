@@ -47,6 +47,10 @@ export default new Vuex.Store({
         state.cart[productId].count -= 1;
       }
     },
+
+    CHANGE_COUNT_PRODUCT(state, payload) {
+      state.cart[payload.productId].count = payload.count;
+    },
   },
 
   actions: {
@@ -76,6 +80,9 @@ export default new Vuex.Store({
 
     decrementProductInCart({ commit }, productId) {
       commit('DECREMENT_PRODUCT', productId);
+    },
+    changeCountProduct({ commit }, payload) {
+      commit('CHANGE_COUNT_PRODUCT', payload);
     },
   },
 

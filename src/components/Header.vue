@@ -12,10 +12,10 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-btn icon router-link to="/cart">
         <v-icon color="white">mdi-cart</v-icon>
-        <span>{{ getCart.length }}</span>
+        <span v-if="changeCounterCart > 0"> {{ changeCounterCart }}</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-toolbar-title> <v-btn icon router-link to="/">shop</v-btn></v-toolbar-title>
+      <v-toolbar-title> <v-btn class="icon-shop" icon router-link to="/">shop</v-btn></v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!getUser.email" class="auth-wrapper">
         <router-link class="mx-2" to="/registration">Registration</router-link>
@@ -51,6 +51,12 @@ export default {
   }),
   computed: {
     ...mapGetters(['getUser', 'getCart']),
+
+    changeCounterCart() {
+      const countEachProduct = Object.values(this.getCart).map(product => product.count);
+      const totalCount = countEachProduct.reduce((acc, count) => acc + count, 0);
+      return totalCount;
+    },
   },
   methods: {
     ...mapActions(['clearUserState']),
@@ -86,5 +92,11 @@ export default {
   a {
     color: white;
   }
+}
+
+.icon-shop {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

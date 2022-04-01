@@ -14,7 +14,7 @@
       "price": "1231",
       "image": "2.jpg",
       "id": 2,
-      "rating": 5
+      "rating": 3
     },
     {
       "image": "3.jpg",
@@ -148,14 +148,6 @@
       "last": "qqq",
       "age": 50,
       "id": 5
-    },
-    {
-      "email": "abce@ab.ab",
-      "password": "$2a$10$loNXqd2g0J8m38GhRUBOuubqLVamyrcgq6Q1rWTLAKTeClpOXtW86",
-      "first": "s",
-      "last": "s",
-      "age": 18,
-      "id": 6
     }
   ]
 }
