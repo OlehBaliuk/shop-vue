@@ -1,122 +1,146 @@
 <template>
   <div class="registration-form">
     <h1>Registration</h1>
-    <v-card flat>
-      <v-snackbar v-model="snackbar" absolute top color="success">
-        <span>Registration successful!</span>
-        <v-icon dark> mdi-checkbox-marked-circle </v-icon>
-      </v-snackbar>
-      <v-form ref="form" @submit.prevent="submit(form)">
+    <Dialog
+      :isFlag="isErrorRegistration"
+      @onChangeStatus="onChangeStatusError"
+      title="Error"
+      content="something went wrong.."
+    />
+    <validation-observer ref="observer" v-slot="{ invalid }">
+      <v-form @submit.prevent="submit(form)">
         <v-container fluid>
           <v-row>
             <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="form.first"
-                :rules="rules.name"
-                color="purple darken-2"
-                label="First name"
-                required
-              ></v-text-field>
+              <validation-provider v-slot="{ errors }" name="first name" rules="required|max:20">
+                <v-text-field
+                  v-model="form.first"
+                  :counter="20"
+                  :error-messages="errors"
+                  label="First name"
+                  required
+                ></v-text-field>
+              </validation-provider>
             </v-col>
-
             <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="form.last"
-                :rules="rules.name"
-                color="blue darken-2"
-                label="Last name"
-                required
-              ></v-text-field>
+              <validation-provider v-slot="{ errors }" name="last name" rules="required|max:20">
+                <v-text-field
+                  v-model="form.last"
+                  :counter="20"
+                  :error-messages="errors"
+                  label="Last name"
+                  required
+                ></v-text-field>
+              </validation-provider>
             </v-col>
-
             <v-col cols="12" sm="6">
-              <v-text-field v-model="form.email" :rules="rules.email" label="E-mail" required></v-text-field>
+              <validation-provider
+                v-slot="{ errors }"
+                name="Email"
+                :rules="{
+                  required: true,
+                  email: true,
+                }"
+              >
+                <v-text-field v-model="form.email" :error-messages="errors" label="Email" required></v-text-field>
+              </validation-provider>
             </v-col>
-
             <v-col cols="12" sm="6">
-              <v-text-field
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="rules.min"
-                :type="showPassword ? 'text' : 'password'"
-                name="input-10-2"
-                label="Password"
-                hint="At least 8 characters"
-                v-model="form.password"
-                class="input-group--focused"
-                required
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
+              <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
+                <v-text-field
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="showPassword ? 'text' : 'password'"
+                  :error-messages="errors"
+                  label="Password"
+                  v-model="form.password"
+                  class="input-group--focused"
+                  required
+                  @click:append="showPassword = !showPassword"
+                ></v-text-field>
+              </validation-provider>
             </v-col>
-
             <v-col cols="12" sm="6">
-              <v-slider
-                v-model="form.age"
-                :rules="rules.age"
-                color="orange"
-                label="Age"
-                hint="Be honest"
-                min="18"
-                max="100"
-                thumb-label
-              ></v-slider>
-            </v-col>
-
-            <v-col cols="12">
-              <v-checkbox v-model="checkBoxTerms" color="green">
-                <template v-slot:label>
-                  <div @click.stop="">
-                    Do you accept the
-                    <a href="#" @click.prevent="terms = true">terms</a>
-                    and
-                    <a href="#" @click.prevent="conditions = true">conditions?</a>
-                  </div>
-                </template>
-              </v-checkbox>
+              <validation-provider v-slot="{ errors }" name="age" rules="required">
+                <v-slider
+                  v-model="form.age"
+                  :error-messages="errors"
+                  label="Age"
+                  hint="Be honest"
+                  min="18"
+                  max="100"
+                  thumb-label
+                ></v-slider>
+              </validation-provider>
+              <validation-provider v-slot="{ errors }" name="checkbox" rules="required">
+                <v-col cols="12">
+                  <v-checkbox
+                    v-model="checkBoxTerms"
+                    :error-messages="errors"
+                    color="green"
+                    value="true"
+                    type="checkbox"
+                    required
+                  >
+                    <template v-slot:label>
+                      <div @click.stop="">
+                        Do you accept the
+                        <a href="#" @click.prevent="onChangeStatusTerms">terms</a>
+                        and
+                        <a href="#" @click.prevent="onChangeStatusConditions">conditions?</a>
+                      </div>
+                    </template>
+                  </v-checkbox>
+                </v-col>
+              </validation-provider>
             </v-col>
           </v-row>
         </v-container>
-        <v-card-actions>
-          <v-btn text @click="resetForm"> Cancel </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :disabled="!formIsValid" text color="primary" type="submit"> Register </v-btn>
-        </v-card-actions>
+        <v-btn class="mr-4" type="submit" :disabled="invalid">submit</v-btn>
+        <v-btn @click="clear">clear</v-btn>
       </v-form>
-      <v-dialog v-model="terms" width="70%">
-        <v-card>
-          <v-card-title class="text-h6"> Terms </v-card-title>
-          <v-card-text>
-            {{ content }}
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text color="purple" @click="terms = false"> Ok </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-dialog v-model="conditions" width="70%">
-        <v-card>
-          <v-card-title class="text-h6"> Conditions </v-card-title>
-          <v-card-text>
-            {{ content }}
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text color="purple" @click="conditions = false"> Ok </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-card>
+      <Dialog :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
+      <Dialog :isFlag="conditions" @onChangeStatus="onChangeStatusConditions" title="Conditions" :content="content" />
+    </validation-observer>
   </div>
 </template>
 
 <script>
 import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
+import { required, max, min, email } from 'vee-validate/dist/rules';
+import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import routes from '@/constants/routes';
 import HttpService from '../services/HttpService';
+import Dialog from './sharedComponents/Dialog.vue';
+
+extend('required', {
+  ...required,
+  message: '{_field_} can not be empty',
+});
+
+extend('max', {
+  ...max,
+  message: '{_field_} may not be greater than {length} characters',
+});
+
+extend('min', {
+  ...min,
+  message: '{_field_} may not be less than {length} characters',
+});
+
+extend('email', {
+  ...email,
+  message: '{_field_} not correct',
+});
 
 export default {
   name: 'RegistrationForm',
+
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+    Dialog,
+  },
 
   data() {
     const defaultForm = Object.freeze({
@@ -129,50 +153,45 @@ export default {
 
     return {
       form: { ...defaultForm },
-      rules: {
-        age: [val => val > 17 || "I don't believe you!"],
-        name: [val => (val || '').length > 0 || 'This field is required'],
-        min: [val => (val || '').length >= 8 || 'Min 8 characters'],
-        email: [
-          value => {
-            // eslint-disable-next-line
-            const pattern =
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return pattern.test(value) || 'Invalid e-mail.';
-          },
-        ],
-      },
-
       conditions: false,
       snackbar: false,
       terms: false,
-      checkBoxTerms: false,
+      checkBoxTerms: null,
       showPassword: false,
-      defaultForm,
       content: 'Lorem ipsum dolor sit amet',
+      isErrorRegistration: false,
     };
   },
 
-  computed: {
-    formIsValid() {
-      return this.form.first && this.form.last && this.form.email && this.form.password && this.checkBoxTerms;
-    },
-  },
-
   methods: {
-    resetForm() {
+    clear() {
       this.form = { ...this.defaultForm };
-      this.$refs.form.reset();
+      this.checkBoxTerms = null;
+      this.$refs.observer.reset();
+    },
+
+    onChangeStatusError() {
+      this.isErrorRegistration = !this.isErrorRegistration;
+    },
+
+    onChangeStatusTerms() {
+      this.terms = !this.terms;
+    },
+
+    onChangeStatusConditions() {
+      this.conditions = !this.conditions;
     },
 
     async submit(credentials) {
-      const token = await HttpService.post(`${routes.users}`, credentials);
-      const decoded = jwt_decode(token.accessToken);
+      try {
+        const token = await HttpService.post(`${routes.users}`, credentials);
+        const decoded = jwt_decode(token.accessToken);
 
-      this.addUserToState(decoded);
-      this.snackbar = true;
-      this.resetForm();
-      this.$router.push({ path: routes.catalog });
+        this.addUserToState(decoded);
+        this.$router.push({ path: routes.catalog });
+      } catch (e) {
+        this.onChangeStatusError();
+      }
     },
 
     ...mapActions(['addUserToState']),

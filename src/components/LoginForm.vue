@@ -1,6 +1,12 @@
 <template>
   <div class="login-form">
     <h1>Login</h1>
+    <Dialog
+      :isFlag="isErrorLogin"
+      @onChangeStatus="onChangeStatusError"
+      title="Error"
+      content="something went wrong.."
+    />
     <v-card flat>
       <v-snackbar v-model="snackbar" absolute top color="success">
         <span>Registration successful!</span>
@@ -40,11 +46,16 @@
 <script>
 import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
-import HttpService from '@/services/HttpService';
 import routes from '@/constants/routes';
+import HttpService from '../services/HttpService';
+import Dialog from './sharedComponents/Dialog.vue';
 
 export default {
   name: 'RegistrationForm',
+
+  components: {
+    Dialog,
+  },
 
   data() {
     const defaultForm = Object.freeze({
@@ -56,6 +67,7 @@ export default {
       form: { ...defaultForm },
       snackbar: false,
       showPassword: false,
+      isErrorLogin: false,
       defaultForm,
     };
   },
@@ -72,14 +84,22 @@ export default {
       this.$refs.form.reset();
     },
 
-    async submit(credentials) {
-      const token = await HttpService.post(`${routes.login}`, credentials);
-      const decoded = jwt_decode(token.accessToken);
+    onChangeStatusError() {
+      this.isErrorLogin = !this.isErrorLogin;
+    },
 
-      this.addUserToState(decoded);
-      this.snackbar = true;
-      this.resetForm();
-      this.$router.push({ path: routes.catalog });
+    async submit(credentials) {
+      try {
+        const token = await HttpService.post(`${routes.login}`, credentials);
+        const decoded = jwt_decode(token.accessToken);
+
+        this.addUserToState(decoded);
+        this.snackbar = true;
+        this.resetForm();
+        this.$router.push({ path: routes.catalog });
+      } catch {
+        this.isErrorLogin = !this.isErrorLogin;
+      }
     },
 
     ...mapActions(['addUserToState']),
