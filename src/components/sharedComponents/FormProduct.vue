@@ -60,9 +60,7 @@
 
 <script>
 import { required, max, regex } from 'vee-validate/dist/rules';
-import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate';
-
-setInteractionMode('eager');
+import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 
 extend('required', {
   ...required,
