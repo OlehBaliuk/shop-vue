@@ -112,6 +112,13 @@
       "price": "111",
       "image": "",
       "id": 67
+    },
+    {
+      "name": "sss",
+      "description": "sss",
+      "price": "111",
+      "image": "",
+      "id": 68
     }
   ],
   "users": [
@@ -148,6 +155,62 @@
       "last": "qqq",
       "age": 50,
       "id": 5
+    },
+    {
+      "email": "abcyy@ab.ab",
+      "password": "$2a$10$6cTn8c2pu1FhhemZKgGtx.aY70.vvFw9/fDnCxj0lSD3Jfdij4L7m",
+      "first": "yy",
+      "last": "yy",
+      "age": 18,
+      "id": 6
+    },
+    {
+      "email": "abcaa@ab.ab",
+      "password": "$2a$10$icmrW4WY.smrAzOrx9zgXePv29ihbPZxL00Bd9atvoQdXjY8rhdqe",
+      "first": "a",
+      "last": "a",
+      "age": 18,
+      "id": 7
+    },
+    {
+      "email": "abcsaa@ab.ab",
+      "password": "$2a$10$nBBi6XW9yImNGtkym72WGu/Z1DzpqysUgjV8b7InIxAMumsyMYeya",
+      "first": "a",
+      "last": "a",
+      "age": 26,
+      "id": 8
+    },
+    {
+      "email": "abcss@ab.ab",
+      "password": "$2a$10$rTdTCs8kdkOAcpCkPHltH.0.SAubBJBPwNtetEOtS70.cvRbqWZIe",
+      "first": "s",
+      "last": "s",
+      "age": 18,
+      "id": 9
+    },
+    {
+      "email": "abcqqqq@ab.ab",
+      "password": "$2a$10$bxbvc0iK/g1xE8cDZnW3A.T14LFVHQ1fGwP6s1A2kRuTGbINfTdvK",
+      "first": "aa",
+      "last": "aaa",
+      "age": 25,
+      "id": 10
+    },
+    {
+      "email": "abcssss@ab.ab",
+      "password": "$2a$10$fsV6LnHtlCX501VZVSxHJ.zG/Y//4tyhRs3AtwPkSDXjcAm9Sitka",
+      "first": "ss",
+      "last": "ss",
+      "age": 18,
+      "id": 11
+    },
+    {
+      "email": "abcaaa@ab.ab",
+      "password": "$2a$10$IHC4ROweKOlo7bIOsIw6Hel.R.LGANbh5KEhINyEzqc7gtpKhfEWy",
+      "first": "a",
+      "last": "a",
+      "age": 18,
+      "id": 12
     }
   ]
 }

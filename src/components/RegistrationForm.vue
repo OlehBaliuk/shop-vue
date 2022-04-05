@@ -184,8 +184,8 @@ export default {
 
     async submit(credentials) {
       try {
-        const token = await HttpService.post(`${routes.users}`, credentials);
-        const decoded = jwt_decode(token.accessToken);
+        const { data } = await HttpService.post(`${routes.users}`, credentials);
+        const decoded = jwt_decode(data.accessToken);
 
         this.addUserToState(decoded);
         this.$router.push({ path: routes.catalog });

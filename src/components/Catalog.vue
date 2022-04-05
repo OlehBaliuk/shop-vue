@@ -3,13 +3,13 @@
     <h1>Catalog</h1>
     <div class="product-wrapper">
       <Product @onDelete="deleteProduct" v-for="product in productsList" :key="product.id" :product="product" />
+      <div v-if="productsList.length" v-observe-visibility="handleScroll"></div>
     </div>
   </div>
 </template>
 
 <script>
 import HttpService from '@/services/HttpService';
-import routes from '@/constants/routes';
 import Product from './Product.vue';
 
 export default {
@@ -17,6 +17,8 @@ export default {
   data() {
     return {
       productsList: [],
+      page: 1,
+      totalPosts: null,
     };
   },
 
@@ -26,13 +28,27 @@ export default {
 
   methods: {
     async getProductFromDB() {
-      const data = await HttpService.get(`${routes.products}`);
+      const data = await HttpService.get(`/products?_page=${this.page}`);
 
-      this.productsList = data;
+      const newProductList = [...this.productsList, ...data.data];
+
+      this.totalPosts = data.headers['x-total-count'];
+
+      this.productsList = newProductList;
     },
 
     deleteProduct(productId) {
       this.productsList = this.productsList.filter(product => product.id !== productId);
+    },
+
+    handleScroll(isVisible) {
+      if (!isVisible || this.totalPosts <= this.productsList.length) {
+        return;
+      }
+
+      this.page += 1;
+
+      this.getProductFromDB();
     },
   },
 
