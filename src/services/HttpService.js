@@ -4,15 +4,16 @@ class HttpService {
   static async request(url, method, data) {
     try {
       const response = await Vue.axios({ url, method, data });
-      return response.data;
+
+      return response;
     } catch (e) {
       console.log(e);
     }
     return null;
   }
 
-  static async get(url) {
-    const response = await this.request(url, 'get');
+  static async get(url, options) {
+    const response = await this.request(url, 'get', options);
 
     return response;
   }

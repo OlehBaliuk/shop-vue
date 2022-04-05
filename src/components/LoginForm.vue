@@ -90,13 +90,14 @@ export default {
 
     async submit(credentials) {
       try {
-        const token = await HttpService.post(`${routes.login}`, credentials);
-        const decoded = jwt_decode(token.accessToken);
+        const { data } = await HttpService.post(`${routes.login}`, credentials);
+        const decoded = jwt_decode(data.accessToken);
 
-        this.addUserToState(decoded);
-        this.snackbar = true;
-        this.resetForm();
-        this.$router.push({ path: routes.catalog });
+        if (decoded) {
+          this.addUserToState(decoded);
+          this.snackbar = true;
+          this.$router.push({ path: routes.catalog });
+        }
       } catch {
         this.isErrorLogin = !this.isErrorLogin;
       }
