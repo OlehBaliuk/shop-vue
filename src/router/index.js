@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import SearchProducts from '@/components/SearchProducts.vue';
+import route from '@/constants/routes';
 import Cart from '../components/Cart.vue';
 import Catalog from '../components/Catalog.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
@@ -12,44 +14,49 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
+    path: route.main,
     name: 'main',
     component: Catalog,
   },
   {
-    path: '/cart',
+    path: route.cart,
     name: 'cart',
     component: Cart,
   },
   {
-    path: '/catalog',
+    path: route.catalog,
     name: 'catalog',
     component: Catalog,
   },
   {
-    path: '/registration',
+    path: route.registration,
     name: 'registration',
     component: RegistrationForm,
   },
   {
-    path: '/catalog/:id',
+    path: route.aboutProduct,
     name: 'about-product',
     component: AboutProduct,
   },
   {
-    path: '/add-new-product',
+    path: route.addNewProduct,
     name: 'add-new-product',
     component: AddNewProduct,
   },
   {
-    path: '/edit-product/:id',
+    path: route.editProduct,
     name: 'edit-product',
     component: EditProduct,
   },
   {
-    path: '/login',
+    path: route.login,
     name: 'login',
     component: LoginForm,
+  },
+  {
+    path: route.search,
+    name: 'search',
+    component: SearchProducts,
   },
 ];
 

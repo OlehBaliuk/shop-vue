@@ -46,8 +46,8 @@
 <script>
 import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
-import routes from '@/constants/routes';
-import HttpService from '../services/HttpService';
+import route from '@/constants/routes';
+import HttpService from '@/services/HttpService';
 import Dialog from './sharedComponents/Dialog.vue';
 
 export default {
@@ -90,13 +90,13 @@ export default {
 
     async submit(credentials) {
       try {
-        const { data } = await HttpService.post(`${routes.login}`, credentials);
+        const { data } = await HttpService.post(`${route.login}`, credentials);
         const decoded = jwt_decode(data.accessToken);
 
         if (decoded) {
           this.addUserToState(decoded);
           this.snackbar = true;
-          this.$router.push({ path: routes.catalog });
+          this.$router.push({ path: route.catalog });
         }
       } catch {
         this.isErrorLogin = !this.isErrorLogin;

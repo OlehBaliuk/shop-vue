@@ -33,7 +33,7 @@
 <script>
 import HttpService from '@/services/HttpService';
 import { mapActions, mapGetters } from 'vuex';
-import routes from '@/constants/routes';
+import route from '@/constants/routes';
 
 export default {
   name: 'AboutProduct',
@@ -48,11 +48,11 @@ export default {
 
   methods: {
     changeRating() {
-      HttpService.put(`${routes.products}/${this.$route.params.id}`, this.product);
+      HttpService.put(`${route.products}/${this.$route.params.id}`, this.product);
     },
 
     async getProduct() {
-      const data = await HttpService.get(`${routes.products}/${this.$route.params.id}`, this.product);
+      const data = await HttpService.get(`${route.products}/${this.$route.params.id}`, this.product);
 
       this.product = data;
       this.isLoader = !this.isLoader;

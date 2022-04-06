@@ -14,7 +14,7 @@
       "price": "1231",
       "image": "2.jpg",
       "id": 2,
-      "rating": 3
+      "rating": 5
     },
     {
       "image": "3.jpg",
@@ -44,7 +44,7 @@
       "image": "6.jpg",
       "name": "T-shirt",
       "description": "bla-bla-bla",
-      "price": "148",
+      "price": "1480",
       "id": 57,
       "rating": 5
     },
@@ -211,6 +211,14 @@
       "last": "a",
       "age": 18,
       "id": 12
+    },
+    {
+      "email": "abcssssss@ab.ab",
+      "password": "$2a$10$cHEf/MzQGeznRE4uokv4BeKhcneWTTcd5Ax/./uGY6VSsmPWFO2fK",
+      "first": "ss",
+      "last": "ss",
+      "age": 18,
+      "id": 13
     }
   ]
 }
