@@ -7,7 +7,7 @@
 
 <script>
 import HttpService from '@/services/HttpService';
-import routes from '@/constants/routes';
+import route from '@/constants/routes';
 import FormProduct from './sharedComponents/FormProduct.vue';
 
 export default {
@@ -26,15 +26,15 @@ export default {
 
   methods: {
     async submit(newProduct) {
-      const response = await HttpService.put(`${routes.products}/${this.$route.params.id}`, newProduct);
-      if (response) {
-        this.$router.push({ path: routes.catalog });
+      const { data } = await HttpService.put(`${route.products}/${this.$route.params.id}`, newProduct);
+      if (data) {
+        this.$router.push({ path: route.catalog });
       }
     },
 
     async getProductFromDB() {
-      const result = await HttpService.get(`${routes.products}/${this.$route.params.id}`);
-      return result;
+      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`);
+      return data;
     },
   },
   async mounted() {

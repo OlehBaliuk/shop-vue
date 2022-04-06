@@ -27,8 +27,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import routes from '@/constants/routes';
-import HttpService from '../services/HttpService';
+import HttpService from '@/services/HttpService';
+import route from '@/constants/routes';
 
 export default {
   name: 'Product',
@@ -46,8 +46,8 @@ export default {
     },
 
     async deleteProductFromDB(productId) {
-      const response = await HttpService.delete(`${routes.products}/${productId}`);
-      if (response) {
+      const { data } = await HttpService.delete(`${route.products}/${productId}`);
+      if (data) {
         this.$emit('onDelete', this.product.id);
       }
     },

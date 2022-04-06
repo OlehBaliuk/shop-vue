@@ -7,12 +7,15 @@ export default new Vuex.Store({
   state: {
     user: {},
     cart: {},
+    searchProduct: {},
   },
 
   getters: {
     getUser: state => state.user,
 
     getCart: state => state.cart,
+
+    getSearchProduct: state => state.searchProduct,
   },
 
   mutations: {
@@ -51,6 +54,10 @@ export default new Vuex.Store({
     CHANGE_COUNT_PRODUCT(state, payload) {
       state.cart[payload.productId].count = payload.count;
     },
+
+    ADD_SEARCH_PRODUCT_TO_STATE(state, payload) {
+      state.searchProduct = { ...payload };
+    },
   },
 
   actions: {
@@ -83,6 +90,10 @@ export default new Vuex.Store({
     },
     changeCountProduct({ commit }, payload) {
       commit('CHANGE_COUNT_PRODUCT', payload);
+    },
+
+    addSearchProductToState({ commit }, payload) {
+      commit('ADD_SEARCH_PRODUCT_TO_STATE', payload);
     },
   },
 

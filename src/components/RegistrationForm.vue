@@ -109,8 +109,8 @@ import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
 import { required, max, min, email } from 'vee-validate/dist/rules';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
-import routes from '@/constants/routes';
-import HttpService from '../services/HttpService';
+import route from '@/constants/routes';
+import HttpService from '@/services/HttpService';
 import Dialog from './sharedComponents/Dialog.vue';
 
 extend('required', {
@@ -184,11 +184,11 @@ export default {
 
     async submit(credentials) {
       try {
-        const { data } = await HttpService.post(`${routes.users}`, credentials);
+        const { data } = await HttpService.post(`${route.users}`, credentials);
         const decoded = jwt_decode(data.accessToken);
 
         this.addUserToState(decoded);
-        this.$router.push({ path: routes.catalog });
+        this.$router.push({ path: route.catalog });
       } catch (e) {
         this.onChangeStatusError();
       }

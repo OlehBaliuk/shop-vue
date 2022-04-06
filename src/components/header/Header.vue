@@ -14,6 +14,7 @@
         <v-icon color="white">mdi-cart</v-icon>
         <span v-if="changeCounterCart > 0"> {{ changeCounterCart }}</span>
       </v-btn>
+      <InputSearch @onSubmit="submit" />
       <v-spacer></v-spacer>
       <v-toolbar-title> <v-btn class="icon-shop" icon router-link to="/">shop</v-btn></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -22,7 +23,7 @@
         <router-link class="mx-2" to="/login">Login</router-link>
       </div>
       <p class="my-0 font-weight-medium" v-else>Hey {{ getUser.email }}</p>
-      <v-btn icon @click="clearUserState">
+      <v-btn v-if="getUser.email" icon @click="clearUserState">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -31,9 +32,17 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import HttpService from '@/services/HttpService';
+import route from '@/constants/routes';
+import InputSearch from './InputSearch.vue';
 
 export default {
   name: 'Header',
+
+  components: {
+    InputSearch,
+  },
+
   data: () => ({
     drawer: false,
     linksNavigator: [
@@ -50,7 +59,7 @@ export default {
     ],
   }),
   computed: {
-    ...mapGetters(['getUser', 'getCart']),
+    ...mapGetters(['getUser', 'getCart', 'getSearchProduct']),
 
     changeCounterCart() {
       const countEachProduct = Object.values(this.getCart).map(product => product.count);
@@ -59,7 +68,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['clearUserState']),
+    ...mapActions(['clearUserState', 'addSearchProductToState']),
+
+    async submit(product) {
+      const { data } = await HttpService.get(`${route.products}?name_like=${product}`);
+      this.addSearchProductToState(data);
+      if (this.$route.path !== route.search) {
+        this.$router.push({ path: route.search });
+      }
+    },
   },
 };
 </script>
