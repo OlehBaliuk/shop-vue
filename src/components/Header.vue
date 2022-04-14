@@ -14,7 +14,6 @@
         <v-icon color="white">mdi-cart</v-icon>
         <span v-if="changeCounterCart > 0"> {{ changeCounterCart }}</span>
       </v-btn>
-      <InputSearch @onSubmit="submit" />
       <v-spacer></v-spacer>
       <v-toolbar-title> <v-btn class="icon-shop" icon router-link to="/">shop</v-btn></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -32,16 +31,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import HttpService from '@/services/HttpService';
-import route from '@/constants/routes';
-import InputSearch from './InputSearch.vue';
 
 export default {
   name: 'Header',
-
-  components: {
-    InputSearch,
-  },
 
   data: () => ({
     drawer: false,
@@ -59,7 +51,7 @@ export default {
     ],
   }),
   computed: {
-    ...mapGetters(['getUser', 'getCart', 'getSearchProduct']),
+    ...mapGetters(['getUser', 'getCart']),
 
     changeCounterCart() {
       const countEachProduct = Object.values(this.getCart).map(product => product.count);
@@ -68,15 +60,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['clearUserState', 'addSearchProductToState']),
-
-    async submit(product) {
-      const { data } = await HttpService.get(`${route.products}?name_like=${product}`);
-      this.addSearchProductToState(data);
-      if (this.$route.path !== route.search) {
-        this.$router.push({ path: route.search });
-      }
-    },
+    ...mapActions(['clearUserState']),
   },
 };
 </script>

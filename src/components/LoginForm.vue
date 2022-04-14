@@ -91,6 +91,7 @@ export default {
     async submit(credentials) {
       try {
         const { data } = await HttpService.post(`${route.login}`, credentials);
+
         const decoded = jwt_decode(data.accessToken);
 
         if (decoded) {

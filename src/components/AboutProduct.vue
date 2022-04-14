@@ -21,7 +21,7 @@
               {{ product.description }}
             </div>
           </v-card-text>
-          <v-btn :disabled="isDisable" @click="addProductToState(product)" color="teal lighten-1" text
+          <v-btn :disabled="isDisable" @click="addProductToStateCart(product)" color="teal lighten-1" text
             >{{ changeTitleButton }}
           </v-btn>
         </v-card>
@@ -52,13 +52,13 @@ export default {
     },
 
     async getProduct() {
-      const data = await HttpService.get(`${route.products}/${this.$route.params.id}`, this.product);
+      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`, this.product);
 
       this.product = data;
       this.isLoader = !this.isLoader;
     },
 
-    ...mapActions(['addProductToState']),
+    ...mapActions(['addProductToStateCart']),
   },
 
   computed: {
