@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import SearchProducts from '@/components/SearchProducts.vue';
 import route from '@/constants/routes';
 import Cart from '../components/Cart.vue';
 import Catalog from '../components/Catalog.vue';
@@ -52,11 +51,6 @@ const routes = [
     path: route.login,
     name: 'login',
     component: LoginForm,
-  },
-  {
-    path: route.search,
-    name: 'search',
-    component: SearchProducts,
   },
 ];
 

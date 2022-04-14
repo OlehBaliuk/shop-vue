@@ -98,7 +98,8 @@ export default {
   methods: {
     submit() {
       this.$refs.observer.validate();
-      this.$emit('onSubmit', this.dataProduct);
+      const fixDataProduct = { ...this.dataProduct, price: Number(this.dataProduct.price) };
+      this.$emit('onSubmit', fixDataProduct);
     },
     clear() {
       this.dataProduct.name = '';

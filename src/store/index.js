@@ -7,7 +7,20 @@ export default new Vuex.Store({
   state: {
     user: {},
     cart: {},
-    searchProduct: {},
+    filter: {
+      page: {
+        key: '_page',
+        value: 1,
+      },
+      from: {
+        key: 'price_gte',
+        value: undefined,
+      },
+      to: {
+        key: 'price_lte',
+        value: undefined,
+      },
+    },
   },
 
   getters: {
@@ -15,7 +28,9 @@ export default new Vuex.Store({
 
     getCart: state => state.cart,
 
-    getSearchProduct: state => state.searchProduct,
+    getProductFilter: state => state.filterProduct,
+
+    filter: state => state.filter,
   },
 
   mutations: {
@@ -55,8 +70,33 @@ export default new Vuex.Store({
       state.cart[payload.productId].count = payload.count;
     },
 
-    ADD_SEARCH_PRODUCT_TO_STATE(state, payload) {
-      state.searchProduct = { ...payload };
+    UPDATE_FILTER_FIELD(state, payload) {
+      state.filter[payload.field].value = payload.value;
+    },
+
+    UPDATE_PAGE(state, page) {
+      state.filter.page.value = page;
+    },
+
+    RESET_FILTER(state) {
+      state.filter = {
+        from: {
+          key: 'price_gte',
+          value: undefined,
+        },
+        to: {
+          key: 'price_lte',
+          value: undefined,
+        },
+        page: {
+          key: '_page',
+          value: 1,
+        },
+      };
+    },
+
+    CREATE_FIELD_FILTER(state, payload) {
+      state.filter[payload.field] = payload.filterParams;
     },
   },
 
@@ -69,7 +109,7 @@ export default new Vuex.Store({
       commit('CLEAR_USER');
     },
 
-    addProductToState({ commit }, product) {
+    addProductToStateCart({ commit }, product) {
       commit('ADD_PRODUCT_TO_CART', product);
     },
 
@@ -94,6 +134,22 @@ export default new Vuex.Store({
 
     addSearchProductToState({ commit }, payload) {
       commit('ADD_SEARCH_PRODUCT_TO_STATE', payload);
+    },
+
+    updateFilterField({ commit }, payload) {
+      commit('UPDATE_FILTER_FIELD', payload);
+    },
+
+    updatePage({ commit }, page) {
+      commit('UPDATE_PAGE', page);
+    },
+
+    resetFilter({ commit }) {
+      commit('RESET_FILTER');
+    },
+
+    createFieldFilter({ commit }, payload) {
+      commit('CREATE_FIELD_FILTER', payload);
     },
   },
 

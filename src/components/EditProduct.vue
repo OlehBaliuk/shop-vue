@@ -8,7 +8,7 @@
 <script>
 import HttpService from '@/services/HttpService';
 import route from '@/constants/routes';
-import FormProduct from './sharedComponents/FormProduct.vue';
+import FormProduct from './sharedComponents/ProductForm.vue';
 
 export default {
   name: 'EditProduct',

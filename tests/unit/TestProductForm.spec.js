@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
-import FormProduct from '@/components/sharedComponents/FormProduct.vue';
+import FormProduct from '@/components/sharedComponents/ProductForm.vue';
 
 describe('FormProduct', () => {
   const localVue = createLocalVue();
@@ -18,7 +18,7 @@ describe('FormProduct', () => {
 
     const name = 'name';
     const description = 'description';
-    const price = '100';
+    const price = 100;
 
     await wrapper.find('[data-test="nameText"]').setValue(name);
 
