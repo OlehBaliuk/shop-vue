@@ -1,7 +1,7 @@
 <template>
   <div class="login-form">
     <h1>Login</h1>
-    <Dialog
+    <DialogModal
       :isFlag="isErrorLogin"
       @onChangeStatus="onChangeStatusError"
       title="Error"
@@ -16,7 +16,7 @@
         <v-container fluid>
           <v-row>
             <v-col cols="12" sm="6">
-              <v-text-field v-model="form.email" label="E-mail" required></v-text-field>
+              <v-text-field v-model="form.email" data-test="login" label="E-mail" required></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -25,6 +25,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 name="input-10-2"
                 label="Password"
+                data-test="password"
                 v-model="form.password"
                 class="input-group--focused"
                 required
@@ -48,13 +49,13 @@ import jwt_decode from 'jwt-decode';
 import { mapActions } from 'vuex';
 import route from '@/constants/routes';
 import HttpService from '@/services/HttpService';
-import Dialog from './sharedComponents/Dialog.vue';
+import DialogModal from './sharedComponents/DialogModal.vue';
 
 export default {
   name: 'RegistrationForm',
 
   components: {
-    Dialog,
+    DialogModal,
   },
 
   data() {
@@ -97,7 +98,7 @@ export default {
         if (decoded) {
           this.addUserToState(decoded);
           this.snackbar = true;
-          this.$router.push({ path: route.catalog });
+          this.$router.push({ path: route.main });
         }
       } catch {
         this.isErrorLogin = !this.isErrorLogin;

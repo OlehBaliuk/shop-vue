@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
-import FormProduct from '@/components/sharedComponents/ProductForm.vue';
+import ProductForm from '@/components/sharedComponents/ProductForm.vue';
 
 describe('FormProduct', () => {
   const localVue = createLocalVue();
@@ -10,8 +10,16 @@ describe('FormProduct', () => {
     vuetify = new Vuetify();
   });
 
+  it('should be render', () => {
+    const wrapper = mount(ProductForm, {
+      localVue,
+      vuetify,
+    });
+    expect(wrapper.isVisible()).toBe(true);
+  });
+
   it('submits a form', async () => {
-    const wrapper = mount(FormProduct, {
+    const wrapper = mount(ProductForm, {
       localVue,
       vuetify,
     });

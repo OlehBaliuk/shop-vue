@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1649953991371" clover="3.2.0">
+  <project timestamp="1649953991371" name="All files">
+    <metrics statements="20" coveredstatements="18" conditionals="16" coveredconditionals="12" methods="20" coveredmethods="17" elements="56" coveredelements="47" complexity="0" loc="20" ncloc="20" packages="3" files="16" classes="16"/>
+    <package name="src">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="App.vue" path="/home/baliuk/shop-vue/src/App.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="11" coveredstatements="11" conditionals="14" coveredconditionals="11" methods="11" coveredmethods="10"/>
+      <file name="AboutProduct.vue" path="/home/baliuk/shop-vue/src/components/AboutProduct.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="15" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="AddNewProduct.vue" path="/home/baliuk/shop-vue/src/components/AddNewProduct.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="9" type="stmt"/>
+      </file>
+      <file name="Cart.vue" path="/home/baliuk/shop-vue/src/components/Cart.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="22" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="Catalog.vue" path="/home/baliuk/shop-vue/src/components/Catalog.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="24" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="EditProduct.vue" path="/home/baliuk/shop-vue/src/components/EditProduct.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="9" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="Footer.vue" path="/home/baliuk/shop-vue/src/components/Footer.vue">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="13" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+      <file name="Header.vue" path="/home/baliuk/shop-vue/src/components/Header.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="9" type="cond" truecount="2" falsecount="0"/>
+      </file>
+      <file name="LoginForm.vue" path="/home/baliuk/shop-vue/src/components/LoginForm.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="Product.vue" path="/home/baliuk/shop-vue/src/components/Product.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+      </file>
+      <file name="RegistrationForm.vue" path="/home/baliuk/shop-vue/src/components/RegistrationForm.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+    <package name="src.components.sharedComponents">
+      <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="6"/>
+      <file name="DialogModal.vue" path="/home/baliuk/shop-vue/src/components/sharedComponents/DialogModal.vue">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="1" count="15" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+      </file>
+      <file name="FilterForm.vue" path="/home/baliuk/shop-vue/src/components/sharedComponents/FilterForm.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="27" type="stmt"/>
+      </file>
+      <file name="NavBar.vue" path="/home/baliuk/shop-vue/src/components/sharedComponents/NavBar.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="14" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="ProductForm.vue" path="/home/baliuk/shop-vue/src/components/sharedComponents/ProductForm.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="206" type="stmt"/>
+      </file>
+      <file name="SearchInput.vue" path="/home/baliuk/shop-vue/src/components/sharedComponents/SearchInput.vue">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="21" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

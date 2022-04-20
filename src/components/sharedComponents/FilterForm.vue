@@ -6,9 +6,10 @@
         <label for="input-gte">
           <input
             v-debounce="submit"
+            data-test="from"
             id="input-gte"
             :value="filter.from.value"
-            @input="({ target: { value } }) => onChangeFilter('from', value)"
+            @input="onChangeFilter('from', $event)"
             min="0"
             max="99999"
             type="number"
@@ -19,18 +20,18 @@
         <label for="input-lte">
           <input
             v-debounce="submit"
+            data-test="to"
             id="input-lte"
             min="0"
             max="99999"
             :value="filter.to.value"
-            @input="({ target: { value } }) => onChangeFilter('to', value)"
+            @input="onChangeFilter('to', $event)"
             type="number"
             placeholder="to"
           />
         </label>
       </div>
-      <v-btn text color="primary" type="submit">search</v-btn>
-      <v-btn @click="clearFilterState" text color="primary">clear filter</v-btn>
+      <v-btn @click="clearFilterState" data-test="button-clear" text color="primary">clear filter</v-btn>
     </form>
   </div>
 </template>
@@ -48,8 +49,8 @@ export default {
       this.$emit('onSubmit');
     },
 
-    onChangeFilter(field, value) {
-      this.updateFilterField({ field, value: Number(value) });
+    onChangeFilter(field, event) {
+      this.updateFilterField({ field, value: Number(event.target.value) });
     },
 
     clearFilterState() {

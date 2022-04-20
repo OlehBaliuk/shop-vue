@@ -6,8 +6,8 @@
       <div>
         <div class="d-flex flex-column justify-space-between align-center mx-5 my-5">
           <v-slider v-model="widthSlider" class="align-self-stretch" min="200" max="400" step="1"></v-slider>
-          <v-img :width="widthSlider" :src="require('/public/images/' + getProductImage)"></v-img>
-          <v-btn @click="changeRating" width="100%">
+          <v-img :width="widthSlider" :src="require('../../public/images/' + getProductImage)"></v-img>
+          <v-btn data-test="btn-rating" @click="changeRating" width="100%">
             <v-rating v-model="product.rating" icon-label="custom icon label text {0} of {1}"></v-rating>
           </v-btn>
         </div>
