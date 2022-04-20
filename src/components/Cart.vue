@@ -2,14 +2,13 @@
   <div class="cart-wrapper">
     <h1>Cart</h1>
     <div v-if="isEmpty">Cart is empty</div>
-
     <div v-else v-for="product in getCart" :key="product.id" class="product-wrapper">
       <v-col class="py-0" cols="12">
         <div class="product-wrapper__info">
           <div class="d-flex align-center">
             <img
               class="product-wrapper__img"
-              :src="require('/public/images/' + (product.image === '' ? '1.jpg' : product.image))"
+              :src="require('../../public/images/' + getProductImage(product))"
               alt="img"
             />
             <div class="product-wrapper__text">
@@ -22,6 +21,7 @@
             <label for="countProduct">
               <input
                 min="1"
+                data-test="input"
                 type="number"
                 id="countProduct"
                 :value="product.count"
@@ -34,15 +34,16 @@
           </div>
           <div class="price-wrapper">
             <p>{{ product.price }} UAH</p>
-            <v-btn @click="deleteProductFromCart(product.id)" x-small color="teal lighten-1" text>delete</v-btn>
+            <v-btn @click="deleteProductFromCart(product.id)" x-small color="cyan lighten-4 black--text" depressed
+              >delete</v-btn
+            >
           </div>
         </div>
       </v-col>
     </div>
-
     <div v-if="!isEmpty" class="cart-wrapper__total-field">
       <h2>Total: {{ countTotalCost }} UAH</h2>
-      <v-btn @click="cleareCart" color="teal lighten-1" text>clear cart</v-btn>
+      <v-btn @click="cleareCart" color="cyan lighten-4 black--text" depressed>clear cart</v-btn>
     </div>
   </div>
 </template>
@@ -82,6 +83,10 @@ export default {
       'decrementProductInCart',
       'changeCountProduct',
     ]),
+
+    getProductImage(product) {
+      return product.image === '' ? '1.jpg' : product.image;
+    },
 
     onChangeCountProduct(productId, e) {
       this.changeCountProduct({ productId, count: Number(e.target.value) });

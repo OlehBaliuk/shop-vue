@@ -1,7 +1,7 @@
 <template>
   <div class="registration-form">
     <h1>Registration</h1>
-    <Dialog
+    <DialogModal
       :isFlag="isErrorRegistration"
       @onChangeStatus="onChangeStatusError"
       title="Error"
@@ -98,8 +98,13 @@
         <v-btn class="mr-4" type="submit" :disabled="invalid">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
       </v-form>
-      <Dialog :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
-      <Dialog :isFlag="conditions" @onChangeStatus="onChangeStatusConditions" title="Conditions" :content="content" />
+      <DialogModal :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
+      <DialogModal
+        :isFlag="conditions"
+        @onChangeStatus="onChangeStatusConditions"
+        title="Conditions"
+        :content="content"
+      />
     </validation-observer>
   </div>
 </template>
@@ -111,7 +116,7 @@ import { required, max, min, email } from 'vee-validate/dist/rules';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import route from '@/constants/routes';
 import HttpService from '@/services/HttpService';
-import Dialog from './sharedComponents/Dialog.vue';
+import DialogModal from './sharedComponents/DialogModal.vue';
 
 extend('required', {
   ...required,
@@ -139,7 +144,7 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
-    Dialog,
+    DialogModal,
   },
 
   data() {
@@ -188,7 +193,7 @@ export default {
         const decoded = jwt_decode(data.accessToken);
 
         this.addUserToState(decoded);
-        this.$router.push({ path: route.catalog });
+        this.$router.push({ path: route.main });
       } catch (e) {
         this.onChangeStatusError();
       }

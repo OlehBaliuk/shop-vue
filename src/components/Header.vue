@@ -1,21 +1,15 @@
 <template>
   <div>
-    <v-navigation-drawer app v-model="drawer" class="teal lighten-2">
-      <v-list>
-        <v-list-item v-for="link in linksNavigator" :key="link.title" router-link :to="link.route">
-          <v-icon color="white">{{ link.icon }}</v-icon>
-          <v-list-item-title class="white--text">{{ link.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+    <v-navigation-drawer app class="teal lighten-2">
+      <NavBar />
     </v-navigation-drawer>
     <v-app-bar app color="teal lighten-1" dense dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-btn icon router-link to="/cart">
         <v-icon color="white">mdi-cart</v-icon>
         <span v-if="changeCounterCart > 0"> {{ changeCounterCart }}</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-toolbar-title> <v-btn class="icon-shop" icon router-link to="/">shop</v-btn></v-toolbar-title>
+      <v-toolbar-title><router-link class="catalog" to="/">Catalog</router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!getUser.email" class="auth-wrapper">
         <router-link class="mx-2" to="/registration">Registration</router-link>
@@ -31,25 +25,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import NavBar from './sharedComponents/NavBar.vue';
 
 export default {
   name: 'Header',
 
-  data: () => ({
-    drawer: false,
-    linksNavigator: [
-      {
-        title: 'Catalog',
-        route: '/catalog',
-        icon: 'mdi-format-list-bulleted-square',
-      },
-      {
-        title: 'Add new product',
-        route: '/add-new-product',
-        icon: 'mdi-plus-box-multiple',
-      },
-    ],
-  }),
+  components: {
+    NavBar,
+  },
+
   computed: {
     ...mapGetters(['getUser', 'getCart']),
 
@@ -95,9 +79,14 @@ export default {
   }
 }
 
-.icon-shop {
+.catalog {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
+}
+
+.v-list-item--link:before {
+  background-color: inherit;
 }
 </style>

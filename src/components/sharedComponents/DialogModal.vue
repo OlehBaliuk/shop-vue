@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="isFlagDialog" width="70%">
     <v-card>
-      <v-card-title class="text-h6"> {{ title }}</v-card-title>
+      <v-card-title class="text-h6">{{ title }}</v-card-title>
       <v-card-text>{{ content }} </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text color="purple" @click="onChangeStatus"> Ok </v-btn>
+        <v-btn text color="purple" @click="changeStatus">Ok</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Dialog',
+  name: 'DialogModal',
 
   props: {
     isFlag: {
@@ -28,7 +28,7 @@ export default {
   },
 
   methods: {
-    onChangeStatus() {
+    changeStatus() {
       this.$emit('onChangeStatus');
     },
   },

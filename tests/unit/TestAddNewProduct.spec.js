@@ -1,6 +1,7 @@
 import AddNewProduct from '@/components/AddNewProduct.vue';
 import { mount, createLocalVue } from '@vue/test-utils';
 import HttpService from '@/services/HttpService';
+import route from '@/constants/routes';
 import Vuetify from 'vuetify';
 
 jest.mock('@/services/HttpService');
@@ -38,6 +39,6 @@ describe('AddNewProduct', () => {
 
     expect(HttpService.post).toHaveBeenCalledTimes(1);
 
-    expect(HttpService.post).toBeCalledWith('/products', newProduct);
+    expect(HttpService.post).toBeCalledWith(`${route.products}`, newProduct);
   });
 });

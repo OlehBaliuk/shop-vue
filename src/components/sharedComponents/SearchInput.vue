@@ -1,17 +1,16 @@
 <template>
   <form @submit.prevent="submit">
+    <h3>Search</h3>
     <label for="input-search">
       <input
         v-debounce="submit"
         :value="inputValue"
+        data-test="searchField"
         @input="({ target: { value } }) => onChangeFilter('search', value)"
         id="input-search"
         type="text"
         placeholder="search.."
     /></label>
-    <v-btn icon type="submit">
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
   </form>
 </template>
 
@@ -25,9 +24,7 @@ export default {
     ...mapActions(['createFieldFilter']),
 
     submit() {
-      if (this.filter.search?.value) {
-        this.$emit('onSubmit');
-      }
+      this.$emit('onSubmit');
     },
 
     onChangeFilter(field, value) {

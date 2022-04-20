@@ -1,13 +1,11 @@
 <template>
   <div class="catalog">
-    <h1>Catalog</h1>
     <div class="form-wrapper">
-      <InputSearch @onSubmit="onSubmitSearch" />
-      <FilterForm @onSubmit="onSubmitFilter" @onClearFilterState="clearFilterState" />
+      <InputSearch v-if="flag.searchByName" @onSubmit="onSubmitSearch" />
+      <FilterForm v-if="flag.searchByPrice" @onSubmit="onSubmitFilter" @onClearFilterState="clearFilterState" />
     </div>
     <div class="product-wrapper">
       <Product @onDelete="deleteProduct" v-for="product in productsList" :key="product.id" :product="product" />
-      <h1 v-if="!productsList.length">no result</h1>
       <div v-if="productsList.length" v-observe-visibility="handleScroll"></div>
     </div>
   </div>
@@ -90,7 +88,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['filter']),
+    ...mapGetters(['filter', 'flag']),
   },
 
   created() {

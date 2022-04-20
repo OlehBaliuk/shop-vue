@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     cart: {},
+    flags: {},
     filter: {
       page: {
         key: '_page',
@@ -28,9 +29,9 @@ export default new Vuex.Store({
 
     getCart: state => state.cart,
 
-    getProductFilter: state => state.filterProduct,
-
     filter: state => state.filter,
+
+    flag: state => state.flags,
   },
 
   mutations: {
@@ -98,6 +99,10 @@ export default new Vuex.Store({
     CREATE_FIELD_FILTER(state, payload) {
       state.filter[payload.field] = payload.filterParams;
     },
+
+    CHANGE_FLAG(state, payload) {
+      Vue.set(state.flags, [payload.field], payload.value);
+    },
   },
 
   actions: {
@@ -150,6 +155,10 @@ export default new Vuex.Store({
 
     createFieldFilter({ commit }, payload) {
       commit('CREATE_FIELD_FILTER', payload);
+    },
+
+    changeFlag({ commit }, payload) {
+      commit('CHANGE_FLAG', payload);
     },
   },
 
