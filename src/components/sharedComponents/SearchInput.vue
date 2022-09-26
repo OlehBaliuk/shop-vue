@@ -14,35 +14,23 @@
   </form>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-export default {
-  name: 'InputSearch',
+@Component
+export default class InputSearch extends Vue {
+  submit() {
+    this.$emit('onSubmit');
+  }
 
-  methods: {
-    ...mapActions(['createFieldFilter']),
+  onChangeFilter(field: string, value: string) {
+    this.$store.dispatch('createFieldFilter', { field, filterParams: { value, key: 'name_like' } });
+  }
 
-    submit() {
-      this.$emit('onSubmit');
-    },
-
-    onChangeFilter(field, value) {
-      this.createFieldFilter({ field, filterParams: { value, key: 'name_like' } });
-    },
-  },
-
-  computed: {
-    ...mapGetters(['filter']),
-
-    inputValue() {
-      if (this.filter.search?.value) {
-        return this.filter.search.value;
-      }
-      return '';
-    },
-  },
-};
+  get inputValue() {
+    return this.$store.getters.filter.search?.value || '';
+  }
+}
 </script>
 
 <style scoped lang="scss">

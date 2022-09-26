@@ -2,7 +2,13 @@
   <div class="cart-wrapper">
     <h1>Cart</h1>
     <div v-if="isEmpty">Cart is empty</div>
-    <div v-else v-for="product in getCart" data-test="product" :key="product.id" class="product-wrapper">
+    <div
+      v-else
+      v-for="product in $store.getters.getCart"
+      data-test="product"
+      :key="product.id"
+      class="product-wrapper"
+    >
       <v-col class="py-0" cols="12">
         <div class="product-wrapper__info">
           <div class="d-flex align-center">
@@ -17,7 +23,11 @@
           </div>
           <div></div>
           <div class="product-wrapper__quantity">
-            <v-icon @click="decrementProductInCart(product.id)" data-test="decrement" slot="prepend" color="green"
+            <v-icon
+              @click="$store.dispatch('decrementProductInCart', product.id)"
+              data-test="decrement"
+              slot="prepend"
+              color="green"
               >mdi-minus</v-icon
             >
             <label for="countProduct">
@@ -32,14 +42,18 @@
                 @blur="onBlur(product.id, $event)"
               />
             </label>
-            <v-icon @click="incrementProductInCart(product.id)" data-test="increment" slot="append" color="red"
+            <v-icon
+              @click="$store.dispatch('incrementProductInCart', product.id)"
+              data-test="increment"
+              slot="append"
+              color="red"
               >mdi-plus</v-icon
             >
           </div>
           <div class="price-wrapper">
             <p>{{ product.price }} UAH</p>
             <v-btn
-              @click="deleteProductFromCart(product.id)"
+              @click="$store.dispatch('deleteProductFromCart', product.id)"
               data-test="delete"
               x-small
               color="cyan lighten-4 black--text"
@@ -52,65 +66,59 @@
     </div>
     <div v-if="!isEmpty" class="cart-wrapper__total-field">
       <h2>Total: {{ countTotalCost }} UAH</h2>
-      <v-btn @click="cleareCart" data-test="clear" color="cyan lighten-4 black--text" depressed>clear cart</v-btn>
+      <v-btn
+        @click="$store.dispatch('cleareCart')"
+        data-test="clear"
+        color="cyan lighten-4 black--text"
+        depressed
+        >clear cart</v-btn
+      >
     </div>
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import { IProduct } from './interfaces/interfaces';
 
-export default {
-  name: 'Cart',
+@Component
+export default class Cart extends Vue {
+  product: null | IProduct = null;
 
-  data() {
-    return {
-      product: null,
-      isLoader: false,
-    };
-  },
+  isLoader: boolean = false;
 
-  computed: {
-    ...mapGetters(['getCart']),
+  get isEmpty(): boolean {
+    return !Object.keys(this.$store.getters.getCart).length;
+  }
 
-    isEmpty() {
-      return !Object.keys(this.getCart).length;
-    },
+  get countTotalCost(): number {
+    const total = Object.values(this.$store.getters.getCart).reduce(
+      (acc: number, item: any) => acc + item.price * item.count,
+      0,
+    );
 
-    countTotalCost() {
-      const total = Object.values(this.getCart).reduce((acc, item) => acc + item.price * item.count, 0);
+    return total;
+  }
 
-      return total;
-    },
-  },
+  onChangeCountProduct(productId: number, e: any): void {
+    this.$store.dispatch('changeCountProduct', { productId, count: Number(e.target.value) });
+  }
 
-  methods: {
-    ...mapActions([
-      'deleteProductFromCart',
-      'cleareCart',
-      'incrementProductInCart',
-      'decrementProductInCart',
-      'changeCountProduct',
-    ]),
+  onBlur(productId: number, e: any): void {
+    if (e.target.value === '' || e.target.value === '0') {
+      this.$store.dispatch('changeCountProduct', { productId, count: 1 });
+    }
+  }
 
-    getProductImage(product) {
-      return product.image === '' ? '1.jpg' : product.image;
-    },
+  // eslint-disable-next-line class-methods-use-this
+  getProductImage(product: IProduct): string {
+    return product.image === '' ? '1.jpg' : product.image;
+  }
 
-    onChangeCountProduct(productId, e) {
-      this.changeCountProduct({ productId, count: Number(e.target.value) });
-    },
-    onInput(e) {
-      if (e.target.value === '0') e.target.value = 1;
-    },
-
-    onBlur(productId, e) {
-      if (e.target.value === '' || e.target.value === '0') {
-        this.changeCountProduct({ productId, count: 1 });
-      }
-    },
-  },
-};
+  onInput = (e: any): void => {
+    if (e.target.value === '0') e.target.value = 1;
+  };
+}
 </script>
 
 <style scoped lang="scss">

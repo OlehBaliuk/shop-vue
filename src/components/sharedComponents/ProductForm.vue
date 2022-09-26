@@ -58,9 +58,11 @@
   </validation-observer>
 </template>
 
-<script>
+<script lang="ts">
 import { required, max, regex } from 'vee-validate/dist/rules';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
+import { Vue, Prop, Component } from 'vue-property-decorator';
+import { IDataProduct } from '../interfaces/interfaces';
 
 extend('required', {
   ...required,
@@ -77,42 +79,47 @@ extend('regex', {
   message: '{_field_} {_value_} must be only numbers',
 });
 
-export default {
-  name: 'FormProduct',
+const defaultProduct = {
+  name: '',
+  description: '',
+  price: '',
+};
+
+@Component({
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+})
+export default class FormProduct extends Vue {
+  dataProduct = {
+    ...defaultProduct,
+  } as IDataProduct;
 
-  props: {
-    product: {
-      type: Object,
-    },
-  },
+  checkbox: null | string = null;
 
-  data: () => ({
-    dataProduct: {},
-    checkbox: null,
-  }),
+  @Prop(Object) product: IDataProduct;
 
-  methods: {
-    submit() {
-      this.$refs.observer.validate();
-      const fixDataProduct = { ...this.dataProduct, price: Number(this.dataProduct.price) };
-      this.$emit('onSubmit', fixDataProduct);
-    },
-    clear() {
-      this.dataProduct.name = '';
-      this.dataProduct.description = '';
-      this.dataProduct.price = '';
-      this.checkbox = null;
-      this.$refs.observer.reset();
-    },
-  },
+  changeStatus() {
+    this.$emit('onChangeStatus');
+  }
+
+  submit() {
+    (this.$refs.observer as any).validate();
+    const fixDataProduct = { ...this.dataProduct, price: Number(this.dataProduct.price) };
+    this.$emit('onSubmit', fixDataProduct);
+  }
+
+  clear() {
+    this.dataProduct = { ...this.product, ...defaultProduct };
+    this.checkbox = null;
+    (this.$refs.observer as any).reset();
+  }
+
   created() {
     this.dataProduct = { ...this.product };
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

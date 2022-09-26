@@ -8,43 +8,45 @@
   </v-app>
 </template>
 
-<script>
-import { mapActions } from 'vuex';
+<script lang="ts">
 import jwt_decode from 'jwt-decode';
-import route from '@/constants/routes';
 import HttpService from '@/services/HttpService';
+import { Vue, Component } from 'vue-property-decorator';
+import route from '@/constants/routes';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
-export default {
-  name: 'App',
+@Component({
   components: {
     Header,
     Footer,
   },
+})
+export default class App extends Vue {
+  async setAdminsToState() {
+    try {
+      const { data }: any = await HttpService.get(route.admins);
 
-  methods: {
-    ...mapActions(['addUserToState', 'addAdminsToState']),
-
-    async setAdminsToState() {
-      const { data } = await HttpService.get(route.admins);
-      this.addAdminsToState(data);
-    },
-  },
+      this.$store.dispatch('addAdminsToState', data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async created() {
-    if (localStorage.getItem('authToken')) {
+    if (localStorage.getItem('authToken') !== null) {
       try {
-        const decode = jwt_decode(localStorage.getItem('authToken'));
-        this.addUserToState(decode);
+        const decode = jwt_decode(localStorage.getItem('authToken')!);
+
+        this.$store.dispatch('addUserToState', decode);
       } catch (e) {
         console.log(e);
       }
     }
 
     await this.setAdminsToState();
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">

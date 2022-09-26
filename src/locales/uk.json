@@ -1,0 +1,27 @@
+{
+  "header": {
+    "catalog": "Каталог",
+    "registration": "Реєстрація",
+    "login": "Логін"
+  },
+  "profile": {
+    "changeAvatar": "Замінити аватар",
+    "country": "Країна",
+    "city": "Місто",
+    "first": "Ім'я обовязково"
+  },
+  "product": {
+    "addToCart": "До кошика",
+    "aboutProduct": "Детальніше",
+    "inACart": "У кошику"
+  },
+  "navBar": {
+    "filter": "Фiльтр",
+    "products": "Товари",
+    "catalog": "Каталог",
+    "actions": "Можливостi",
+    "create": "додати",
+    "searchByName": "Пошук за назвою",
+    "searchByPrice": "Пошук за  цiною"
+  }
+}

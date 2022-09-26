@@ -12,12 +12,11 @@
   </v-footer>
 </template>
 
-<script>
-export default {
-  name: 'Footer',
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-  data: () => ({
-    icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
-  }),
-};
+@Component
+export default class Footer extends Vue {
+  icons: string[] = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'];
+}
 </script>

@@ -5,10 +5,8 @@ module.exports = {
     node: true,
   },
 
-  extends: ['plugin:vue/essential', '@vue/airbnb'],
-
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
   },
 
   rules: {
@@ -26,6 +24,7 @@ module.exports = {
     'newline-per-chained-call': 'off',
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
+    // 'class-methods-use-this': 0,
   },
 
   overrides: [
@@ -36,4 +35,6 @@ module.exports = {
       },
     },
   ],
+
+  extends: ['plugin:vue/essential', '@vue/airbnb', '@vue/typescript'],
 };

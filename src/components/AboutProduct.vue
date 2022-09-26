@@ -12,14 +12,14 @@
             max="400"
             step="1"
           ></v-slider>
-          <v-img
-            :width="widthSlider"
-            :src="require('../../public/images/' + getProductImage)"
-          ></v-img>
+          <v-img :width="widthSlider" :src="require('../../public/images/' + productImage)"></v-img>
           <v-btn data-test="btn-rating" @click="changeRating" width="100%">
             <v-rating
+
               v-model="product.rating"
+
               icon-label="custom icon label text {0} of {1}"
+
             ></v-rating>
           </v-btn>
         </div>
@@ -34,8 +34,8 @@
             </div>
           </v-card-text>
           <v-btn
-            :disabled="isDisable"
-            @click="addProductToStateCart(product)"
+            :disabled="isDisableButtonAddToCart"
+            @click="$store.dispatch('addProductToStateCart', product)"
             color="teal lighten-1"
             text
             >{{ changeTitleButton }}
@@ -46,64 +46,50 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import HttpService from '@/services/HttpService';
-import { mapActions, mapGetters } from 'vuex';
 import route from '@/constants/routes';
+import { AxiosResponse } from 'axios';
+import { IProduct } from './interfaces/interfaces';
 
-export default {
-  name: 'AboutProduct',
+@Component
+export default class AboutProduct extends Vue {
+  product: null | IProduct = null;
 
-  data() {
-    return {
-      product: null,
-      isLoader: true,
-      widthSlider: 250,
-    };
-  },
+  isLoader: boolean = true;
 
-  methods: {
-    changeRating() {
-      HttpService.put(`${route.products}/${this.$route.params.id}`, this.product);
-    },
+  widthSlider: number = 250;
 
-    async getProduct() {
-      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`);
+  changeRating() {
+    HttpService.put(`${route.products}/${this.$route.params.id}`, this.product);
+  }
 
-      this.product = data;
-      this.isLoader = !this.isLoader;
-    },
+  async getProduct() {
+    const { data }: AxiosResponse = await HttpService.get(
+      `${route.products}/${this.$route.params.id}`,
+    );
 
-    ...mapActions(['addProductToStateCart']),
-  },
+    this.product = data;
+    this.isLoader = !this.isLoader;
+  }
 
-  computed: {
-    ...mapGetters(['getCart']),
+  get productImage() {
+    return (this.product as IProduct).image === '' ? '1.jpg' : (this.product as IProduct).image;
+  }
 
-    getProductImage() {
-      return this.product.image === '' ? '1.jpg' : this.product.image;
-    },
+  get isDisableButtonAddToCart() {
+    return Object.keys(this.$store.getters.getCart).includes(String((this.product as IProduct).id));
+  }
 
-    isDisable() {
-      return Object.keys(this.getCart).includes(String(this.product.id));
-    },
-    changeTitleButton() {
-      if (Object.keys(this.getCart).includes(String(this.product.id))) {
-        return 'In a cart';
-      }
-      return 'Add to cart';
-    },
-  },
+  get changeTitleButton() {
+    return Object.keys(this.$store.getters.getCart).includes(String((this.product as IProduct).id))
+      ? 'In a cart'
+      : 'Add to cart';
+  }
 
-  async mounted() {
+  mounted() {
     this.getProduct();
-  },
-};
-</script>
-
-<style scoped lang="scss">
-.wrapper {
-  display: flex;
-  justify-content: center;
+  }
 }
-</style>
+</script>

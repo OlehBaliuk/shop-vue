@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {},
-    admins: null,
+    admins: [],
     cart: {},
     flags: {},
     filter: {
@@ -49,7 +49,7 @@ export default new Vuex.Store({
     ADD_PRODUCT_TO_CART(state, product) {
       const productWithCount = { ...product, count: 1 };
 
-      Vue.set(state.cart, [product.id], productWithCount);
+      Vue.set(state.cart as any, [product.id] as any, productWithCount);
     },
 
     DELETE_PRODUCT_FROM_CART(state, productId) {
@@ -61,21 +61,21 @@ export default new Vuex.Store({
     },
 
     INCREMENT_PRODUCT(state, productId) {
-      state.cart[productId].count += 1;
+      (state.cart as any)[productId].count += 1;
     },
 
     DECREMENT_PRODUCT(state, productId) {
-      if (state.cart[productId].count > 1) {
-        state.cart[productId].count -= 1;
+      if ((state.cart as any)[productId].count > 1) {
+        (state.cart as any)[productId].count -= 1;
       }
     },
 
     CHANGE_COUNT_PRODUCT(state, payload) {
-      state.cart[payload.productId].count = payload.count;
+      (state.cart as any)[payload.productId].count = payload.count;
     },
 
     UPDATE_FILTER_FIELD(state, payload) {
-      state.filter[payload.field].value = payload.value;
+      (state.filter as any)[payload.field].value = payload.value;
     },
 
     UPDATE_PAGE(state, page) {
@@ -100,11 +100,11 @@ export default new Vuex.Store({
     },
 
     CREATE_FIELD_FILTER(state, payload) {
-      state.filter[payload.field] = payload.filterParams;
+      (state.filter as any)[payload.field] = payload.filterParams;
     },
 
     CHANGE_FLAG(state, payload) {
-      Vue.set(state.flags, [payload.field], payload.value);
+      Vue.set(state.flags as any, [payload.field] as any, payload.value);
     },
 
     ADD_ADMINS_TO_STATE(state, payload) {
@@ -112,7 +112,7 @@ export default new Vuex.Store({
     },
 
     REMOTE_ADMINS_FROM_STATE(state) {
-      state.admins = null;
+      state.admins = [];
     },
   },
 

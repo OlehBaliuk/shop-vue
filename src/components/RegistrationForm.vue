@@ -16,7 +16,6 @@
                 <v-text-field
                   v-model="form.first"
                   data-test="firstName"
-                  data-test="firstName"
                   :counter="20"
                   :error-messages="errors"
                   label="First name"
@@ -109,12 +108,7 @@
         <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
         <v-btn @click="clear" data-test="cancel">clear</v-btn>
       </v-form>
-      <DialogModal
-        :isFlag="terms"
-        @onChangeStatus="onChangeStatusTerms"
-        title="Terms"
-        :content="content"
-      />
+      <DialogModal :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
       <DialogModal
         :isFlag="conditions"
         @onChangeStatus="onChangeStatusConditions"
@@ -125,13 +119,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import jwt_decode from 'jwt-decode';
-import { mapActions } from 'vuex';
 import { required, max, min, email } from 'vee-validate/dist/rules';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import route from '@/constants/routes';
 import HttpService from '@/services/HttpService';
+import { Vue, Component } from 'vue-property-decorator';
 import DialogModal from './sharedComponents/DialogModal.vue';
 
 extend('required', {
@@ -154,80 +148,80 @@ extend('email', {
   message: '{_field_} not correct',
 });
 
-export default {
-  name: 'RegistrationForm',
+const defaultForm: any = Object.freeze({
+  first: '',
+  last: '',
+  email: '',
+  password: '',
+  age: 18,
+  birthDay: '',
+  phone: '',
+  country: '',
+  city: '',
+  gender: '',
+  avatar: '',
+  contactType: '',
+});
 
+@Component({
   components: {
     ValidationProvider,
     ValidationObserver,
     DialogModal,
   },
+})
+export default class RegistrationForm extends Vue {
+  form: any = {
+    ...defaultForm,
+  };
 
-  data() {
-    const defaultForm = Object.freeze({
-      first: '',
-      last: '',
-      email: '',
-      password: '',
-      age: 18,
-      birthDay: '',
-      phone: '',
-      country: '',
-      city: '',
-      gender: '',
-      avatar: '',
-      contactType: '',
-    });
+  conditions: boolean = false;
 
-    return {
-      form: { ...defaultForm },
-      conditions: false,
-      snackbar: false,
-      terms: false,
-      checkBoxTerms: null,
-      showPassword: false,
-      content: 'Lorem ipsum dolor sit amet',
-      isErrorRegistration: false,
-    };
-  },
+  snackbar: boolean = false;
 
-  methods: {
-    clear() {
-      this.form = { ...this.defaultForm };
-      this.checkBoxTerms = null;
-      this.$refs.observer.reset();
-    },
+  terms: boolean = false;
 
-    onChangeStatusError() {
-      this.isErrorRegistration = !this.isErrorRegistration;
-    },
+  checkBoxTerms = null;
 
-    onChangeStatusTerms() {
-      this.terms = !this.terms;
-    },
+  showPassword: boolean = false;
 
-    onChangeStatusConditions() {
-      this.conditions = !this.conditions;
-    },
+  content: string = 'Lorem ipsum dolor sit amet';
 
-    async submit(credentials) {
-      try {
-        const { data } = await HttpService.post(`${route.users}`, credentials);
+  isErrorRegistration: boolean = false;
 
-        localStorage.setItem('authToken', data.accessToken);
+  clear() {
+    this.form = { ...defaultForm };
+    this.checkBoxTerms = null;
+    (this.$refs as any).observer.reset();
+  }
 
-        const decoded = jwt_decode(data.accessToken);
+  onChangeStatusError() {
+    this.isErrorRegistration = !this.isErrorRegistration;
+  }
 
-        this.addUserToState(decoded);
-        this.$router.push({ path: route.catalog });
-      } catch (e) {
-        this.onChangeStatusError();
-      }
-    },
+  onChangeStatusTerms() {
+    this.terms = !this.terms;
+  }
 
-    ...mapActions(['addUserToState']),
-  },
-};
+  onChangeStatusConditions() {
+    this.conditions = !this.conditions;
+  }
+
+  async submit(credentials: any) {
+    try {
+      const { data }: any = await HttpService.post(`${route.users}`, credentials);
+
+      localStorage.setItem('authToken', data.accessToken);
+
+      const decoded = jwt_decode(data.accessToken);
+
+      this.$store.dispatch('addUserToState', decoded);
+      this.$router.push({ name: 'catalog', params: { locale: this.$i18n.locale } });
+    } catch (e) {
+      this.onChangeStatusError();
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

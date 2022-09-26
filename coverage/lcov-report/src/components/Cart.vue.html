@@ -219,7 +219,45 @@
 <a name='L161'></a><a href='#L161'>161</a>
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
-<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -386,7 +424,13 @@
   &lt;div class="cart-wrapper"&gt;
     &lt;h1&gt;Cart&lt;/h1&gt;
     &lt;div v-if="isEmpty"&gt;Cart is empty&lt;/div&gt;
-    &lt;div v-else v-for="product in getCart" data-test="product" :key="product.id" class="product-wrapper"&gt;
+    &lt;div
+      v-else
+      v-for="product in getCart"
+      data-test="product"
+      :key="product.id"
+      class="product-wrapper"
+    &gt;
       &lt;v-col class="py-0" cols="12"&gt;
         &lt;div class="product-wrapper__info"&gt;
           &lt;div class="d-flex align-center"&gt;
@@ -401,7 +445,11 @@
           &lt;/div&gt;
           &lt;div&gt;&lt;/div&gt;
           &lt;div class="product-wrapper__quantity"&gt;
-            &lt;v-icon @click="decrementProductInCart(product.id)" data-test="decrement" slot="prepend" color="green"
+            &lt;v-icon
+              @click="decrementProductInCart(product.id)"
+              data-test="decrement"
+              slot="prepend"
+              color="green"
               &gt;mdi-minus&lt;/v-icon
             &gt;
             &lt;label for="countProduct"&gt;
@@ -416,17 +464,26 @@
                 @blur="onBlur(product.id, $event)"
               /&gt;
             &lt;/label&gt;
-            &lt;v-icon @click="incrementProductInCart(product.id)" data-test="increment" slot="append" color="red"
+            &lt;v-icon
+              @click="incrementProductInCart(product.id)"
+              data-test="increment"
+              slot="append"
+              color="red"
               &gt;mdi-plus&lt;/v-icon
             &gt;
           &lt;/div&gt;
           &lt;div class="price-wrapper"&gt;
             &lt;p&gt;{{ product.price }} UAH&lt;/p&gt;
             &lt;v-btn
+             
               @click="deleteProductFromCart(product.id)"
               data-test="delete"
+             
+              data-test="delete"
               x-small
+             
               color="cyan lighten-4 black--text"
+             
               depressed
               &gt;delete&lt;/v-btn
             &gt;
@@ -436,7 +493,9 @@
     &lt;/div&gt;
     &lt;div v-if="!isEmpty" class="cart-wrapper__total-field"&gt;
       &lt;h2&gt;Total: {{ countTotalCost }} UAH&lt;/h2&gt;
-      &lt;v-btn @click="cleareCart" data-test="clear" color="cyan lighten-4 black--text" depressed&gt;clear cart&lt;/v-btn&gt;
+      &lt;v-btn @click="cleareCart" data-test="clear" color="cyan lighten-4 black--text" depressed
+        &gt;clear cart&lt;/v-btn
+      &gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -462,7 +521,10 @@ export default {
     },
 &nbsp;
     countTotalCost() {
-      const total = Object.values(this.getCart).reduce((acc, item) =&gt; acc + item.price * item.count, 0);
+      const total = Object.values(this.getCart).reduce(
+        (acc, item) =&gt; acc + item.price * item.count,
+        0,
+      );
 &nbsp;
       return total;
     },
@@ -552,7 +614,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 27 2022 19:05:15 GMT+0300 (Eastern European Summer Time)
+                at Thu May 26 2022 15:48:27 GMT+0300 (Eastern European Summer Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

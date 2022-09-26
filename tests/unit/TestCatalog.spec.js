@@ -32,7 +32,6 @@ describe('Catalog', () => {
   };
 
   const actions = {
-    updateFilter: jest.fn(),
     updatePage: jest.fn(),
     resetFilter: jest.fn(),
   };
@@ -65,7 +64,7 @@ describe('Catalog', () => {
   });
 
   it('should be call getProductFromDB', async () => {
-    const getProductFromDB = jest.spyOn(Catalog.methods, 'getProductFromDB');
+    const getProductFromDB = jest.spyOn(Catalog.options.methods, 'getProductFromDB');
 
     customWrapper(Catalog, options);
 

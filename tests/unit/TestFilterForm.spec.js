@@ -57,11 +57,10 @@ describe('FilterForm', () => {
     const wrapper = customWrapper(FilterForm, options);
     const filterTo = 100;
 
-    wrapper.vm.updateFilterField = jest.fn();
+    wrapper.vm.onChangeFilter = jest.fn();
 
     await wrapper.find('[data-test="to"]').setValue(filterTo);
 
-    expect(wrapper.vm.updateFilterField).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.updateFilterField).toBeCalledWith({ field: 'to', value: 100 });
+    expect(wrapper.vm.onChangeFilter).toHaveBeenCalledTimes(1);
   });
 });

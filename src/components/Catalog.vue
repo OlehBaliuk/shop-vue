@@ -1,21 +1,22 @@
 <template>
   <div class="catalog">
     <div class="form-wrapper">
-      <InputSearch v-if="flag.searchByName" @onSubmit="onSubmitSearch" />
+      <InputSearch v-if="$store.getters.flag.searchByName" @onSubmit="onSubmitSearch" />
       <FilterForm
-        v-if="flag.searchByPrice"
+        v-if="$store.getters.flag.searchByPrice"
         @onSubmit="onSubmitFilter"
         @onClearFilterState="clearFilterState"
       />
     </div>
     <v-btn
-      v-if="flag.searchByName || flag.searchByPrice"
+      v-if="$store.getters.flag.searchByName || $store.getters.flag.searchByPrice"
       @click="clearFilterState"
       data-test="button-clear"
       text
       color="primary"
       >clear filter</v-btn
     >
+    <DialogAreYouSure ref="DialogAreYouSure" :isDialog="isDialog" />
     <div class="product-wrapper">
       <Product
         @onDelete="deleteProduct"
@@ -29,91 +30,103 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import HttpService from '@/services/HttpService';
-import { mapGetters, mapActions } from 'vuex';
 import FilterForm from '@/components/sharedComponents/FilterForm.vue';
 import route from '@/constants/routes';
+import { Vue, Component } from 'vue-property-decorator';
+import { AxiosResponse } from 'axios';
 import InputSearch from './sharedComponents/SearchInput.vue';
+import DialogAreYouSure from './sharedComponents/DialogAreYouSure.vue';
 import Product from './Product.vue';
+import { IfilterData } from './interfaces/interfaces';
 
-export default {
-  name: 'Catalog',
-  data() {
-    return {
-      productsList: [],
-      totalPosts: null,
-    };
-  },
-
+@Component({
   components: {
     Product,
     FilterForm,
     InputSearch,
+    DialogAreYouSure,
   },
+})
+export default class Catalog extends Vue {
+  productsList: any = [];
 
-  methods: {
-    ...mapActions(['updateFilter', 'updatePage', 'resetFilter']),
+  totalPosts: null | string = null;
 
-    async getProductFromDB() {
-      const query = this.createQuery(this.filter);
+  isDialog: boolean = false;
 
-      const data = await HttpService.get(`${route.products}?${query}`);
+  async getProductFromDB() {
+    try {
+      const query = this.createQuery(this.$store.getters.filter);
+
+      const data: AxiosResponse = await HttpService.get(`${route.products}?${query}`);
 
       const newProductList = [...this.productsList, ...data.data];
 
       this.totalPosts = data.headers['x-total-count'];
 
       this.productsList = newProductList;
-    },
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-    deleteProduct(productId) {
-      this.productsList = this.productsList.filter(product => product.id !== productId);
-    },
+  async deleteProduct(productId: number) {
+    this.isDialog = true;
 
-    handleScroll(isVisible) {
-      if (!isVisible || this.totalPosts <= this.productsList.length) {
-        return;
+    (this.$refs as any).DialogAreYouSure.show({
+      title: 'Delete product',
+    }).then(async (isOk: string) => {
+      if (isOk) {
+        const { data }: AxiosResponse = await HttpService.delete(`${route.products}/${productId}`);
+        if (data) {
+          this.productsList = this.productsList.filter((product: any) => product.id !== productId);
+          this.isDialog = false;
+        }
+      } else {
+        this.isDialog = false;
       }
-      this.updatePage(this.filter.page.value + 1);
-      this.getProductFromDB();
-    },
+    });
+  }
 
-    onSubmitFilter() {
-      this.productsList = [];
-      this.updatePage(1);
-      this.getProductFromDB();
-    },
+  handleScroll(isVisible: boolean) {
+    if (!isVisible || (this.totalPosts as any) <= this.productsList.length) {
+      return;
+    }
+    this.$store.dispatch('updatePage', this.$store.getters.filter.page.value + 1);
+    this.getProductFromDB();
+  }
 
-    clearFilterState() {
-      this.resetFilter();
-      this.productsList = [];
-      this.getProductFromDB();
-    },
+  onSubmitFilter() {
+    this.productsList = [];
+    this.$store.dispatch('updatePage', 1);
+    this.getProductFromDB();
+  }
 
-    async onSubmitSearch() {
-      this.productsList = [];
-      this.updatePage(1);
-      this.getProductFromDB();
-    },
+  clearFilterState() {
+    this.$store.dispatch('resetFilter');
+    this.productsList = [];
+    this.getProductFromDB();
+  }
 
-    createQuery(filterData) {
-      return Object.keys(filterData).reduce((acc, key) => {
-        if (filterData[key]?.value === undefined) return acc;
-        return `${acc}&${filterData[key].key}=${filterData[key].value}`;
-      }, '');
-    },
-  },
+  async onSubmitSearch() {
+    this.productsList = [];
+    this.$store.dispatch('updatePage', 1);
+    this.getProductFromDB();
+  }
 
-  computed: {
-    ...mapGetters(['filter', 'flag']),
-  },
+  createQuery = (filterData: IfilterData) =>
+    Object.keys(filterData).reduce((acc, key) => {
+      if (filterData[key]?.value === undefined) return acc;
+      return `${acc}&${filterData[key].key}=${filterData[key].value}`;
+    }, '');
 
   created() {
-    this.updatePage(1);
+    this.$store.dispatch('updatePage', 1);
     this.getProductFromDB();
-  },
-};
+  }
+}
 </script>
 
 <style scoped lang="scss">

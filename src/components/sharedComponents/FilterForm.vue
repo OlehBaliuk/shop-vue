@@ -8,7 +8,7 @@
             v-debounce="submit"
             data-test="from"
             id="input-gte"
-            :value="filter.from.value"
+            :value="filterValue.from.value"
             @input="onChangeFilter('from', $event)"
             min="0"
             max="99999"
@@ -24,7 +24,7 @@
             id="input-lte"
             min="0"
             max="99999"
-            :value="filter.to.value"
+            :value="filterValue.to.value"
             @input="onChangeFilter('to', $event)"
             type="number"
             placeholder="to"
@@ -35,28 +35,23 @@
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-export default {
-  name: 'FilterForm',
+@Component
+export default class FilterForm extends Vue {
+  submit() {
+    this.$emit('onSubmit');
+  }
 
-  methods: {
-    ...mapActions(['updateFilterField']),
+  onChangeFilter(field: string, event: any) {
+    this.$store.dispatch('updateFilterField', { field, value: Number(event.target.value) });
+  }
 
-    submit() {
-      this.$emit('onSubmit');
-    },
-
-    onChangeFilter(field, event) {
-      this.updateFilterField({ field, value: Number(event.target.value) });
-    },
-  },
-
-  computed: {
-    ...mapGetters(['filter']),
-  },
-};
+  get filterValue() {
+    return this.$store.getters.filter;
+  }
+}
 </script>
 
 <style lang="scss" scoped>

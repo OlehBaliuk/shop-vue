@@ -12,39 +12,42 @@
         background-image: url(../../../sort-arrow-sprite.png);
       }
     </style>
-  </head>
-
-  <body>
-    <div class="wrapper">
-      <div class="pad1">
-        <h1>
-          <a href="../../../index.html">All files</a> /
-          <a href="index.html">src/components/sharedComponents</a> NavBar.vue
-        </h1>
-        <div class="clearfix">
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Statements</span>
-            <span class="fraction">1/1</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">50% </span>
-            <span class="quiet">Branches</span>
-            <span class="fraction">1/2</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Functions</span>
-            <span class="fraction">1/1</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Lines</span>
-            <span class="fraction">1/1</span>
-          </div>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/sharedComponents</a> NavBar.vue</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
         </div>
         <p class="quiet">
           Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the
@@ -148,7 +151,14 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,27 +247,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="branch-1 cbranch-no" title="branch not covered" >&lt;template&gt;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;v-list&gt;
     &lt;v-list-group class="white--text" :value="false"&gt;
       &lt;template v-slot:activator&gt;
         &lt;v-icon&gt;mdi-circle-small&lt;/v-icon&gt;
-        &lt;v-list-item-title data-test="products"&gt;Products&lt;/v-list-item-title&gt;
+        &lt;v-list-item-title data-test="products" data-test="products"&gt;Products&lt;/v-list-item-title&gt;
       &lt;/template&gt;
       &lt;template&gt;
-        &lt;v-list-item router-link :to="'/catalog'"&gt;
+        &lt;v-list-item router-link :to="'/catalogcatalog'"&gt;
           &lt;v-list-item-title&gt;Catalog&lt;/v-list-item-title&gt;
           &lt;v-icon&gt;mdi-format-list-bulleted-square&lt;/v-icon&gt;
         &lt;/v-list-item&gt;
       &lt;/template&gt;
-      &lt;v-list-group no-action sub-group&gt;
+      &lt;v-list-group v-if="isAdmin" no-action sub-group&gt;
         &lt;template v-slot:activator&gt;
           &lt;v-list-item&gt;
-            &lt;v-list-item-title data-test="actions"&gt;Actions&lt;/v-list-item-title&gt;
+            &lt;v-list-item-title data-test="actions" data-test="actions"&gt;Actions&lt;/v-list-item-title&gt;
           &lt;/v-list-item&gt;
         &lt;/template&gt;
         &lt;v-list-item router-link :to="'/add-new-product'"&gt;
-          &lt;v-list-item-title data-test="create"&gt;Create&lt;/v-list-item-title&gt;
+          &lt;v-list-item-title data-test="create" data-test="create"&gt;Create&lt;/v-list-item-title&gt;
           &lt;v-icon&gt;mdi-plus-outline&lt;/v-icon&gt;
         &lt;/v-list-item&gt;
       &lt;/v-list-group&gt;
@@ -266,7 +283,7 @@
     &lt;v-list-group v-if="isFilter" class="white--text" :value="false"&gt;
       &lt;template v-slot:activator&gt;
         &lt;v-icon&gt;mdi-circle-small&lt;/v-icon&gt;
-        &lt;v-list-item-title data-test="filter"&gt;Filter&lt;/v-list-item-title&gt;
+        &lt;v-list-item-title data-test="filter" data-test="filter"&gt;Filter&lt;/v-list-item-title&gt;
       &lt;/template&gt;
       &lt;template&gt;
         &lt;v-container fluid&gt;
@@ -278,9 +295,14 @@
           &gt;&lt;/v-checkbox&gt;
           &lt;v-checkbox
             data-test="searchByPrice"
+           
+            data-test="searchByPrice"
             @click="onChecked('searchByPrice', price)"
+           
             v-model="price"
+           
             label="Search by price"
+          
           &gt;&lt;/v-checkbox&gt;
         &lt;/v-container&gt;
       &lt;/template&gt;
@@ -289,7 +311,7 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import route from '@/constants/routes';
 &nbsp;
 export default {
@@ -314,6 +336,13 @@ export default {
     isFilter() {
       return this.$route.path === route.catalog || this.$route.path === route.main;
     },
+&nbsp;
+    ...mapGetters(['admins', 'getUser']),
+&nbsp;
+    isAdmin() {
+      const isVisible = this.admins?.some(admin =&gt; admin.email === this.getUser.email);
+      return isVisible;
+    },
   },
 };
 &lt;/script&gt;
@@ -333,7 +362,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 27 2022 19:05:15 GMT+0300 (Eastern European Summer Time)
+                at Thu May 26 2022 15:48:27 GMT+0300 (Eastern European Summer Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
