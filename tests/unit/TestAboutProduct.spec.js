@@ -21,7 +21,7 @@ describe('About Product', () => {
       $route: { params: { id: '' } },
     },
     computed: {
-      getProductImage() {
+      productImage() {
         return '1.jpg';
       },
     },
@@ -33,7 +33,7 @@ describe('About Product', () => {
   });
 
   it('should be call getProduct', () => {
-    const getProduct = jest.spyOn(AboutProduct.methods, 'getProduct');
+    const getProduct = jest.spyOn(AboutProduct.options.methods, 'getProduct');
     customWrapper(AboutProduct, options);
     expect(getProduct).toHaveBeenCalledTimes(1);
   });

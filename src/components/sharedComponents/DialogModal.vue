@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isFlagDialog" width="70%">
+  <v-dialog v-model="isFlag" width="70%">
     <v-card>
       <v-card-title class="text-h6">{{ title }}</v-card-title>
       <v-card-text data-test="error">{{ content }} </v-card-text>
@@ -11,37 +11,19 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
-  name: 'DialogModal',
+<script lang="ts">
+import { Vue, Prop, Component } from 'vue-property-decorator';
 
-  props: {
-    isFlag: {
-      type: Boolean,
-    },
-    title: {
-      type: String,
-    },
-    content: {
-      type: String,
-    },
-  },
+@Component
+export default class DialogModal extends Vue {
+  @Prop(Boolean) isFlag: boolean;
 
-  methods: {
-    changeStatus() {
-      this.$emit('onChangeStatus');
-    },
-  },
+  @Prop(String) title: string;
 
-  computed: {
-    isFlagDialog: {
-      get() {
-        return this.isFlag;
-      },
-      set() {
-        this.onChangeStatus();
-      },
-    },
-  },
-};
+  @Prop(String) content: string;
+
+  changeStatus() {
+    this.$emit('onChangeStatus');
+  }
+}
 </script>

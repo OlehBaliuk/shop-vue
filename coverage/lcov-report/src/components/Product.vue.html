@@ -18,30 +18,36 @@
     <div class="wrapper">
       <div class="pad1">
         <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> Product.vue</h1>
-        <div class="clearfix">
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Statements</span>
-            <span class="fraction">1/1</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Branches</span>
-            <span class="fraction">0/0</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">0% </span>
-            <span class="quiet">Functions</span>
-            <span class="fraction">0/1</span>
-          </div>
-
-          <div class="fl pad1y space-right2">
-            <span class="strong">100% </span>
-            <span class="quiet">Lines</span>
-            <span class="fraction">1/1</span>
-          </div>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
         </div>
         <p class="quiet">
           Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the
@@ -166,7 +172,9 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,7 +285,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="fstat-no" title="function not covered" >&lt;template&gt;</span>
-  &lt;v-card class="mx-4 my-4 xs-" width="300"&gt;
+  &lt;v-card class="mx-4 my-4" width="300"&gt;
     &lt;v-img
       class="main-image white--text align-end"
       object-fit="cover"
@@ -285,6 +293,7 @@
       :src="require('/public/images/' + getProductImage())"
     &gt;
       &lt;v-btn
+        v-if="isAdmin"
         :id="'btn-edit' + product.id"
         router-link
         :to="'/edit-product/' + product.id"
@@ -292,6 +301,7 @@
         &gt;&lt;v-icon color="black"&gt;mdi-pencil-outline&lt;/v-icon&gt;
       &lt;/v-btn&gt;
       &lt;v-btn
+        v-if="isAdmin"
         @click="deleteProductFromDB(product.id)"
         :id="'btn-delete' + product.id"
         class="icon-delete"
@@ -304,9 +314,13 @@
     &lt;v-card-subtitle class="pb-0"&gt; price:{{ product.price }} &lt;/v-card-subtitle&gt;
     &lt;v-card-actions class="d-flex justify-center"&gt;
       &lt;v-btn
+       
         :disabled="isDisable"
+       
         @click="addProductToStateCart(product)"
+       
         color="teal lighten-1"
+       
         text
         &gt;{{ changeTitleButton }}
       &lt;/v-btn&gt;
@@ -324,8 +338,6 @@
 &nbsp;
 &lt;script&gt;
 import { mapActions, mapGetters } from 'vuex';
-import HttpService from '@/services/HttpService';
-import route from '@/constants/routes';
 &nbsp;
 export default {
   name: 'Product',
@@ -342,16 +354,13 @@ export default {
       return this.product.image === '' ? '1.jpg' : this.product.image;
     },
 &nbsp;
-    async deleteProductFromDB(productId) {
-      const { data } = await HttpService.delete(`${route.products}/${productId}`);
-      if (data) {
-        this.$emit('onDelete', this.product.id);
-      }
+    async deleteProductFromDB() {
+      this.$emit('onDelete', this.product.id);
     },
   },
 &nbsp;
   computed: {
-    ...mapGetters(['getCart']),
+    ...mapGetters(['getCart', 'admins', 'getUser']),
 &nbsp;
     isDisable() {
       return Object.keys(this.getCart).includes(String(this.product.id));
@@ -361,6 +370,10 @@ export default {
         return 'In a cart';
       }
       return 'Add to cart';
+    },
+    isAdmin() {
+      const isVisible = this.admins?.some(admin =&gt; admin.email === this.getUser.email);
+      return isVisible;
     },
   },
 };
@@ -393,7 +406,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 27 2022 19:05:15 GMT+0300 (Eastern European Summer Time)
+                at Thu May 26 2022 15:48:27 GMT+0300 (Eastern European Summer Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -1,0 +1,27 @@
+{
+  "header": {
+    "catalog": "Catalog",
+    "registration": "Registration",
+    "login": "Login"
+  },
+  "profile": {
+    "changeAvatar": "Change avatar",
+    "country": "Country",
+    "city": "City",
+    "first": "First name is required"
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "aboutProduct": "About product",
+    "inACart": "In a cart"
+  },
+  "navBar": {
+    "filter": "Filter",
+    "products": "Products",
+    "catalog": "Catalog",
+    "actions": "Actions",
+    "create": "add",
+    "searchByName": "Search by name",
+    "searchByPrice": "Search by price"
+  }
+}

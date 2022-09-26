@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/sharedComponents/Dialog.vue</title>
+    <title>Code coverage report for src/components/sharedComponents/DialogAreYouSure.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/sharedComponents</a> Dialog.vue</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/sharedComponents</a> DialogAreYouSure.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>6/6</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -109,8 +109,7 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,6 +126,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,14 +134,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,21 +142,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;v-dialog v-model="isFlagDialog" width="70%"&gt;
+  &lt;v-dialog v-model="isFlagDialog" persistent max-width="290"&gt;
     &lt;v-card&gt;
-      &lt;v-card-title class="text-h6"&gt; {{ title }}&lt;/v-card-title&gt;
-      &lt;v-card-text&gt;{{ content }} &lt;/v-card-text&gt;
-      &lt;v-card-actions&gt;
-        &lt;v-spacer&gt;&lt;/v-spacer&gt;
-        &lt;v-btn text color="purple" @click="onChangeStatus"&gt; Ok &lt;/v-btn&gt;
+      &lt;v-card-title class="text-h5 justify-center"&gt;{{ title }}&lt;/v-card-title&gt;
+      &lt;v-card-actions class="d-flex justify-center"&gt;
+        &lt;v-btn color="green darken-1" text @click="resolvePromise(false)"&gt;Disagree&lt;/v-btn&gt;
+        &lt;v-btn color="green darken-1" text @click="resolvePromise(true)"&gt;Agree&lt;/v-btn&gt;
       &lt;/v-card-actions&gt;
     &lt;/v-card&gt;
   &lt;/v-dialog&gt;
@@ -172,34 +169,34 @@
 &nbsp;
 &lt;script&gt;
 export default {
-  name: 'Dialog',
+  name: 'DialogAreYouSure',
+&nbsp;
+  data() {
+    return {
+      title: null,
+      resolvePromise: null,
+    };
+  },
 &nbsp;
   props: {
-    isFlag: {
+    isDialog: {
       type: Boolean,
-    },
-    title: {
-      type: String,
-    },
-    content: {
-      type: String,
     },
   },
 &nbsp;
   methods: {
-<span class="fstat-no" title="function not covered" >    onChangeStatus() {</span>
-<span class="cstat-no" title="statement not covered" >      this.$emit('onChangeStatus');</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >    show(opts = {}) {</span>
+      this.title = opts.title;
+&nbsp;
+      return new Promise(resolve =&gt; {
+        this.resolvePromise = resolve;
+      });
     },
   },
 &nbsp;
   computed: {
-    isFlagDialog: {
-      get() {
-        return this.isFlag;
-      },
-<span class="fstat-no" title="function not covered" >      set() {</span>
-<span class="cstat-no" title="statement not covered" >        this.onChangeStatus();</span>
-      },
+    isFlagDialog() {
+      return this.isDialog;
     },
   },
 };
@@ -211,7 +208,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 13 2022 13:05:03 GMT+0300 (Eastern European Summer Time)
+                at Thu May 26 2022 15:48:27 GMT+0300 (Eastern European Summer Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -2,6 +2,7 @@ import SearchInput from '@/components/sharedComponents/SearchInput.vue';
 import vueDebounce from 'vue-debounce';
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import customWrapper from './utils/utils';
 
 describe('SearchInput', () => {
@@ -46,17 +47,13 @@ describe('SearchInput', () => {
 
   it('send data to store', async () => {
     const searchName = 'name';
-    const params = {
-      field: 'search',
-      filterParams: { value: 'name', key: 'name_like' },
-    };
+
     const wrapper = customWrapper(SearchInput, options);
 
-    wrapper.vm.createFieldFilter = jest.fn();
+    wrapper.vm.onChangeFilter = jest.fn();
 
     await wrapper.find('[data-test="searchField"]').setValue(searchName);
 
-    expect(wrapper.vm.createFieldFilter).toHaveBeenCalledTimes(1);
-    expect(wrapper.vm.createFieldFilter).toBeCalledWith(params);
+    expect(wrapper.vm.onChangeFilter).toHaveBeenCalledTimes(1);
   });
 });

@@ -7,6 +7,10 @@ Cypress.Commands.add('getInputDescriptionProduct', () => cy.get('[data-test="des
 Cypress.Commands.add('getInputPriceProduct', () => cy.get('[data-test="price"]'));
 Cypress.Commands.add('getButtonEdit', () => cy.get('#btn-edit1'));
 
+Given('A user login, enter email {string} and password {string}', (email, password) => {
+  cy.login(email, password);
+});
+
 Given('A user opens page add new product', () => {
   cy.intercept('PUT', '/products/1', { fixture: 'oneProduct.json' });
   cy.intercept('GET', '/products/1', { fixture: 'oneProduct.json' });

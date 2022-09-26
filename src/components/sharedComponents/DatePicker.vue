@@ -10,7 +10,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          :disabled="!isDisable"
+          :disabled="!isEditing"
           v-model="date"
           label="Birthday date"
           prepend-icon="mdi-calendar"
@@ -22,10 +22,10 @@
       </template>
       <v-date-picker
         v-model="date"
+        :locale="$i18n.locale"
+        first-day-of-week="1"
         :active-picker.sync="activePicker"
-        :max="
-          new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
-        "
+        :max="new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)"
         min="1930-01-01"
         @change="save"
         color="teal lighten-2"
@@ -34,34 +34,24 @@
   </v-card-text>
 </template>
 
-<script>
-export default {
-  name: 'DatePicker',
+<script lang="ts">
+import { Vue, Prop, Component } from 'vue-property-decorator';
 
-  data: () => ({
-    activePicker: null,
-    date: null,
-    menu: false,
-    isDisable: false,
-  }),
+@Component
+export default class DatePicker extends Vue {
+  activePicker: null | Date = null;
 
-  props: ['dateBirthDay', 'isEditing'],
+  date: string | null | undefined = this.dateBirthDay;
 
-  methods: {
-    save(date) {
-      this.$refs.menu.save(date);
-      this.$emit('onChangeDate', date);
-    },
-  },
+  menu: boolean = false;
 
-  watch: {
-    dateBirthDay() {
-      if (!this.dateBirthDay) return;
-      this.date = new Date(this.dateBirthDay).toISOString().substr(0, 10);
-    },
-    isEditing() {
-      this.isDisable = this.isEditing;
-    },
-  },
-};
+  @Prop(String) dateBirthDay?: string | null;
+
+  @Prop(Boolean) isEditing: boolean;
+
+  save(date: string) {
+    (this.$refs.menu as any).save(date);
+    this.$emit('onChangeDate', date);
+  }
+}
 </script>

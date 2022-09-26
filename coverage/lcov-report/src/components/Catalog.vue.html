@@ -183,7 +183,59 @@
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
 <a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">24x</span>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,7 +366,11 @@
   &lt;div class="catalog"&gt;
     &lt;div class="form-wrapper"&gt;
       &lt;InputSearch v-if="flag.searchByName" @onSubmit="onSubmitSearch" /&gt;
-      &lt;FilterForm v-if="flag.searchByPrice" @onSubmit="onSubmitFilter" @onClearFilterState="clearFilterState" /&gt;
+      &lt;FilterForm
+        v-if="flag.searchByPrice"
+        @onSubmit="onSubmitFilter"
+        @onClearFilterState="clearFilterState"
+      /&gt;
     &lt;/div&gt;
     &lt;v-btn
       v-if="flag.searchByName || flag.searchByPrice"
@@ -324,13 +380,20 @@
       color="primary"
       &gt;clear filter&lt;/v-btn
     &gt;
+    &lt;DialogAreYouSure ref="DialogAreYouSure" :isDialog="isDialog" /&gt;
     &lt;div class="product-wrapper"&gt;
       &lt;Product
+       
         @onDelete="deleteProduct"
         data-test="product"
+       
+        data-test="product"
         v-for="product in productsList"
+       
         :key="product.id"
+       
         :product="product"
+     
       /&gt;
       &lt;div v-if="productsList.length" v-observe-visibility="handleScroll"&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -343,6 +406,7 @@ import { mapGetters, mapActions } from 'vuex';
 import FilterForm from '@/components/sharedComponents/FilterForm.vue';
 import route from '@/constants/routes';
 import InputSearch from './sharedComponents/SearchInput.vue';
+import DialogAreYouSure from './sharedComponents/DialogAreYouSure.vue';
 import Product from './Product.vue';
 &nbsp;
 export default {
@@ -351,6 +415,7 @@ export default {
     return {
       productsList: [],
       totalPosts: null,
+      isDialog: false,
     };
   },
 &nbsp;
@@ -358,25 +423,44 @@ export default {
     Product,
     FilterForm,
     InputSearch,
+    DialogAreYouSure,
   },
 &nbsp;
   methods: {
     ...mapActions(['updateFilter', 'updatePage', 'resetFilter']),
 &nbsp;
     async getProductFromDB() {
-      const query = this.createQuery(this.filter);
+      try {
+        const query = this.createQuery(this.filter);
 &nbsp;
-      const data = await HttpService.get(`${route.products}?${query}`);
+        const data = await HttpService.get(`${route.products}?${query}`);
 &nbsp;
-      const newProductList = [...this.productsList, ...data.data];
+        const newProductList = [...this.productsList, ...data.data];
 &nbsp;
-      this.totalPosts = data.headers['x-total-count'];
+        this.totalPosts = data.headers['x-total-count'];
 &nbsp;
-      this.productsList = newProductList;
+        this.productsList = newProductList;
+      } catch (e) {
+        console.log(e);
+      }
     },
 &nbsp;
-    deleteProduct(productId) {
-      this.productsList = this.productsList.filter(product =&gt; product.id !== productId);
+    async deleteProduct(productId) {
+      this.isDialog = true;
+&nbsp;
+      this.$refs.DialogAreYouSure.show({
+        title: 'Delete product',
+      }).then(async isOk =&gt; {
+        if (isOk) {
+          const { data } = await HttpService.delete(`${route.products}/${productId}`);
+          if (data) {
+            this.productsList = this.productsList.filter(product =&gt; product.id !== productId);
+            this.isDialog = false;
+          }
+        } else {
+          this.isDialog = false;
+        }
+      });
     },
 &nbsp;
     handleScroll(isVisible) {
@@ -436,6 +520,12 @@ export default {
   justify-content: center;
   margin-top: 0.3rem;
 }
+&nbsp;
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
 &lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -444,7 +534,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 27 2022 19:05:15 GMT+0300 (Eastern European Summer Time)
+                at Thu May 26 2022 15:48:27 GMT+0300 (Eastern European Summer Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-4 my-4 xs-" width="300">
+  <v-card class="mx-4 my-4" width="300">
     <v-img
       class="main-image white--text align-end"
       object-fit="cover"
@@ -7,13 +7,15 @@
       :src="require('/public/images/' + getProductImage())"
     >
       <v-btn
+        v-if="isAdmin"
         :id="'btn-edit' + product.id"
         router-link
-        :to="'/edit-product/' + product.id"
+        :to="{ name: 'edit-product', params: { locale: $i18n.locale, id: product.id } }"
         class="icon-edit"
         ><v-icon color="black">mdi-pencil-outline</v-icon>
       </v-btn>
       <v-btn
+        v-if="isAdmin"
         @click="deleteProductFromDB(product.id)"
         :id="'btn-delete' + product.id"
         class="icon-delete"
@@ -27,7 +29,7 @@
     <v-card-actions class="d-flex justify-center">
       <v-btn
         :disabled="isDisable"
-        @click="addProductToStateCart(product)"
+        @click="$store.dispatch('addProductToStateCart', product)"
         color="teal lighten-1"
         text
         >{{ changeTitleButton }}
@@ -37,55 +39,46 @@
         color="teal lighten-1"
         text
         router-link
-        :to="'/catalog/' + product.id"
-        >About product</v-btn
+        :to="{ name: 'about-product', params: { locale: $i18n.locale, id: product.id } }"
+        >{{ $t('product.aboutProduct') }}</v-btn
       >
     </v-card-actions>
   </v-card>
 </template>
 
-<script>
-import { mapActions, mapGetters } from 'vuex';
-import HttpService from '@/services/HttpService';
-import route from '@/constants/routes';
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-export default {
-  name: 'Product',
+@Component
+export default class Product extends Vue {
+  @Prop(Object) product: any;
 
-  props: {
-    product: {
-      type: Object,
-    },
-  },
-  methods: {
-    ...mapActions(['addProductToStateCart']),
+  getProductImage() {
+    return this.product.image === '' ? '1.jpg' : this.product.image;
+  }
 
-    getProductImage() {
-      return this.product.image === '' ? '1.jpg' : this.product.image;
-    },
+  async deleteProductFromDB() {
+    this.$emit('onDelete', this.product.id);
+  }
 
-    async deleteProductFromDB(productId) {
-      const { data } = await HttpService.delete(`${route.products}/${productId}`);
-      if (data) {
-        this.$emit('onDelete', this.product.id);
-      }
-    },
-  },
+  get isDisable(): boolean {
+    return Object.keys(this.$store.getters.getCart).includes(String(this.product.id));
+  }
 
-  computed: {
-    ...mapGetters(['getCart']),
+  get changeTitleButton(): any {
+    if (Object.keys(this.$store.getters.getCart).includes(String(this.product.id))) {
+      return this.$t('product.inACart');
+    }
+    return this.$t('product.addToCart');
+  }
 
-    isDisable() {
-      return Object.keys(this.getCart).includes(String(this.product.id));
-    },
-    changeTitleButton() {
-      if (Object.keys(this.getCart).includes(String(this.product.id))) {
-        return 'In a cart';
-      }
-      return 'Add to cart';
-    },
-  },
-};
+  get isAdmin() {
+    const isVisible = this.$store.getters.admins.some(
+      (admin: any) => admin.email === this.$store.getters.getUser.email,
+    );
+    return isVisible;
+  }
+}
 </script>
 
 <style scoped lang="scss">

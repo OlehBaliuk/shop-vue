@@ -1,7 +1,7 @@
 import Cart from '@/components/Cart.vue';
 import customWrapper from './utils/utils';
 
-jest.spyOn(Cart.methods, 'getProductImage').mockReturnValue('1.jpg');
+jest.spyOn(Cart.options.methods, 'getProductImage').mockReturnValue('1.jpg');
 
 describe('Cart', () => {
   const store = {

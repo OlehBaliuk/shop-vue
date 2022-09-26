@@ -5,41 +5,37 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import HttpService from '@/services/HttpService';
 import route from '@/constants/routes';
+import { Vue, Component } from 'vue-property-decorator';
 import FormProduct from './sharedComponents/ProductForm.vue';
 
-export default {
-  name: 'EditProduct',
-
+@Component({
   components: {
     FormProduct,
   },
+})
+export default class EditProduct extends Vue {
+  editData = {};
 
-  data() {
-    return {
-      editData: {},
-      loading: true,
-    };
-  },
+  loading: boolean = true;
 
-  methods: {
-    async submit(newProduct) {
-      const { data } = await HttpService.put(`${route.products}/${this.$route.params.id}`, newProduct);
-      if (data) {
-        this.$router.push({ path: route.catalog });
-      }
-    },
+  async submit(newProduct: any) {
+    const { data } = await HttpService.put(`${route.products}/${this.$route.params.id}`, newProduct);
+    if (data) {
+      this.$router.back();
+    }
+  }
 
-    async getProductFromDB() {
-      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`);
-      return data;
-    },
-  },
+  async getProductFromDB() {
+    const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`);
+    return data;
+  }
+
   async mounted() {
     this.editData = await this.getProductFromDB();
     this.loading = false;
-  },
-};
+  }
+}
 </script>

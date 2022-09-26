@@ -23,7 +23,6 @@
                 required
               ></v-text-field>
             </v-col>
-
             <v-col cols="12" sm="6">
               <v-text-field
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -42,87 +41,65 @@
         <v-card-actions>
           <v-btn text data-test="cancel" @click="resetForm">Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit"
-            >Login</v-btn
-          >
+          <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit">Login</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import jwt_decode from 'jwt-decode';
-import { mapActions } from 'vuex';
 import route from '@/constants/routes';
 import HttpService from '@/services/HttpService';
+import { Vue, Component } from 'vue-property-decorator';
 import DialogModal from './sharedComponents/DialogModal.vue';
 
-export default {
-  name: 'RegistrationForm',
-
+@Component({
   components: {
     DialogModal,
   },
+})
+export default class LoginForm extends Vue {
+  form: any = { email: '', password: '' };
 
-  data() {
-    const defaultForm = Object.freeze({
-      email: '',
-      password: '',
-    });
+  snackbar: boolean = false;
 
-    return {
-      form: { ...defaultForm },
-      snackbar: false,
-      showPassword: false,
-      isErrorLogin: false,
-      defaultForm,
-    };
-  },
+  showPassword: boolean = false;
 
-  computed: {
-    formIsValid() {
-      return this.form.email && this.form.password;
-    },
-  },
+  isErrorLogin: boolean = false;
 
-  methods: {
-    resetForm() {
-      this.form = { ...this.defaultForm };
-      this.$refs.form.reset();
-    },
+  get formIsValid(): boolean {
+    return this.form.email && this.form.password;
+  }
 
-    onChangeStatusError() {
-      this.isErrorLogin = !this.isErrorLogin;
-    },
+  resetForm(): void {
+    (this.$refs as any).form.reset();
+  }
 
-    async submit(credentials) {
-      try {
-        let decoded;
-        if (localStorage.getItem('authToken')) {
-          decoded = jwt_decode(localStorage.getItem('authToken'));
-        } else {
-          const { data } = await HttpService.post(`${route.login}`, credentials);
-          decoded = jwt_decode(data.accessToken);
-          localStorage.setItem('authToken', data.accessToken);
-        }
+  onChangeStatusError(): void {
+    this.isErrorLogin = !this.isErrorLogin;
+  }
 
-        if (decoded) {
-          this.addUserToState(decoded);
-          const { data } = await HttpService.get(route.admins);
-          this.addAdminsToState(data);
-          this.snackbar = true;
-          this.$router.push({ path: route.catalog });
-        }
-      } catch {
-        localStorage.removeItem('authToken');
-        this.isErrorLogin = !this.isErrorLogin;
+  async submit(credentials: any) {
+    try {
+      const response: any = await HttpService.post(`${route.login}`, credentials);
+      const decoded = jwt_decode(response.data.accessToken);
+      localStorage.setItem('authToken', response.data.accessToken);
+
+      if (decoded) {
+        this.$store.dispatch('addUserToState', decoded);
+        const { data }: any = await HttpService.get(route.admins);
+        this.$store.dispatch('addAdminsToState', data);
+        this.snackbar = true;
+        this.$router.push({ name: 'catalog', params: { locale: this.$i18n.locale } });
       }
-    },
-
-    ...mapActions(['addUserToState', 'addAdminsToState']),
-  },
-};
+    } catch {
+      localStorage.removeItem('authToken');
+      this.isErrorLogin = !this.isErrorLogin;
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -2,10 +2,11 @@
   <v-card-text>
     <v-row
       ><v-file-input
+        data-test="fileInput"
         color="teal lighten-2"
-        :disabled="!isDisable"
+        :disabled="!isEditing"
         @change="handleImage"
-        label="Change avatar"
+        :label="$t('profile.changeAvatar')"
         prepend-icon="mdi-camera"
         class="px-4"
       ></v-file-input>
@@ -15,51 +16,33 @@
   </v-card-text>
 </template>
 
-<script>
-export default {
-  name: 'AvatarUpload',
-  data() {
-    return {
-      image: '',
-      isDisable: false,
+<script lang="ts">
+import { Vue, Prop, Component, Emit } from 'vue-property-decorator';
+
+@Component
+export default class AvatarUpload extends Vue {
+  image: string | undefined = this.avatar;
+
+  @Prop(String) avatar?: string;
+
+  @Prop(Boolean) isEditing: boolean;
+
+  handleImage(file: Blob | File) {
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      this.image = (e.target as any).result;
+      this.handleAvatar();
     };
-  },
 
-  props: {
-    avatar: {
-      type: String,
-    },
-    isEditing: {
-      type: Boolean,
-    },
-  },
-  methods: {
-    handleImage(selectedImage) {
-      this.createBase64Image(selectedImage);
-    },
+    reader.readAsDataURL(file);
+  }
 
-    createBase64Image(file) {
-      const reader = new FileReader();
-
-      reader.onload = e => {
-        this.image = e.target.result;
-        this.$emit('handleAvatar', this.image);
-      };
-
-      reader.readAsDataURL(file);
-    },
-  },
-
-  watch: {
-    avatar() {
-      this.image = this.avatar;
-    },
-
-    isEditing() {
-      this.isDisable = this.isEditing;
-    },
-  },
-};
+  @Emit('handleAvatar')
+  handleAvatar() {
+    return this.image;
+  }
+}
 </script>
 
 <style lang="scss" scope>
