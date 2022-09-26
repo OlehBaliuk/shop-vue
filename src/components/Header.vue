@@ -1,19 +1,18 @@
 <template>
   <div>
-    <v-navigation-drawer mobile-breakpoint="0" v-if="drawer" app class="teal lighten-2">
+    <v-navigation-drawer mobile-breakpoint="0" v-if="drawer" mobile-breakpoint="0" v-if="drawer" app class="teal lighten-2">
       <NavBar />
     </v-navigation-drawer>
     <v-app-bar app color="teal lighten-1" dense dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-btn data-test="cart" icon router-link to="/cart">
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-btn data-test="cart" data-test="cart" icon router-link to="/cart">
         <v-icon color="white">mdi-cart</v-icon>
         <span data-test="cart-count" v-if="changeCounterCart > 0">{{ changeCounterCart }}</span>
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-title
-
-        ><router-link class="catalog" to="/catalogcatalog">Catalog</router-link></v-toolbar-title
-
+        ><router-link class="catalog" to="/catalog">Catalog</router-link></v-toolbar-title
       >
       <v-spacer></v-spacer>
       <div v-if="!getUser.email" class="auth-wrapper">
@@ -29,6 +28,7 @@
 import { mapGetters } from 'vuex';
 import NavBar from './sharedComponents/NavBar.vue';
 import UserMenu from './sharedComponents/UserMenu.vue';
+import UserMenu from './sharedComponents/UserMenu.vue';
 
 export default {
   name: 'Header',
@@ -37,8 +37,13 @@ export default {
     drawer: true,
   }),
 
+  data: () => ({
+    drawer: true,
+  }),
+
   components: {
     NavBar,
+    UserMenu,
     UserMenu,
   },
 

@@ -242,10 +242,10 @@
     &lt;v-list-group class="white--text" :value="false"&gt;
       &lt;template v-slot:activator&gt;
         &lt;v-icon&gt;mdi-circle-small&lt;/v-icon&gt;
-        &lt;v-list-item-title data-test="products" data-test="products"&gt;Products&lt;/v-list-item-title&gt;
+        &lt;v-list-item-title data-test="products"&gt;Products&lt;/v-list-item-title&gt;
       &lt;/template&gt;
       &lt;template&gt;
-        &lt;v-list-item router-link :to="'/catalogcatalog'"&gt;
+        &lt;v-list-item router-link :to="'/catalog'"&gt;
           &lt;v-list-item-title&gt;Catalog&lt;/v-list-item-title&gt;
           &lt;v-icon&gt;mdi-format-list-bulleted-square&lt;/v-icon&gt;
         &lt;/v-list-item&gt;
@@ -266,7 +266,7 @@
     &lt;v-list-group v-if="isFilter" class="white--text" :value="false"&gt;
       &lt;template v-slot:activator&gt;
         &lt;v-icon&gt;mdi-circle-small&lt;/v-icon&gt;
-        &lt;v-list-item-title data-test="filter" data-test="filter"&gt;Filter&lt;/v-list-item-title&gt;
+        &lt;v-list-item-title data-test="filter"&gt;Filter&lt;/v-list-item-title&gt;
       &lt;/template&gt;
       &lt;template&gt;
         &lt;v-container fluid&gt;
@@ -278,14 +278,9 @@
           &gt;&lt;/v-checkbox&gt;
           &lt;v-checkbox
             data-test="searchByPrice"
-           
-            data-test="searchByPrice"
             @click="onChecked('searchByPrice', price)"
-           
             v-model="price"
-           
             label="Search by price"
-          
           &gt;&lt;/v-checkbox&gt;
         &lt;/v-container&gt;
       &lt;/template&gt;
@@ -317,7 +312,7 @@ export default {
 &nbsp;
   computed: {
     isFilter() {
-      return this.$route.path === route.catalog || this.$route.path === route.catalog || this.$route.path === route.main;
+      return this.$route.path === route.catalog || this.$route.path === route.main;
     },
   },
 };

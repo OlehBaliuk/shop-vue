@@ -5,10 +5,22 @@
     <div class="wrapper d-flex flex-wrap" v-else>
       <div>
         <div class="d-flex flex-column justify-space-between align-center mx-5 my-5">
-          <v-slider v-model="widthSlider" class="align-self-stretch" min="200" max="400" step="1"></v-slider>
-          <v-img :width="widthSlider" :src="require('../../public/images/' + getProductImage)"></v-img>
+          <v-slider
+            v-model="widthSlider"
+            class="align-self-stretch"
+            min="200"
+            max="400"
+            step="1"
+          ></v-slider>
+          <v-img
+            :width="widthSlider"
+            :src="require('../../public/images/' + getProductImage)"
+          ></v-img>
           <v-btn data-test="btn-rating" @click="changeRating" width="100%">
-            <v-rating v-model="product.rating" icon-label="custom icon label text {0} of {1}"></v-rating>
+            <v-rating
+              v-model="product.rating"
+              icon-label="custom icon label text {0} of {1}"
+            ></v-rating>
           </v-btn>
         </div>
       </div>
@@ -21,7 +33,11 @@
               {{ product.description }}
             </div>
           </v-card-text>
-          <v-btn :disabled="isDisable" @click="addProductToStateCart(product)" color="teal lighten-1" text
+          <v-btn
+            :disabled="isDisable"
+            @click="addProductToStateCart(product)"
+            color="teal lighten-1"
+            text
             >{{ changeTitleButton }}
           </v-btn>
         </v-card>

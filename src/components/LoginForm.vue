@@ -109,6 +109,8 @@ export default {
 
         if (decoded) {
           this.addUserToState(decoded);
+          const { data } = await HttpService.get(route.admins);
+          this.addAdminsToState(data);
           this.snackbar = true;
           this.$router.push({ path: route.catalog });
         }
@@ -118,7 +120,7 @@ export default {
       }
     },
 
-    ...mapActions(['addUserToState']),
+    ...mapActions(['addUserToState', 'addAdminsToState']),
   },
 };
 </script>

@@ -11,6 +11,8 @@
 <script>
 import { mapActions } from 'vuex';
 import jwt_decode from 'jwt-decode';
+import route from '@/constants/routes';
+import HttpService from '@/services/HttpService';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
@@ -22,10 +24,15 @@ export default {
   },
 
   methods: {
-    ...mapActions(['addUserToState']),
+    ...mapActions(['addUserToState', 'addAdminsToState']),
+
+    async setAdminsToState() {
+      const { data } = await HttpService.get(route.admins);
+      this.addAdminsToState(data);
+    },
   },
 
-  created() {
+  async created() {
     if (localStorage.getItem('authToken')) {
       try {
         const decode = jwt_decode(localStorage.getItem('authToken'));
@@ -34,6 +41,8 @@ export default {
         console.log(e);
       }
     }
+
+    await this.setAdminsToState();
   },
 };
 </script>

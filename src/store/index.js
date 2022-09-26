@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {},
+    admins: null,
     cart: {},
     flags: {},
     filter: {
@@ -32,6 +33,8 @@ export default new Vuex.Store({
     filter: state => state.filter,
 
     flag: state => state.flags,
+
+    admins: state => state.admins,
   },
 
   mutations: {
@@ -103,6 +106,14 @@ export default new Vuex.Store({
     CHANGE_FLAG(state, payload) {
       Vue.set(state.flags, [payload.field], payload.value);
     },
+
+    ADD_ADMINS_TO_STATE(state, payload) {
+      state.admins = payload;
+    },
+
+    REMOTE_ADMINS_FROM_STATE(state) {
+      state.admins = null;
+    },
   },
 
   actions: {
@@ -159,6 +170,14 @@ export default new Vuex.Store({
 
     changeFlag({ commit }, payload) {
       commit('CHANGE_FLAG', payload);
+    },
+
+    addAdminsToState({ commit }, payload) {
+      commit('ADD_ADMINS_TO_STATE', payload);
+    },
+
+    removeAdminsFromState({ commit }) {
+      commit('REMOTE_ADMINS_FROM_STATE');
     },
   },
 

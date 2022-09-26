@@ -151,7 +151,7 @@ const UserProfileSchema = yup.object().shape({
     .nullable()
     .when('contactType', {
       is: value => value === 'country and city',
-      then: yup.string().required('Country is required').nullable(),
+      then: yup.string().required('City is required').nullable(),
     }),
 });
 
