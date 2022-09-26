@@ -16,6 +16,7 @@
                 <v-text-field
                   v-model="form.first"
                   data-test="firstName"
+                  data-test="firstName"
                   :counter="20"
                   :error-messages="errors"
                   label="First name"
@@ -45,17 +46,11 @@
                 }"
               >
                 <v-text-field
-
                   v-model="form.email"
                   data-test="login"
-
-                  data-test="login"
                   :error-messages="errors"
-
                   label="Email"
-
                   required
-
                 ></v-text-field>
               </validation-provider>
             </v-col>
@@ -111,19 +106,14 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-btn class="mr-4" data-test="submit" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
-        <v-btn @click="clear" data-test="cancel" data-test="cancel">clear</v-btn>
+        <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
+        <v-btn @click="clear" data-test="cancel">clear</v-btn>
       </v-form>
       <DialogModal
-
         :isFlag="terms"
-
         @onChangeStatus="onChangeStatusTerms"
-
         title="Terms"
-
         :content="content"
-
       />
       <DialogModal
         :isFlag="conditions"

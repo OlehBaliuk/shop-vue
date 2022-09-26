@@ -11,6 +11,7 @@ const routes = {
   addNewProduct: '/add-new-product',
   editProduct: '/edit-product/:id',
   profile: '/profile',
+  admins: '/admins',
 };
 
 export default routes;

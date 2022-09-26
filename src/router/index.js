@@ -10,8 +10,29 @@ import EditProduct from '../components/EditProduct.vue';
 import LoginForm from '../components/LoginForm.vue';
 import Profile from '../components/Profile.vue';
 import store from '../store';
+import AdminsList from '../components/AdminsList.vue';
 
 Vue.use(VueRouter);
+
+function redirectFromProfileToCatalog(to, from, next) {
+  if (store.getters.getUser.email) {
+    next();
+  } else {
+    next(route.catalog);
+  }
+}
+
+function redirectFromAdminsToCatalog(to, from, next) {
+  const isAdmin = store.getters.admins?.filter(
+    admin => admin.email === store.getters.getUser.email,
+  );
+
+  if (isAdmin) {
+    next();
+  } else {
+    next(route.catalog);
+  }
+}
 
 const routes = [
   {
@@ -58,13 +79,13 @@ const routes = [
     path: route.profile,
     name: 'profile',
     component: Profile,
-    beforeEnter: (to, from, next) => {
-      if (store.getters.getUser.email) {
-        next();
-      } else {
-        next(route.catalog);
-      }
-    },
+    beforeEnter: redirectFromProfileToCatalog,
+  },
+  {
+    path: route.admins,
+    name: 'admins-list',
+    component: AdminsList,
+    beforeEnter: redirectFromAdminsToCatalog,
   },
 ];
 
