@@ -52,7 +52,7 @@
     </div>
     <div v-if="!isEmpty" class="cart-wrapper__total-field">
       <h2>Total: {{ countTotalCost }} UAH</h2>
-      <v-btn @click="cleareCart" color="cyan lighten-4 black--text" depressed>clear cart</v-btn>
+      <v-btn @click="cleareCart" data-test="clear" color="cyan lighten-4 black--text" depressed>clear cart</v-btn>
     </div>
   </div>
 </template>

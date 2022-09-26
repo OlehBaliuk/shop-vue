@@ -16,6 +16,7 @@
                 <v-text-field
                   v-model="form.first"
                   data-test="firstName"
+                  data-test="firstName"
                   :counter="20"
                   :error-messages="errors"
                   label="First name"
@@ -27,6 +28,7 @@
               <validation-provider v-slot="{ errors }" name="last name" rules="required|max:20">
                 <v-text-field
                   v-model="form.last"
+                  data-test="secondName"
                   data-test="secondName"
                   :counter="20"
                   :error-messages="errors"
@@ -46,7 +48,7 @@
               >
                 <v-text-field
                   v-model="form.email"
-                  data-test="email"
+                  data-test="login"
                   :error-messages="errors"
                   label="Email"
                   required
@@ -61,6 +63,7 @@
                   :error-messages="errors"
                   label="Password"
                   v-model="form.password"
+                  data-test="password"
                   data-test="password"
                   class="input-group--focused"
                   required
@@ -85,6 +88,7 @@
                   <v-checkbox
                     v-model="checkBoxTerms"
                     data-test="checkbox"
+                    data-test="checkbox"
                     :error-messages="errors"
                     color="green"
                     value="true"
@@ -106,9 +110,14 @@
           </v-row>
         </v-container>
         <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
-        <v-btn @click="clear">clear</v-btn>
+        <v-btn @click="clear" data-test="cancel">clear</v-btn>
       </v-form>
-      <DialogModal :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
+      <DialogModal
+        :isFlag="terms"
+        @onChangeStatus="onChangeStatusTerms"
+        title="Terms"
+        :content="content"
+      />
       <DialogModal
         :isFlag="conditions"
         @onChangeStatus="onChangeStatusConditions"
@@ -203,7 +212,7 @@ export default {
         const decoded = jwt_decode(data.accessToken);
 
         this.addUserToState(decoded);
-        this.$router.push({ path: route.main });
+        this.$router.push({ path: route.catalog });
       } catch (e) {
         this.onChangeStatusError();
       }

@@ -1,9 +1,9 @@
 <template>
   <div class="filter-wrapper">
-    <h3>Price</h3>
     <form @submit.prevent="submit">
       <div class="input-wrapper">
         <label for="input-gte">
+          Price
           <input
             v-debounce="submit"
             data-test="from"
@@ -31,7 +31,6 @@
           />
         </label>
       </div>
-      <v-btn @click="clearFilterState" data-test="button-clear" text color="primary">clear filter</v-btn>
     </form>
   </div>
 </template>
@@ -51,10 +50,6 @@ export default {
 
     onChangeFilter(field, event) {
       this.updateFilterField({ field, value: Number(event.target.value) });
-    },
-
-    clearFilterState() {
-      this.$emit('onClearFilterState');
     },
   },
 

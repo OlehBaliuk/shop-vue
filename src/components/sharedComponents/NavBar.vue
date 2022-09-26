@@ -27,17 +27,22 @@
     <v-list-group v-if="isFilter" class="white--text" :value="false">
       <template v-slot:activator>
         <v-icon>mdi-circle-small</v-icon>
-        <v-list-item-title>Filter</v-list-item-title>
+        <v-list-item-title data-test="filter">Filter</v-list-item-title>
       </template>
       <template>
         <v-container fluid>
           <v-checkbox
-            data-test="checkbox"
+            data-test="searchByName"
             @click="onChecked('searchByName', name)"
             v-model="name"
             label="Search by name"
           ></v-checkbox>
-          <v-checkbox @click="onChecked('searchByPrice', price)" v-model="price" label="Search by price"></v-checkbox>
+          <v-checkbox
+            data-test="searchByPrice"
+            @click="onChecked('searchByPrice', price)"
+            v-model="price"
+            label="Search by price"
+          ></v-checkbox>
         </v-container>
       </template>
     </v-list-group>

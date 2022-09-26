@@ -16,7 +16,7 @@ Vue.config.productionTip = false;
 
 Vue.use(vueDebounce, {
   listenTo: 'input',
-  defaultTime: '800ms',
+  defaultTime: '1s',
 });
 
 Vue.axios.defaults.baseURL = 'http://localhost:3000';

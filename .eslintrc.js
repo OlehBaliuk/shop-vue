@@ -23,6 +23,9 @@ module.exports = {
     'object-curly-newline': 0,
     'vuejs-accessibility/label-has-for': 'off',
     'vue/no-mutating-props': 0,
+    'newline-per-chained-call': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
   },
 
   overrides: [

@@ -2,10 +2,10 @@
   {
     "name": "футболка",
     "description": "опять футболка",
-    "price": 100,
+    "price": 110,
     "image": "1.jpg",
     "id": 1,
-    "rating": 5
+    "rating": 3
   },
   {
     "name": "майка",

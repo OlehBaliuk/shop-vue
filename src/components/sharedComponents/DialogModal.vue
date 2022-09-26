@@ -2,7 +2,7 @@
   <v-dialog v-model="isFlagDialog" width="70%">
     <v-card>
       <v-card-title class="text-h6">{{ title }}</v-card-title>
-      <v-card-text>{{ content }} </v-card-text>
+      <v-card-text data-test="error">{{ content }} </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text color="purple" @click="changeStatus">Ok</v-btn>

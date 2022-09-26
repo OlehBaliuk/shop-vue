@@ -1,5 +1,9 @@
 {
   "pluginsFile": "tests/e2e/plugins/index.js",
   "viewportWidth": 1326,
-  "viewportHeight": 700
+  "viewportHeight": 700,
+  "testFiles": "**/*.feature",
+  "integrationFolder": "tests/e2e/integration",
+  "fixturesFolder": "tests/e2e/fixtures",
+  "supportFile": "tests/e2e/support"
 }

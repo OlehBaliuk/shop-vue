@@ -6,7 +6,7 @@
       "price": 100,
       "image": "1.jpg",
       "id": 1,
-      "rating": 5
+      "rating": 4
     },
     {
       "name": "майка",
@@ -22,7 +22,7 @@
       "description": "bla-bla-bla",
       "price": 1300,
       "id": 3,
-      "rating": 5
+      "rating": 4
     },
     {
       "image": "4.jpg",
@@ -47,183 +47,6 @@
       "price": 1000,
       "id": 57,
       "rating": 5
-    },
-    {
-      "name": "uioo",
-      "description": "uoui",
-      "price": 777,
-      "image": "",
-      "id": 59,
-      "rating": 5
-    },
-    {
-      "name": "111iliuliuliu",
-      "description": "111",
-      "price": 111,
-      "image": "",
-      "id": 60,
-      "rating": 5
-    },
-    {
-      "name": "aaaa",
-      "description": "aaa",
-      "price": 111,
-      "image": "",
-      "id": 61
-    },
-    {
-      "name": "33tr6trt",
-      "description": "33hggyfyf",
-      "price": 1000,
-      "image": "",
-      "id": 62
-    },
-    {
-      "name": "рррроллл",
-      "description": "рпшагнвнеен",
-      "price": 1220,
-      "image": "",
-      "id": 63
-    },
-    {
-      "name": "цццц",
-      "description": "ццц",
-      "price": 1111,
-      "image": "",
-      "id": 64
-    },
-    {
-      "name": "ss",
-      "description": "sss",
-      "price": 1111,
-      "image": "",
-      "id": 65
-    },
-    {
-      "name": "s",
-      "description": "s",
-      "price": 1111,
-      "image": "",
-      "id": 66
-    },
-    {
-      "name": "aa",
-      "description": "aa",
-      "price": 111,
-      "image": "",
-      "id": 67
-    },
-    {
-      "name": "qqq",
-      "description": "qqqq",
-      "price": 101,
-      "image": "",
-      "id": 68
-    },
-    {
-      "name": "gfdyutfyutf",
-      "description": "hjgvkufkuygf",
-      "price": 20,
-      "image": "",
-      "id": 69
-    },
-    {
-      "name": "huiouio",
-      "description": "yuiouoy",
-      "price": 120,
-      "image": "",
-      "id": 70
-    },
-    {
-      "name": "ewrwe",
-      "description": "ewfqewfewq",
-      "price": 111,
-      "image": "",
-      "id": 71
-    },
-    {
-      "name": "укц",
-      "description": "цукцу",
-      "price": 122,
-      "image": "",
-      "id": 72
-    },
-    {
-      "name": "fwefwe79",
-      "description": "44",
-      "price": 1111,
-      "image": "",
-      "id": 73
-    },
-    {
-      "name": "32423",
-      "description": "134213",
-      "price": 1111,
-      "image": "",
-      "id": 74
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 75
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 76
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 77
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 78
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 79
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 80
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 81
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 82
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 83
     },
     {
       "name": "Name",
@@ -286,41 +109,6 @@
       "description": "Description",
       "price": 100,
       "image": "",
-      "id": 92
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 93
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 94
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 95
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
-      "id": 96
-    },
-    {
-      "name": "Name",
-      "description": "Description",
-      "price": 100,
-      "image": "",
       "id": 97
     },
     {
@@ -329,6 +117,41 @@
       "price": 1000,
       "image": "",
       "id": 98
+    },
+    {
+      "name": "name",
+      "description": "description",
+      "price": 500,
+      "image": "",
+      "id": 99
+    },
+    {
+      "name": "name",
+      "description": "description",
+      "price": 500,
+      "image": "",
+      "id": 100
+    },
+    {
+      "name": "name",
+      "description": "description",
+      "price": 500,
+      "image": "",
+      "id": 101
+    },
+    {
+      "name": "name",
+      "description": "description",
+      "price": 500,
+      "image": "",
+      "id": 102
+    },
+    {
+      "name": "name",
+      "description": "description",
+      "price": 500,
+      "image": "",
+      "id": 103
     }
   ],
   "users": [
@@ -557,6 +380,254 @@
       "last": "name",
       "age": 18,
       "id": 29
+    },
+    {
+      "email": "0.07095@ab.ab",
+      "password": "$2a$10$cVnRrmrvjvICX4dgqZHLNu0S2okLP2iLxeNpcKb0HjvOQPQj9s/56",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 30
+    },
+    {
+      "email": "0.43764@ab.ab",
+      "password": "$2a$10$FGPGDMXYXYSv2Ju4f03pEu7lLqaqhSwsqVVhg9lb3GcZ9u7RYVrym",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 31
+    },
+    {
+      "email": "0.79242@ab.ab",
+      "password": "$2a$10$tt5h2YP7nYLDWnPSDNKa/eplz0Dj4HuyHr6dQKq0UqwIWNIAJNq.e",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 32
+    },
+    {
+      "email": "0.19213@ab.ab",
+      "password": "$2a$10$u/jP42pEvmYzosz9phHaeOYxbw0B7uyOWrT4T4d3utdqSdRi4lIGG",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 33
+    },
+    {
+      "email": "0.08158@ab.ab",
+      "password": "$2a$10$8nLqyRMpWLYFu.cHf43jYuD6Ys8TyJMYQmEEbb5b443eB2Dr/91b6",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 34
+    },
+    {
+      "email": "0.30658@ab.ab",
+      "password": "$2a$10$ju7IpqThJFS0AOKc3GCVxeND7iXvS9aWEBhdxpy3oEstXLdIX3L.O",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 35
+    },
+    {
+      "email": "0.55466@ab.ab",
+      "password": "$2a$10$Pwl7ly0lQV1QBrcefyBBT.iLCqxvJFAkmD/yuPjxkc72RmSawKS6K",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 36
+    },
+    {
+      "email": "0.34161@ab.ab",
+      "password": "$2a$10$yw2z9BMyyO7Jm83qHYg3r.xQVY6wRgetA2knfjuPPAN9D9/RpBaE.",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 37
+    },
+    {
+      "email": "0.46825@ab.ab",
+      "password": "$2a$10$.c9zff14xcYhwRuRhlDgaeEWoyh5QDIh5mXIqD.UPYQawJMhCSCti",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 38
+    },
+    {
+      "email": "0.79980@ab.ab",
+      "password": "$2a$10$Ab9oehMVMLm4MI0jgcXHyO.Fyk80mVzXilTo/8Fh4bZU2Oa8c0/MK",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 39
+    },
+    {
+      "email": "0.19604@ab.ab",
+      "password": "$2a$10$WJnJ7NFz9L9eUn7lolvyFukpPooWDHmljhKX.7x/AyYrFW/tPx97i",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 40
+    },
+    {
+      "email": "0.29082@ab.ab",
+      "password": "$2a$10$hx7UIM4kQqELWxKF/lqxj.Skli610Rki/k.2L38Wbs4OghEREytk6",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 41
+    },
+    {
+      "email": "0.76454@ab.ab",
+      "password": "$2a$10$jtxK4IpJ/1KoelyWt0vJ7.uQ/w6cvj0OM.i65Aq.TH6Ulix7hAL4C",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 42
+    },
+    {
+      "email": "0.19385@ab.ab",
+      "password": "$2a$10$dq6lMPVqWwr9PkjypL3QVea1h0o0ddB4v9Q1c9wsCQDW/5uVJOVFC",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 43
+    },
+    {
+      "email": "0.42384@ab.ab",
+      "password": "$2a$10$30ci5WMF5vzxkwQdJjRUQuNNxc7So54a9p.5z32jdQFGfuKnP7xeO",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 44
+    },
+    {
+      "email": "0.59029@ab.ab",
+      "password": "$2a$10$BmL2iMIABiXNv8QEPLR/Ie5Npt8vUYA0.oFwhvyef7x1wSQ3KDUHW",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 45
+    },
+    {
+      "email": "0.06844@ab.ab",
+      "password": "$2a$10$DSiOHTJyjKpjJsUVZI7UuOcfIR4ONkR1uNCMBw4dZaUDB7pKkg40K",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 46
+    },
+    {
+      "email": "0.71376@ab.ab",
+      "password": "$2a$10$Wz6SxQD3og5bDgZYwQs/Uu.wGQ.tkpm7BsbfcEKy3AMK/NryQCi5G",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 47
+    },
+    {
+      "email": "0.27098@ab.ab",
+      "password": "$2a$10$ktFFD5jzG5H1T9NBN3G4XuChoibmBW6Kf901HGtOkYqQrFwMkhwwS",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 48
+    },
+    {
+      "email": "0.60769@ab.ab",
+      "password": "$2a$10$i/IZGE/jzlThU2rW6h44IelZohnJOAKeNvqk3ITsDa/a3AFHfvAr2",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 49
+    },
+    {
+      "email": "0.59604@ab.ab",
+      "password": "$2a$10$7vQJt3roxLwwuIM1JACl/.R4128xVu0mfGqImAKfiXn9wscIywwlS",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 50
+    },
+    {
+      "email": "0.32684@ab.ab",
+      "password": "$2a$10$UJrPO.PthpHYfmmEaFfEgOl5DAuSdH1k98EX9PsVbTbwnwJfhSvXq",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 51
+    },
+    {
+      "email": "0.18202@ab.ab",
+      "password": "$2a$10$UZjxN7EJedF/kRUoKDHL5uzwoA8HOWOA1wZIrznNGKxOMqB9I.jiS",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 52
+    },
+    {
+      "email": "0.19545@ab.ab",
+      "password": "$2a$10$LEhoe1RQHSBJQg5mYfE2DOy4ELthKf7MyUIURgSJnX6GHJy199QUu",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 53
+    },
+    {
+      "email": "0.19244@ab.ab",
+      "password": "$2a$10$QSX/522TiISeT/c5au8xHuu6jNwtOSvlLhK7hp6A3/4SKTS4LtMfu",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 54
+    },
+    {
+      "email": "0.85863@ab.ab",
+      "password": "$2a$10$qjHMT1ddGXJgAOmyfB.yI.p805CM1CjeR8pO9hGsTi7mbYAJbc4Y6",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 55
+    },
+    {
+      "email": "0.67820@ab.ab",
+      "password": "$2a$10$hUVvyzBKfp9cf2jBC.HfsO3mfSJ3xy61FGlST1Q9OO2KWStXlxyQa",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 56
+    },
+    {
+      "email": "0.03902@ab.ab",
+      "password": "$2a$10$bHSS2Gy4Fz8OQdbyiKJBJ.UsCyGgNAFyo.xWUljCzC2wg6VFlSGEm",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 57
+    },
+    {
+      "email": "0.70896@ab.ab",
+      "password": "$2a$10$z2p2dQQTwBuh/OFuKfcYFuZSj3sUoANbVJTkS.hYr63cd/B6dMEvu",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 58
+    },
+    {
+      "email": "0.98797@ab.ab",
+      "password": "$2a$10$PNQa19ZNDKkgV4BxR5KipOeRN/QagZlEJxWuqzNaCFlaPm/jotAo.",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 59
+    },
+    {
+      "email": "0.52343@ab.ab",
+      "password": "$2a$10$IKgF75vw/rsZBjWNdeNCHewpPPhyg3jKvuA4fd.nWYM./wkNPCwbi",
+      "first": "name",
+      "last": "secondName",
+      "age": 18,
+      "id": 60
     }
   ]
 }
