@@ -1,10 +1,9 @@
 import RegistrationForm from '@/components/RegistrationForm.vue';
-import { shallowMount } from '@vue/test-utils';
+import customWrapper from './utils/utils';
 
 describe('RegistrationForm', () => {
   it('should be render', () => {
-    const wrapper = shallowMount(RegistrationForm);
-
+    const wrapper = customWrapper(RegistrationForm);
     expect(wrapper.isVisible()).toBe(true);
   });
 });

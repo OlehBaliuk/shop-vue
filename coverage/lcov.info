@@ -41,8 +41,8 @@ SF:src/components/Cart.vue
 FN:1,(anonymous_0)
 FNF:1
 FNH:1
-FNDA:15,(anonymous_0)
-DA:1,22
+FNDA:5,(anonymous_0)
+DA:1,12
 LF:1
 LH:1
 BRDA:1,0,0,2
@@ -102,7 +102,7 @@ FNDA:1,(anonymous_0)
 DA:1,9
 LF:1
 LH:1
-BRDA:1,0,0,1
+BRDA:1,0,0,2
 BRDA:1,0,1,2
 BRF:2
 BRH:2
@@ -173,8 +173,8 @@ SF:src/components/sharedComponents/FilterForm.vue
 FN:1,(anonymous_0)
 FNF:1
 FNH:1
-FNDA:10,(anonymous_0)
-DA:1,27
+FNDA:7,(anonymous_0)
+DA:1,20
 LF:1
 LH:1
 BRF:0
@@ -185,8 +185,8 @@ SF:src/components/sharedComponents/NavBar.vue
 FN:1,(anonymous_0)
 FNF:1
 FNH:1
-FNDA:3,(anonymous_0)
-DA:1,14
+FNDA:1,(anonymous_0)
+DA:1,12
 LF:1
 LH:1
 BRDA:1,0,0,1
@@ -199,8 +199,8 @@ SF:src/components/sharedComponents/ProductForm.vue
 FN:1,(anonymous_0)
 FNF:1
 FNH:1
-FNDA:98,(anonymous_0)
-DA:1,206
+FNDA:2,(anonymous_0)
+DA:1,14
 LF:1
 LH:1
 BRF:0

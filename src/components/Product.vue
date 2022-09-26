@@ -20,7 +20,7 @@
       <v-btn :disabled="isDisable" @click="addProductToStateCart(product)" color="teal lighten-1" text
         >{{ changeTitleButton }}
       </v-btn>
-      <v-btn color="teal lighten-1" text router-link :to="'/catalog/' + product.id"> About product </v-btn>
+      <v-btn color="teal lighten-1" text router-link :to="'/catalog/' + product.id">About product</v-btn>
     </v-card-actions>
   </v-card>
 </template>

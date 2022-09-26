@@ -1,46 +1,40 @@
 import SearchInput from '@/components/sharedComponents/SearchInput.vue';
-import { mount } from '@vue/test-utils';
-import Vuex from 'vuex';
-import Vue from 'vue';
 import vueDebounce from 'vue-debounce';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import customWrapper from './utils/utils';
 
 describe('SearchInput', () => {
-  let getters;
-  let actions;
-  let store;
+  const getters = {
+    filter: () => ({}),
+  };
 
-  beforeEach(() => {
-    getters = {
-      filter: () => ({
-        search: {
-          key: null,
-          value: null,
-        },
-      }),
-    };
+  const actions = {
+    createFieldFilter: jest.fn(),
+  };
 
-    actions = {
-      createFieldFilter: jest.fn(),
-    };
+  Vue.use(Vuex);
+  Vue.use(vueDebounce);
 
-    Vue.use(Vuex);
-
-    Vue.use(vueDebounce);
-
-    store = new Vuex.Store({
-      getters,
-      actions,
-    });
+  const store = new Vuex.Store({
+    getters,
+    actions,
   });
 
+  const options = {
+    mocks: {
+      $store: store,
+    },
+  };
+
   it('should be render', () => {
-    const wrapper = mount(SearchInput, { store });
+    const wrapper = customWrapper(SearchInput, options);
     expect(wrapper.isVisible()).toBe(true);
   });
 
   it('submit a form', async () => {
     const searchName = 'name';
-    const wrapper = mount(SearchInput, { store });
+    const wrapper = customWrapper(SearchInput, options);
 
     wrapper.vm.submit = jest.fn();
 
@@ -56,7 +50,7 @@ describe('SearchInput', () => {
       field: 'search',
       filterParams: { value: 'name', key: 'name_like' },
     };
-    const wrapper = mount(SearchInput, { store });
+    const wrapper = customWrapper(SearchInput, options);
 
     wrapper.vm.createFieldFilter = jest.fn();
 

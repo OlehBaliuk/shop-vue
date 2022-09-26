@@ -1,76 +1,63 @@
 import Catalog from '@/components/Catalog.vue';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
 import HttpService from '@/services/HttpService';
-import Vuetify from 'vuetify';
-import Vuex from 'vuex';
-import Vue from 'vue';
 import VueObserveVisibility from 'vue-observe-visibility';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import customWrapper from './utils/utils';
 
 require('intersection-observer');
 
 const mockProduct = {
-  data: [{ id: 1, title: 'title' }],
+  data: [{}],
   headers: {
     'x-total-count': 1,
   },
 };
 
+jest.spyOn(Catalog.methods, 'updatePage');
 jest.spyOn(HttpService, 'get').mockResolvedValue(mockProduct);
 
 describe('Catalog', () => {
-  const localVue = createLocalVue();
-  let vuetify;
-  let getters;
-  let actions;
-  let store;
+  const getters = {
+    filter: () => ({
+      page: {
+        key: '_page',
+        value: 1,
+      },
+    }),
+    flag: () => ({
+      searchByName: true,
+      searchByPrice: true,
+    }),
+  };
 
-  beforeEach(() => {
-    vuetify = new Vuetify();
+  const actions = {
+    updateFilter: jest.fn(),
+    updatePage: jest.fn(),
+    resetFilter: jest.fn(),
+  };
 
-    getters = {
-      filter: () => ({
-        page: {
-          key: '_page',
-          value: 1,
-        },
-      }),
-      flag: () => ({
-        searchByName: true,
-        searchByPrice: true,
-      }),
-    };
+  Vue.use(Vuex);
+  Vue.use(VueObserveVisibility);
 
-    actions = {
-      updateFilter: jest.fn(),
-      updatePage: jest.fn(),
-      resetFilter: jest.fn(),
-    };
-
-    Vue.use(Vuex);
-    Vue.use(VueObserveVisibility);
-
-    store = new Vuex.Store({
-      getters,
-      actions,
-    });
+  const store = new Vuex.Store({
+    getters,
+    actions,
   });
 
-  it('should be render', async () => {
-    const wrapper = shallowMount(Catalog, {
-      localVue,
-      vuetify,
-      store,
-    });
+  const options = {
+    mocks: {
+      $store: store,
+    },
+  };
 
+  it('should be render', () => {
+    const wrapper = customWrapper(Catalog, options);
     expect(wrapper.isVisible()).toBe(true);
   });
 
   it('should be call deleteProduct', async () => {
-    const wrapper = shallowMount(Catalog, {
-      localVue,
-      vuetify,
-      store,
-    });
+    const wrapper = customWrapper(Catalog, options);
 
     wrapper.vm.deleteProduct = jest.fn();
     wrapper.vm.deleteProduct();
@@ -80,11 +67,7 @@ describe('Catalog', () => {
   it('should be call getProductFromDB', async () => {
     const getProductFromDB = jest.spyOn(Catalog.methods, 'getProductFromDB');
 
-    shallowMount(Catalog, {
-      localVue,
-      vuetify,
-      store,
-    });
+    customWrapper(Catalog, options);
 
     expect(getProductFromDB).toHaveBeenCalledTimes(1);
   });

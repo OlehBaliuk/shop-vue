@@ -1,0 +1,50 @@
+[
+  {
+    "name": "футболка",
+    "description": "опять футболка",
+    "price": 100,
+    "image": "1.jpg",
+    "id": 1,
+    "rating": 5
+  },
+  {
+    "name": "майка",
+    "description": "тоже майка",
+    "price": 123,
+    "image": "2.jpg",
+    "id": 2,
+    "rating": 5
+  },
+  {
+    "image": "3.jpg",
+    "name": "T-shirt",
+    "description": "bla-bla-bla",
+    "price": 1300,
+    "id": 3,
+    "rating": 5
+  },
+  {
+    "image": "4.jpg",
+    "name": "T-shirt",
+    "description": "bla-bla-bla",
+    "price": 180,
+    "id": 4,
+    "rating": 5
+  },
+  {
+    "image": "5.jpg",
+    "name": "T-shirt",
+    "description": "bla-bla-bla",
+    "price": 108,
+    "id": 56,
+    "rating": 4
+  },
+  {
+    "image": "6.jpg",
+    "name": "T-shirt",
+    "description": "bla-bla-bla",
+    "price": 1480,
+    "id": 57,
+    "rating": 5
+  }
+]

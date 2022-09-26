@@ -1,100 +1,40 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import Vuetify from 'vuetify';
 import AboutProduct from '@/components/AboutProduct.vue';
-import VueRouter from 'vue-router';
 import HttpService from '@/services/HttpService';
-import Vuex from 'vuex';
-import Vue from 'vue';
+import customWrapper from './utils/utils';
 
 const mockProduct = {
-  data: [
-    {
-      image: '3.jpg',
-      name: 'T-shirt',
-      description: 'bla-bla-bla',
-      price: 1300,
-      id: 3,
-      rating: 5,
-    },
-  ],
+  data: [{}],
 };
 
 jest.spyOn(HttpService, 'get').mockResolvedValue(mockProduct);
 
-describe('AboutProduct', () => {
-  const localVue = createLocalVue();
-  localVue.use(VueRouter);
-  let vuetify;
-  let router;
-  let getters;
-  let store;
+describe('About Product', () => {
+  const store = {
+    getters: {
+      getCart: {},
+    },
+  };
 
-  beforeEach(() => {
-    vuetify = new Vuetify();
-    router = new VueRouter();
-
-    const app = document.createElement('div');
-    app.setAttribute('data-app', true);
-    document.body.append(app);
-
-    getters = {
-      getCart: () => ({
-        image: '3.jpg',
-        name: 'T-shirt',
-        description: 'bla-bla-bla',
-        price: 1300,
-        id: 3,
-        rating: 5,
-      }),
-    };
-
-    Vue.use(Vuex);
-
-    store = new Vuex.Store({
-      getters,
-    });
-  });
+  const options = {
+    mocks: {
+      $store: store,
+      $route: { params: { id: '' } },
+    },
+    computed: {
+      getProductImage() {
+        return '1.jpg';
+      },
+    },
+  };
 
   it('should be render', () => {
-    const wrapper = mount(AboutProduct, {
-      localVue,
-      vuetify,
-      store,
-      router,
-      computed: {
-        getProductImage() {
-          return '1.jpg';
-        },
-      },
-      global: {
-        mocks: {
-          $route: { params: { id: '' } },
-        },
-      },
-    });
-
+    const wrapper = customWrapper(AboutProduct, options);
     expect(wrapper.isVisible()).toBe(true);
   });
 
   it('should be call getProduct', () => {
     const getProduct = jest.spyOn(AboutProduct.methods, 'getProduct');
-    mount(AboutProduct, {
-      localVue,
-      vuetify,
-      store,
-      router,
-      computed: {
-        getProductImage() {
-          return '1.jpg';
-        },
-      },
-      global: {
-        mocks: {
-          $route: { params: { id: '' } },
-        },
-      },
-    });
-
+    customWrapper(AboutProduct, options);
     expect(getProduct).toHaveBeenCalledTimes(1);
   });
 });

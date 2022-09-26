@@ -1,6 +1,6 @@
 <template>
   <validation-observer ref="observer" v-slot="{ invalid }">
-    <form @submit.prevent="submit" class="form">
+    <form @submit.prevent="submit" data-test="form" class="form">
       <validation-provider v-slot="{ errors }" name="Name" rules="required|max:25">
         <v-text-field
           data-test="nameText"
@@ -52,7 +52,7 @@
         ></v-checkbox>
       </validation-provider>
 
-      <v-btn class="mr-4" type="submit" :disabled="invalid">submit</v-btn>
+      <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
       <v-btn @click="clear">clear</v-btn>
     </form>
   </validation-observer>

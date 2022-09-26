@@ -15,6 +15,7 @@
               <validation-provider v-slot="{ errors }" name="first name" rules="required|max:20">
                 <v-text-field
                   v-model="form.first"
+                  data-test="firstName"
                   :counter="20"
                   :error-messages="errors"
                   label="First name"
@@ -26,6 +27,7 @@
               <validation-provider v-slot="{ errors }" name="last name" rules="required|max:20">
                 <v-text-field
                   v-model="form.last"
+                  data-test="secondName"
                   :counter="20"
                   :error-messages="errors"
                   label="Last name"
@@ -42,7 +44,13 @@
                   email: true,
                 }"
               >
-                <v-text-field v-model="form.email" :error-messages="errors" label="Email" required></v-text-field>
+                <v-text-field
+                  v-model="form.email"
+                  data-test="email"
+                  :error-messages="errors"
+                  label="Email"
+                  required
+                ></v-text-field>
               </validation-provider>
             </v-col>
             <v-col cols="12" sm="6">
@@ -53,6 +61,7 @@
                   :error-messages="errors"
                   label="Password"
                   v-model="form.password"
+                  data-test="password"
                   class="input-group--focused"
                   required
                   @click:append="showPassword = !showPassword"
@@ -75,6 +84,7 @@
                 <v-col cols="12">
                   <v-checkbox
                     v-model="checkBoxTerms"
+                    data-test="checkbox"
                     :error-messages="errors"
                     color="green"
                     value="true"
@@ -95,7 +105,7 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-btn class="mr-4" type="submit" :disabled="invalid">submit</v-btn>
+        <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
       </v-form>
       <DialogModal :isFlag="terms" @onChangeStatus="onChangeStatusTerms" title="Terms" :content="content" />
