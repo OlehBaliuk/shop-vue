@@ -35,7 +35,7 @@
           </v-row>
         </v-container>
         <v-card-actions>
-          <v-btn text @click="resetForm">Cancel</v-btn>
+          <v-btn text data-test="cancel" @click="resetForm">Cancel</v-btn>
           <v-spacer></v-spacer>
           <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit">Login</v-btn>
         </v-card-actions>
@@ -98,7 +98,7 @@ export default {
         if (decoded) {
           this.addUserToState(decoded);
           this.snackbar = true;
-          this.$router.push({ path: route.main });
+          this.$router.push({ path: route.catalog });
         }
       } catch {
         this.isErrorLogin = !this.isErrorLogin;

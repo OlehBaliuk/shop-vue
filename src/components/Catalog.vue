@@ -4,8 +4,22 @@
       <InputSearch v-if="flag.searchByName" @onSubmit="onSubmitSearch" />
       <FilterForm v-if="flag.searchByPrice" @onSubmit="onSubmitFilter" @onClearFilterState="clearFilterState" />
     </div>
+    <v-btn
+      v-if="flag.searchByName || flag.searchByPrice"
+      @click="clearFilterState"
+      data-test="button-clear"
+      text
+      color="primary"
+      >clear filter</v-btn
+    >
     <div class="product-wrapper">
-      <Product @onDelete="deleteProduct" v-for="product in productsList" :key="product.id" :product="product" />
+      <Product
+        @onDelete="deleteProduct"
+        data-test="product"
+        v-for="product in productsList"
+        :key="product.id"
+        :product="product"
+      />
       <div v-if="productsList.length" v-observe-visibility="handleScroll"></div>
     </div>
   </div>
@@ -103,5 +117,11 @@ export default {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3rem;
 }
 </style>

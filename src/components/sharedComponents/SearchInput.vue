@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
-    <h3>Search</h3>
     <label for="input-search">
+      Search
       <input
         v-debounce="submit"
         :value="inputValue"
@@ -53,7 +53,7 @@ export default {
   outline-offset: 0;
   color: rgb(0, 0, 0);
   width: 10rem;
-  margin-left: 1rem;
+  margin: 0.2rem;
 
   &::placeholder {
     color: #000000;

@@ -6,10 +6,18 @@
       height="200"
       :src="require('/public/images/' + getProductImage())"
     >
-      <v-btn router-link :to="'/edit-product/' + product.id" class="icon-edit"
+      <v-btn
+        :id="'btn-edit' + product.id"
+        router-link
+        :to="'/edit-product/' + product.id"
+        class="icon-edit"
         ><v-icon color="black">mdi-pencil-outline</v-icon>
       </v-btn>
-      <v-btn @click="deleteProductFromDB(product.id)" class="icon-delete">
+      <v-btn
+        @click="deleteProductFromDB(product.id)"
+        :id="'btn-delete' + product.id"
+        class="icon-delete"
+      >
         <v-icon color="black">mdi-delete-forever</v-icon>
       </v-btn>
 
@@ -17,10 +25,21 @@
     </v-img>
     <v-card-subtitle class="pb-0"> price:{{ product.price }} </v-card-subtitle>
     <v-card-actions class="d-flex justify-center">
-      <v-btn :disabled="isDisable" @click="addProductToStateCart(product)" color="teal lighten-1" text
+      <v-btn
+        :disabled="isDisable"
+        @click="addProductToStateCart(product)"
+        color="teal lighten-1"
+        text
         >{{ changeTitleButton }}
       </v-btn>
-      <v-btn color="teal lighten-1" text router-link :to="'/catalog/' + product.id">About product</v-btn>
+      <v-btn
+        :id="'btn-about' + product.id"
+        color="teal lighten-1"
+        text
+        router-link
+        :to="'/catalog/' + product.id"
+        >About product</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
