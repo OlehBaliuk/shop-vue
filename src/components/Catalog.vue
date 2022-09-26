@@ -2,7 +2,11 @@
   <div class="catalog">
     <div class="form-wrapper">
       <InputSearch v-if="flag.searchByName" @onSubmit="onSubmitSearch" />
-      <FilterForm v-if="flag.searchByPrice" @onSubmit="onSubmitFilter" @onClearFilterState="clearFilterState" />
+      <FilterForm
+        v-if="flag.searchByPrice"
+        @onSubmit="onSubmitFilter"
+        @onClearFilterState="clearFilterState"
+      />
     </div>
     <v-btn
       v-if="flag.searchByName || flag.searchByPrice"

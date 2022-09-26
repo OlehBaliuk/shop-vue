@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import jwt_decode from 'jwt-decode';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
@@ -17,6 +19,21 @@ export default {
   components: {
     Header,
     Footer,
+  },
+
+  methods: {
+    ...mapActions(['addUserToState']),
+  },
+
+  created() {
+    if (localStorage.getItem('authToken')) {
+      try {
+        const decode = jwt_decode(localStorage.getItem('authToken'));
+        this.addUserToState(decode);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
 };
 </script>

@@ -305,7 +305,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;validation-observer ref="observer" v-slot="{ invalid }"&gt;
-    &lt;form @submit.prevent="submit" data-test="form" data-test="form" class="form"&gt;
+    &lt;form @submit.prevent="submit" data-test="form" class="form"&gt;
       &lt;validation-provider v-slot="{ errors }" name="Name" rules="required|max:25"&gt;
         &lt;v-text-field
           data-test="nameText"
@@ -357,7 +357,7 @@
         &gt;&lt;/v-checkbox&gt;
       &lt;/validation-provider&gt;
 &nbsp;
-      &lt;v-btn class="mr-4" data-test="submit" data-test="submit" type="submit" :disabled="invalid"&gt;submit&lt;/v-btn&gt;
+      &lt;v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid"&gt;submit&lt;/v-btn&gt;
       &lt;v-btn @click="clear"&gt;clear&lt;/v-btn&gt;
     &lt;/form&gt;
   &lt;/validation-observer&gt;

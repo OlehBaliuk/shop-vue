@@ -16,7 +16,6 @@
                 <v-text-field
                   v-model="form.first"
                   data-test="firstName"
-                  data-test="firstName"
                   :counter="20"
                   :error-messages="errors"
                   label="First name"
@@ -28,7 +27,6 @@
               <validation-provider v-slot="{ errors }" name="last name" rules="required|max:20">
                 <v-text-field
                   v-model="form.last"
-                  data-test="secondName"
                   data-test="secondName"
                   :counter="20"
                   :error-messages="errors"
@@ -47,11 +45,17 @@
                 }"
               >
                 <v-text-field
+
                   v-model="form.email"
                   data-test="login"
+
+                  data-test="login"
                   :error-messages="errors"
+
                   label="Email"
+
                   required
+
                 ></v-text-field>
               </validation-provider>
             </v-col>
@@ -63,7 +67,6 @@
                   :error-messages="errors"
                   label="Password"
                   v-model="form.password"
-                  data-test="password"
                   data-test="password"
                   class="input-group--focused"
                   required
@@ -88,7 +91,6 @@
                   <v-checkbox
                     v-model="checkBoxTerms"
                     data-test="checkbox"
-                    data-test="checkbox"
                     :error-messages="errors"
                     color="green"
                     value="true"
@@ -109,14 +111,19 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-btn class="mr-4" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
-        <v-btn @click="clear" data-test="cancel">clear</v-btn>
+        <v-btn class="mr-4" data-test="submit" data-test="submit" type="submit" :disabled="invalid">submit</v-btn>
+        <v-btn @click="clear" data-test="cancel" data-test="cancel">clear</v-btn>
       </v-form>
       <DialogModal
+
         :isFlag="terms"
+
         @onChangeStatus="onChangeStatusTerms"
+
         title="Terms"
+
         :content="content"
+
       />
       <DialogModal
         :isFlag="conditions"
@@ -173,6 +180,13 @@ export default {
       email: '',
       password: '',
       age: 18,
+      birthDay: '',
+      phone: '',
+      country: '',
+      city: '',
+      gender: '',
+      avatar: '',
+      contactType: '',
     });
 
     return {
@@ -209,6 +223,9 @@ export default {
     async submit(credentials) {
       try {
         const { data } = await HttpService.post(`${route.users}`, credentials);
+
+        localStorage.setItem('authToken', data.accessToken);
+
         const decoded = jwt_decode(data.accessToken);
 
         this.addUserToState(decoded);

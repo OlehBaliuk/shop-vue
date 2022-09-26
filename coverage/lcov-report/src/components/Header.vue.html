@@ -153,17 +153,7 @@
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,7 +262,7 @@
         &lt;span data-test="cart-count" v-if="changeCounterCart &gt; 0"&gt;{{ changeCounterCart }}&lt;/span&gt;
       &lt;/v-btn&gt;
       &lt;v-spacer&gt;&lt;/v-spacer&gt;
-      &lt;v-toolbar-title&gt;&lt;router-link class="catalog" to="/catalog"&gt;Catalog&lt;/router-link&gt;&lt;/v-toolbar-title&gt;
+      &lt;v-toolbar-title&gt;&lt;router-link class="catalog" to="/catalogcatalog"&gt;Catalog&lt;/router-link&gt;&lt;/v-toolbar-title&gt;
       &lt;v-spacer&gt;&lt;/v-spacer&gt;
       &lt;div v-if="!getUser.email" class="auth-wrapper"&gt;
         &lt;router-link class="mx-2" to="/registration"&gt;Registration&lt;/router-link&gt;
@@ -292,10 +282,6 @@ import NavBar from './sharedComponents/NavBar.vue';
 &nbsp;
 export default {
   name: 'Header',
-&nbsp;
-  data: () =&gt; ({
-    drawer: true,
-  }),
 &nbsp;
   data: () =&gt; ({
     drawer: true,

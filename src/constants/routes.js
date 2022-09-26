@@ -10,6 +10,7 @@ const routes = {
   aboutProduct: '/catalog/:id',
   addNewProduct: '/add-new-product',
   editProduct: '/edit-product/:id',
+  profile: '/profile',
 };
 
 export default routes;
