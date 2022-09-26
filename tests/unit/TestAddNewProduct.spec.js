@@ -1,32 +1,18 @@
 import AddNewProduct from '@/components/AddNewProduct.vue';
-import { mount, createLocalVue } from '@vue/test-utils';
 import HttpService from '@/services/HttpService';
 import route from '@/constants/routes';
-import Vuetify from 'vuetify';
+import customWrapper from './utils/utils';
 
 jest.mock('@/services/HttpService');
 
 describe('AddNewProduct', () => {
-  const localVue = createLocalVue();
-  let vuetify;
-
-  beforeEach(() => {
-    vuetify = new Vuetify();
-  });
-
   it('should be render', () => {
-    const wrapper = mount(AddNewProduct, {
-      localVue,
-      vuetify,
-    });
+    const wrapper = customWrapper(AddNewProduct);
     expect(wrapper.isVisible()).toBe(true);
   });
 
   it('handle onSubmit', async () => {
-    const wrapper = mount(AddNewProduct, {
-      localVue,
-      vuetify,
-    });
+    const wrapper = customWrapper(AddNewProduct);
 
     const newProduct = {
       name: 'abc',

@@ -52,7 +52,7 @@ export default {
     },
 
     async getProduct() {
-      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`, this.product);
+      const { data } = await HttpService.get(`${route.products}/${this.$route.params.id}`);
 
       this.product = data;
       this.isLoader = !this.isLoader;

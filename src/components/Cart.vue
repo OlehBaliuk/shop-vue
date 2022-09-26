@@ -2,7 +2,7 @@
   <div class="cart-wrapper">
     <h1>Cart</h1>
     <div v-if="isEmpty">Cart is empty</div>
-    <div v-else v-for="product in getCart" :key="product.id" class="product-wrapper">
+    <div v-else v-for="product in getCart" data-test="product" :key="product.id" class="product-wrapper">
       <v-col class="py-0" cols="12">
         <div class="product-wrapper__info">
           <div class="d-flex align-center">
@@ -17,7 +17,9 @@
           </div>
           <div></div>
           <div class="product-wrapper__quantity">
-            <v-icon @click="decrementProductInCart(product.id)" slot="prepend" color="green">mdi-minus</v-icon>
+            <v-icon @click="decrementProductInCart(product.id)" data-test="decrement" slot="prepend" color="green"
+              >mdi-minus</v-icon
+            >
             <label for="countProduct">
               <input
                 min="1"
@@ -30,11 +32,18 @@
                 @blur="onBlur(product.id, $event)"
               />
             </label>
-            <v-icon @click="incrementProductInCart(product.id)" slot="append" color="red">mdi-plus</v-icon>
+            <v-icon @click="incrementProductInCart(product.id)" data-test="increment" slot="append" color="red"
+              >mdi-plus</v-icon
+            >
           </div>
           <div class="price-wrapper">
             <p>{{ product.price }} UAH</p>
-            <v-btn @click="deleteProductFromCart(product.id)" x-small color="cyan lighten-4 black--text" depressed
+            <v-btn
+              @click="deleteProductFromCart(product.id)"
+              data-test="delete"
+              x-small
+              color="cyan lighten-4 black--text"
+              depressed
               >delete</v-btn
             >
           </div>
@@ -134,7 +143,7 @@ export default {
     }
 
     .product-wrapper__text {
-      width: 20rem;
+      width: 10rem;
       text-align: start;
       margin-left: 1rem;
     }

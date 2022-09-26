@@ -1,9 +1,9 @@
 import LoginForm from '@/components/LoginForm.vue';
-import { shallowMount } from '@vue/test-utils';
+import customWrapper from './utils/utils';
 
 describe('LoginForm', () => {
   it('should be render', () => {
-    const wrapper = shallowMount(LoginForm);
+    const wrapper = customWrapper(LoginForm);
     expect(wrapper.isVisible()).toBe(true);
   });
 });

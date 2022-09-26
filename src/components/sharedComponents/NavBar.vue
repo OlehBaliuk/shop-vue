@@ -3,10 +3,10 @@
     <v-list-group class="white--text" :value="false">
       <template v-slot:activator>
         <v-icon>mdi-circle-small</v-icon>
-        <v-list-item-title>Products</v-list-item-title>
+        <v-list-item-title data-test="products">Products</v-list-item-title>
       </template>
       <template>
-        <v-list-item router-link :to="'/'">
+        <v-list-item router-link :to="'/catalog'">
           <v-list-item-title>Catalog</v-list-item-title>
           <v-icon>mdi-format-list-bulleted-square</v-icon>
         </v-list-item>
@@ -14,11 +14,11 @@
       <v-list-group no-action sub-group>
         <template v-slot:activator>
           <v-list-item>
-            <v-list-item-title>Actions</v-list-item-title>
+            <v-list-item-title data-test="actions">Actions</v-list-item-title>
           </v-list-item>
         </template>
         <v-list-item router-link :to="'/add-new-product'">
-          <v-list-item-title>Create</v-list-item-title>
+          <v-list-item-title data-test="create">Create</v-list-item-title>
           <v-icon>mdi-plus-outline</v-icon>
         </v-list-item>
       </v-list-group>
@@ -68,7 +68,7 @@ export default {
 
   computed: {
     isFilter() {
-      return this.$route.path === route.main;
+      return this.$route.path === route.catalog || this.$route.path === route.main;
     },
   },
 };

@@ -10,7 +10,7 @@
     <v-card flat>
       <v-snackbar v-model="snackbar" absolute top color="success">
         <span>Registration successful!</span>
-        <v-icon dark> mdi-checkbox-marked-circle </v-icon>
+        <v-icon dark> mdi-checkbox-marked-circle</v-icon>
       </v-snackbar>
       <v-form ref="form" @submit.prevent="submit(form)">
         <v-container fluid>
@@ -35,9 +35,9 @@
           </v-row>
         </v-container>
         <v-card-actions>
-          <v-btn text @click="resetForm"> Cancel </v-btn>
+          <v-btn text @click="resetForm">Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn :disabled="!formIsValid" text color="primary" type="submit"> Login </v-btn>
+          <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit">Login</v-btn>
         </v-card-actions>
       </v-form>
     </v-card>

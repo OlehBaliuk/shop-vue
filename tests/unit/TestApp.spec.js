@@ -1,18 +1,13 @@
 import App from '@/App.vue';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
+import Vue from 'vue';
+import customWrapper from './utils/utils';
 
 describe('App', () => {
-  const localVue = createLocalVue();
-  localVue.use(VueRouter);
-  let router;
-
-  beforeEach(() => {
-    router = new VueRouter();
-  });
+  Vue.use(VueRouter);
 
   it('should be render', () => {
-    const wrapper = shallowMount(App, { localVue, router });
+    const wrapper = customWrapper(App);
     expect(wrapper.isVisible()).toBe(true);
   });
 });

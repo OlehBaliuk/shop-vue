@@ -1,54 +1,28 @@
 import Cart from '@/components/Cart.vue';
-import { mount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import Vue from 'vue';
-import Vuetify from 'vuetify';
+import customWrapper from './utils/utils';
+
+jest.spyOn(Cart.methods, 'getProductImage').mockReturnValue('1.jpg');
 
 describe('Cart', () => {
-  const localVue = createLocalVue();
-  let vuetify;
-  let getters;
-  let store;
+  const store = {
+    getters: {
+      getCart: { name: 'T-shirt' },
+    },
+  };
 
-  beforeEach(() => {
-    jest.spyOn(Cart.methods, 'getProductImage').mockReturnValue('1.jpg');
-
-    vuetify = new Vuetify();
-
-    getters = {
-      getCart: () => ({
-        image: '',
-        name: 'T-shirt',
-        description: 'bla-bla-bla',
-        price: 1300,
-        id: 3,
-        rating: 5,
-      }),
-    };
-
-    Vue.use(Vuex);
-
-    store = new Vuex.Store({
-      getters,
-    });
-  });
+  const options = {
+    mocks: {
+      $store: store,
+    },
+  };
 
   it('should be render', () => {
-    const wrapper = mount(Cart, {
-      localVue,
-      vuetify,
-      store,
-    });
-
+    const wrapper = customWrapper(Cart, options);
     expect(wrapper.isVisible()).toBe(true);
   });
 
   it('should be call onChangeCountProduct', async () => {
-    const wrapper = mount(Cart, {
-      localVue,
-      vuetify,
-      store,
-    });
+    const wrapper = customWrapper(Cart, options);
 
     wrapper.vm.onChangeCountProduct = jest.fn();
 

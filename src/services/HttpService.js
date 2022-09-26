@@ -12,8 +12,8 @@ class HttpService {
     return null;
   }
 
-  static async get(url, options) {
-    const response = await this.request(url, 'get', options);
+  static async get(url) {
+    const response = await this.request(url, 'get');
 
     return response;
   }

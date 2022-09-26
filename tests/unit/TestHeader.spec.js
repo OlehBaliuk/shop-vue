@@ -1,50 +1,30 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuetify from 'vuetify';
 import Header from '@/components/Header.vue';
-import Vuex from 'vuex';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router';
+import customWrapper from './utils/utils';
 
 describe('Header', () => {
-  const localVue = createLocalVue();
-  localVue.use(VueRouter);
-  let vuetify;
-  let getters;
-  let store;
-  let router;
+  const getters = {
+    getCart: () => ({}),
+    getUser: () => ({}),
+  };
 
-  beforeEach(() => {
-    vuetify = new Vuetify();
-    router = new VueRouter();
+  Vue.use(Vuex);
+  Vue.use(VueRouter);
 
-    getters = {
-      getCart: () => ({
-        image: '',
-        name: 'T-shirt',
-        description: 'bla-bla-bla',
-        price: 1300,
-        id: 3,
-        rating: 5,
-      }),
-      getUser: () => ({
-        email: 'abc@ab.ab',
-      }),
-    };
-
-    Vue.use(Vuex);
-
-    store = new Vuex.Store({
-      getters,
-    });
+  const store = new Vuex.Store({
+    getters,
   });
 
+  const options = {
+    mocks: {
+      $store: store,
+    },
+  };
+
   it('should be render', () => {
-    const wrapper = shallowMount(Header, {
-      localVue,
-      vuetify,
-      store,
-      router,
-    });
+    const wrapper = customWrapper(Header, options);
     expect(wrapper.isVisible()).toBe(true);
   });
 });
