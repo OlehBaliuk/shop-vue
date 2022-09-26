@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueObserveVisibility from 'vue-observe-visibility';
 import vueDebounce from 'vue-debounce';
+import VueMask from 'v-mask';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -18,6 +19,8 @@ Vue.use(vueDebounce, {
   listenTo: 'input',
   defaultTime: '1s',
 });
+
+Vue.use(VueMask);
 
 Vue.axios.defaults.baseURL = 'http://localhost:3000';
 

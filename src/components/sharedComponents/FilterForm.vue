@@ -67,5 +67,9 @@ export default {
   margin: 0.2rem;
   border-radius: 0.2rem;
   text-align: center;
+
+  &::placeholder {
+    color: #000000;
+  }
 }
 </style>

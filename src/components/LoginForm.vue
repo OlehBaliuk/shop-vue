@@ -16,7 +16,12 @@
         <v-container fluid>
           <v-row>
             <v-col cols="12" sm="6">
-              <v-text-field v-model="form.email" data-test="login" label="E-mail" required></v-text-field>
+              <v-text-field
+                v-model="form.email"
+                data-test="login"
+                label="E-mail"
+                required
+              ></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -37,7 +42,9 @@
         <v-card-actions>
           <v-btn text data-test="cancel" @click="resetForm">Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit">Login</v-btn>
+          <v-btn :disabled="!formIsValid" data-test="submit" text color="primary" type="submit"
+            >Login</v-btn
+          >
         </v-card-actions>
       </v-form>
     </v-card>
@@ -91,9 +98,14 @@ export default {
 
     async submit(credentials) {
       try {
-        const { data } = await HttpService.post(`${route.login}`, credentials);
-
-        const decoded = jwt_decode(data.accessToken);
+        let decoded;
+        if (localStorage.getItem('authToken')) {
+          decoded = jwt_decode(localStorage.getItem('authToken'));
+        } else {
+          const { data } = await HttpService.post(`${route.login}`, credentials);
+          decoded = jwt_decode(data.accessToken);
+          localStorage.setItem('authToken', data.accessToken);
+        }
 
         if (decoded) {
           this.addUserToState(decoded);
@@ -101,6 +113,7 @@ export default {
           this.$router.push({ path: route.catalog });
         }
       } catch {
+        localStorage.removeItem('authToken');
         this.isErrorLogin = !this.isErrorLogin;
       }
     },

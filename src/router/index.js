@@ -8,6 +8,8 @@ import AboutProduct from '../components/AboutProduct.vue';
 import AddNewProduct from '../components/AddNewProduct.vue';
 import EditProduct from '../components/EditProduct.vue';
 import LoginForm from '../components/LoginForm.vue';
+import Profile from '../components/Profile.vue';
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -51,6 +53,18 @@ const routes = [
     path: route.login,
     name: 'login',
     component: LoginForm,
+  },
+  {
+    path: route.profile,
+    name: 'profile',
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.getUser.email) {
+        next();
+      } else {
+        next(route.catalog);
+      }
+    },
   },
 ];
 
