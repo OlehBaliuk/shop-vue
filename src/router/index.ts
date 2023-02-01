@@ -13,6 +13,18 @@ import Profile from '../components/Profile.vue';
 import AdminsList from '../components/AdminsList.vue';
 import ProductsTable from '../components/ProductsTable.vue';
 import DragAndDrop from '../components/DragAndDrop.vue';
+import store from '../store';
+
+// eslint-disable-next-line consistent-return
+const checkIsAdmin = (to: any, from: any, next: any) => {
+  const isAdmin = store.state.admins.some((admin: any) => admin.id === +store.state.user.sub);
+
+  if (isAdmin) {
+    next();
+  } else {
+    return next(`/${i18n.locale}`);
+  }
+};
 
 Vue.use(VueRouter);
 
@@ -56,11 +68,13 @@ const routes: Array<RouteConfig> = [
         path: route.addNewProduct,
         name: 'add-new-product',
         component: AddNewProduct,
+        beforeEnter: checkIsAdmin,
       },
       {
         path: route.editProduct,
         name: 'edit-product',
         component: EditProduct,
+        beforeEnter: checkIsAdmin,
       },
       {
         path: route.login,
@@ -71,21 +85,32 @@ const routes: Array<RouteConfig> = [
         path: route.profile,
         name: 'profile',
         component: Profile,
+        // eslint-disable-next-line consistent-return
+        beforeEnter: (to, from, next) => {
+          if (store.state.user.email) {
+            next();
+          } else {
+            return next(`/${i18n.locale}`);
+          }
+        },
       },
       {
         path: route.admins,
         name: 'admins-list',
         component: AdminsList,
+        beforeEnter: checkIsAdmin,
       },
       {
         path: route.productsTable,
         name: 'products-table',
         component: ProductsTable,
+        beforeEnter: checkIsAdmin,
       },
       {
         path: route.dragAndDrop,
         name: 'drag-and-drop',
         component: DragAndDrop,
+        beforeEnter: checkIsAdmin,
       },
     ],
   },

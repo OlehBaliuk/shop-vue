@@ -25,6 +25,7 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
     // 'class-methods-use-this': 0,
+    // 'no-unused-vars': 0,
   },
 
   overrides: [
@@ -38,3 +39,31 @@ module.exports = {
 
   extends: ['plugin:vue/essential', '@vue/airbnb', '@vue/typescript'],
 };
+
+// module.exports = {
+//   root: true,
+//   env: {
+//     node: true,
+//     'cypress/globals': true,
+//   },
+//   extends: ['plugin:vue/recommended', '@vue/typescript'],
+//   rules: {
+//     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+//     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+//     indent: ['error', 4],
+//     'function-paren-newline': ['warn', { minItems: 5 }],
+//     'comma-dangle': ['error', 'always-multiline'],
+//     quotes: ['warn', 'single'],
+//     'vue/html-indent': ['error', 4],
+//     'vuetify/no-deprecated-classes': 'error',
+//     'vuetify/no-legacy-grid': 'warn',
+//     'vuetify/grid-unknown-attributes': 'warn',
+//   },
+//   plugins: [
+//     'vuetify',
+//     'cypress',
+//   ],
+//   parserOptions: {
+//     parser: '@typescript-eslint/parser',
+//   },
+// };

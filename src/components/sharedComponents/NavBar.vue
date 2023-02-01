@@ -64,7 +64,7 @@ export default class NavBar extends Vue {
   }
 
   get isFilter() {
-    return this.$route.path === `/${this.$i18n.locale}/`;
+    return this.$route.path === `/${this.$i18n.locale}/` || this.$route.path === `/${this.$i18n.locale}`;
   }
 
   get isAdmin() {
