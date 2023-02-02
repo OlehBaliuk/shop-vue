@@ -3,6 +3,7 @@ const routes = {
   login: 'login',
   users: '/users',
   catalog: 'catalog',
+  toDoList: 'toDoList',
   search: '/search',
   cart: 'cart',
   registration: 'registration',

@@ -1,5 +1,6 @@
 <template>
   <v-card width="50%" class="my-5" v-if="!loading">
+    <div class="tf"><div>123</div></div>
     <v-toolbar flat color="teal lighten-2">
       <v-icon>mdi-account</v-icon>
       <v-toolbar-title class="font-weight-light">User Profile</v-toolbar-title>
@@ -32,7 +33,11 @@
           @input="validate('last')"
         ></v-text-field>
       </v-card-text>
-      <DatePicker @onChangeDate="saveDateBirthDay" :dateBirthDay="userData.birthDay" :isEditing="isEditing" />
+      <DatePicker
+        @onChangeDate="saveDateBirthDay"
+        :dateBirthDay="userData.birthDay"
+        :isEditing="isEditing"
+      />
       <AvatarUpload @handleAvatar="saveAvatar" :avatar="userData.avatar" :isEditing="isEditing" />
       <RadioButtonsGender
         @update:gender="newValue => (userData.gender = newValue)"
@@ -90,7 +95,12 @@
       />
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!isEditing" color="teal  lighten-2" class="mr-4" data-test="submit" type="submit"
+        <v-btn
+          :disabled="!isEditing"
+          color="teal  lighten-2"
+          class="mr-4"
+          data-test="submit"
+          type="submit"
           >submit</v-btn
         >
       </v-card-actions>
@@ -100,6 +110,13 @@
     </v-snackbar>
   </v-card>
 </template>
+
+<style lang="scss">
+.tf {
+  display: flex;
+  justify-content: center;
+}
+</style>
 
 <script lang="ts">
 import route from '@/constants/routes';
@@ -188,7 +205,9 @@ export default class Profile extends Vue {
   };
 
   async getUserProfileInfo() {
-    const { data }: any = await HttpService.get(`${route.users}/${this.$store.getters.getUser.sub}`);
+    const { data }: any = await HttpService.get(
+      `${route.users}/${this.$store.getters.getUser.sub}`,
+    );
     this.userData = data;
     this.userData.contactType = '';
     this.userData.birthDay = this.toSringDateBirthDay(this.userData.birthDay);

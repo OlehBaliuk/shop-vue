@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {},
-    admins: [],
+    user: {} as any,
+    admins: [] as any,
     cart: {},
     flags: {},
     filter: {
